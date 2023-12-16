@@ -15,11 +15,16 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    public partial class ChooseLanguage : Window
+    public partial class LanguageChoose : Window
     {
-        public ChooseLanguage()
+        public LanguageChoose()
         {
             InitializeComponent();
+        }
+
+        private void BtnAddLanguage(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

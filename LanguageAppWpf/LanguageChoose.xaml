@@ -1,0 +1,48 @@
+﻿<Window x:Class="LanguageAppWpf.LanguageChoose"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageAppWpf"
+        mc:Ignorable="d"
+        Title="Language" Height="650" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/LanguageAppWpf;component/Resources/LanguageChooseBackground.jpeg" Stretch="UniformToFill" Opacity="0.8"/>
+        </Grid.Background>
+
+        <Button Content="Add Language" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" FontSize="30" Click="BtnAddLanguage"  BorderThickness="2">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>
+                <Thickness Left="20" Top="20" Right="20" Bottom="20"/>
+            </Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="10" Background="#FFAFD2EF" BorderBrush="Black" BorderThickness="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>
