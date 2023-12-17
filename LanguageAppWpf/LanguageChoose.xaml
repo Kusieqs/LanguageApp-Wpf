@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
         Title="Language" Height="650" Width="700">
-    <Grid Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
+    <Grid Name="MainGrid" Background="#FFE2CFB8">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan ="4" Background="#FFCC6014">
+        <Border Grid.Row="0" Grid.ColumnSpan ="4" Background="#FF7A8AC8">
             <TextBlock Text="Choose Language" FontSize="30" FontWeight="Bold"  Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
         <Button Content="Add Language" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  BorderThickness="2" Background="#FFCC6014">
@@ -44,10 +44,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="DarkOrange"/>
+                            <Setter TargetName="border" Property="Background" Value="#FF97A0C5"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="False">
-                            <Setter TargetName="border" Property="Background" Value="#FFCC6014"/>
+                            <Setter TargetName="border" Property="Background" Value="#FF7A8AC8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

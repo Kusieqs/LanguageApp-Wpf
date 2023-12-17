@@ -31,12 +31,51 @@ namespace LanguageAppWpf
         }
         private void AddingFlagsAsButtons(object sender, RoutedEventArgs e)
         {
+            int gridRows = 1;
+            int gridColumns = 0;
             string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string path = System.IO.Path.Combine(appDataFolder, "LanguageAppWpf");
             List<Language> languages = new List<Language>();
-            ExistingFolder(path, languages);
+            ExistingFolder(path, ref languages);
+            foreach (Language lan in languages)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = lan.nameOfLanguage.ToString();
+                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                textBlock.VerticalAlignment = VerticalAlignment.Center;
+                textBlock.FontSize = 20;
+                textBlock.FontWeight = FontWeights.Bold;
+                textBlock.Foreground = Brushes.Black;
+                Grid.SetColumn(textBlock, gridColumns);
+                Grid.SetRow(textBlock, gridRows + 1);
+                MainGrid.Children.Add(textBlock);
+
+                Button button = new Button();
+                Image image = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.abbreviation + ".png");
+                bitmap.EndInit();
+                image.Source = bitmap;
+                button.Content = image;
+                button.Margin = new Thickness(10);
+                button.Background = Brushes.Transparent;
+                button.BorderBrush = Brushes.Transparent;
+                
+
+                button.Click += BtnAddLanguage;
+                Grid.SetColumn(button, gridColumns);
+                Grid.SetRow(button, gridRows);
+                MainGrid.Children.Add(button);
+                gridColumns++;
+                if(gridColumns == 5)
+                {
+                    gridColumns = 0;
+                    gridRows += 2;
+                }
+            }
         }
-        private void ExistingFolder(string path, List<Language> languages)
+        private void ExistingFolder(string path, ref List<Language> languages)
         {
             if (!Directory.Exists(path))
             {
@@ -45,6 +84,7 @@ namespace LanguageAppWpf
                 languages.Add(english);
                 string jsonCreator = JsonConvert.SerializeObject(languages);
                 File.WriteAllText(System.IO.Path.Combine(path, "Languages"), jsonCreator);
+                Directory.CreateDirectory(System.IO.Path.Combine(path, NameOfLanguage.English.ToString()));
             }
             else
             {
