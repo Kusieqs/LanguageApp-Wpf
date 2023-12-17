@@ -20,9 +20,14 @@ namespace LanguageAppWpf
         public LanguageChoose()
         {
             InitializeComponent();
+            this.Loaded += AddingFlagsAsButtons;
         }
 
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddingFlagsAsButtons(object sender, RoutedEventArgs e)
         {
 
         }
