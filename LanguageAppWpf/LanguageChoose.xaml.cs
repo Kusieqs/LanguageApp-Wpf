@@ -37,6 +37,7 @@ namespace LanguageAppWpf
             string path = System.IO.Path.Combine(appDataFolder, "LanguageAppWpf");
             List<Language> languages = new List<Language>();
             ExistingFolder(path, ref languages);
+
             foreach (Language lan in languages)
             {
                 TextBlock textBlock = new TextBlock();
