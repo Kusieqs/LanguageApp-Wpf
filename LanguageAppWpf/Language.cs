@@ -10,10 +10,10 @@ namespace LanguageAppWpf
     {
         public NameOfLanguage nameOfLanguage { get; set;}
         public string abbreviation { get; set;}
-        public Language(NameOfLanguage nameOfLanguage, string abbreviation)
+        public Language(NameOfLanguage nameOfLanguage)
         {
             this.nameOfLanguage = nameOfLanguage;
-            this.abbreviation = abbreviation;
+            abbreviation = nameOfLanguage.ToString().Substring(0, 2);
         }
     }
     enum NameOfLanguage

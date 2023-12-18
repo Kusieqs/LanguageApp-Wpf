@@ -22,9 +22,15 @@ namespace LanguageAppWpf
         public NewLanguage()
         {
             InitializeComponent();
+            this.Loaded += AddingList;
         }
         public void BtnNewLanguage(object sender, RoutedEventArgs e)
         {
+
+        }
+        private void AddingList(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

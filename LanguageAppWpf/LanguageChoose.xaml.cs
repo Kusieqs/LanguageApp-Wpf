@@ -82,7 +82,7 @@ namespace LanguageAppWpf
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-                Language english = new Language(NameOfLanguage.English, "eng");
+                Language english = new Language(NameOfLanguage.English);
                 languages.Add(english);
                 string jsonCreator = JsonConvert.SerializeObject(languages);
                 File.WriteAllText(System.IO.Path.Combine(path, "Languages"), jsonCreator);
