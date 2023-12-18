@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 
-
 namespace LanguageAppWpf
 {
     public partial class LanguageChoose : Window
@@ -27,8 +26,10 @@ namespace LanguageAppWpf
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
-
+            NewLanguage newLanguage = new NewLanguage();
+            newLanguage.Show();
         }
+        
         private void AddingFlagsAsButtons(object sender, RoutedEventArgs e)
         {
             int gridRows = 1;
@@ -64,7 +65,7 @@ namespace LanguageAppWpf
                 button.BorderBrush = Brushes.Transparent;
                 
 
-                button.Click += BtnAddLanguage;
+                button.Click += BtnFlag;
                 Grid.SetColumn(button, gridColumns);
                 Grid.SetRow(button, gridRows);
                 MainGrid.Children.Add(button);
@@ -81,7 +82,7 @@ namespace LanguageAppWpf
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-                Language english = new Language(NameOfLanguage.English, "eng");
+                Language english = new Language(NameOfLanguage.English);
                 languages.Add(english);
                 string jsonCreator = JsonConvert.SerializeObject(languages);
                 File.WriteAllText(System.IO.Path.Combine(path, "Languages"), jsonCreator);
@@ -92,6 +93,10 @@ namespace LanguageAppWpf
                 string json = File.ReadAllText(System.IO.Path.Combine(path, "Languages"));
                 languages = JsonConvert.DeserializeObject<List<Language>>(json);
             }
+        }
+        private void BtnFlag(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
