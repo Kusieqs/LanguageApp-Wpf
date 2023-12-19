@@ -18,10 +18,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+        <ComboBox Name="ComboLan" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="25" Grid.ColumnSpan="3" FontSize="16" FontWeight="Bold"/>
         <Border Background="#FF7A8AC8" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <TextBlock Text="New Language" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" />
         </Border>
-        <Border Grid.Column="0" Grid.Row="2">
+        <Border Grid.Column="0" Grid.Row="1">
             <TextBlock Text="You choosed: " FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="2">
@@ -53,7 +54,32 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
+        <Button Content="Exit" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnExit"  BorderThickness="2">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Margin>
+                <Thickness Left="10" Right="10" Bottom="3" Top="3"/>
+            </Button.Margin>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" Background="White" BorderBrush="Black" BorderThickness="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF97A0C5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF7A8AC8"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </Window>

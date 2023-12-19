@@ -27,7 +27,10 @@ namespace LanguageAppWpf
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
             NewLanguage newLanguage = new NewLanguage();
+            ((Button)sender).IsEnabled = false;
+
             newLanguage.Show();
+            newLanguage.Closed += (s, args) => ((Button)sender).IsEnabled = true;
         }
         
         private void AddingFlagsAsButtons(object sender, RoutedEventArgs e)

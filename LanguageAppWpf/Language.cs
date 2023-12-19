@@ -13,7 +13,7 @@ namespace LanguageAppWpf
         public Language(NameOfLanguage nameOfLanguage)
         {
             this.nameOfLanguage = nameOfLanguage;
-            abbreviation = nameOfLanguage.ToString().Substring(0, 2);
+            abbreviation = nameOfLanguage.ToString().Substring(0, 3);
         }
     }
     enum NameOfLanguage
