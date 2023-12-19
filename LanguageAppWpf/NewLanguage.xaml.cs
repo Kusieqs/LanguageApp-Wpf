@@ -47,7 +47,19 @@ namespace LanguageAppWpf
         }
         public void BtnNewLanguage(object sender, RoutedEventArgs e)
         {
+            string selectedLanguage = ComboLan.SelectedItem.ToString();
+            MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure to add {selectedLanguage}","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
 
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
+                string jsonRead = File.ReadAllText(path);
+                List<Language> languagesJson = JsonConvert.DeserializeObject<List<Language>>(jsonRead);
+                languagesJson.Add(new Language((NameOfLanguage)Enum.Parse(typeof(NameOfLanguage), selectedLanguage)));
+                string jsonWrite = JsonConvert.SerializeObject(languagesJson);
+                File.WriteAllText(path, jsonWrite);
+                this.Close();
+            }
         }
         public void BtnExit(object sender, RoutedEventArgs e)
         {
