@@ -111,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\chi.png" />
-    <Resource Include="Resources\fra.png" />
     <Resource Include="Resources\ger.png" />
     <Resource Include="Resources\ita.png" />
     <Resource Include="Resources\nor.png" />
@@ -123,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fre.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,23 +14,38 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using System.Data.Common;
+using System.Data.Sql;
+using System.ComponentModel;
 
 namespace LanguageAppWpf
 {
     public partial class LanguageChoose : Window
     {
+        private NewLanguage newLanguage;
         public LanguageChoose()
         {
             InitializeComponent();
-            this.Loaded += AddingFlagsAsButtons;
+            this.Loaded += ActivData;
+            this.Activated += ActivData;
+        }
+        private void ActivData(object sender, EventArgs e) // Adding flags as buttons when window is loaded or activated 
+        {
+            AddingFlagsAsButtons();
+        }
+        private void BtnFlag(object sender, RoutedEventArgs e)
+        {
+
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
-            NewLanguage newLanguage = new NewLanguage();
+            newLanguage = new NewLanguage();
+            newLanguage.Owner = this;
+            this.IsEnabled = false;
             newLanguage.Show();
-        }
-        
-        private void AddingFlagsAsButtons(object sender, RoutedEventArgs e)
+            newLanguage.Closed += (s, args) => this.IsEnabled = true;
+        } // Creating new window for adding new language
+        private void AddingFlagsAsButtons()
         {
             int gridRows = 1;
             int gridColumns = 0;
@@ -58,25 +73,27 @@ namespace LanguageAppWpf
                 bitmap.BeginInit();
                 bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.abbreviation + ".png");
                 bitmap.EndInit();
+
                 image.Source = bitmap;
+                image.Stretch = Stretch.Fill;
                 button.Content = image;
                 button.Margin = new Thickness(10);
                 button.Background = Brushes.Transparent;
                 button.BorderBrush = Brushes.Transparent;
-                
-
+                button.Foreground = Brushes.Transparent;
+                button.IsEnabled = true;
                 button.Click += BtnFlag;
                 Grid.SetColumn(button, gridColumns);
                 Grid.SetRow(button, gridRows);
                 MainGrid.Children.Add(button);
                 gridColumns++;
-                if(gridColumns == 5)
+                if (gridColumns == 4)
                 {
                     gridColumns = 0;
                     gridRows += 2;
                 }
             }
-        }
+        } // Adding flags as buttons
         private void ExistingFolder(string path, ref List<Language> languages)
         {
             if (!Directory.Exists(path))
@@ -93,10 +110,15 @@ namespace LanguageAppWpf
                 string json = File.ReadAllText(System.IO.Path.Combine(path, "Languages"));
                 languages = JsonConvert.DeserializeObject<List<Language>>(json);
             }
-        }
-        private void BtnFlag(object sender, RoutedEventArgs e)
+        } // Checking if folder exists
+        protected override void OnClosing(CancelEventArgs e)
         {
-
-        }
+            base.OnClosing(e);
+            if (newLanguage != null && newLanguage.IsVisible)
+            {
+                e.Cancel = true;
+                newLanguage.Focus();
+            }
+        } // Preventing from closing main window when new language window is open
     }
 }
