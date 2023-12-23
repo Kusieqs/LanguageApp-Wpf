@@ -16,29 +16,35 @@ using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.Data.Common;
 using System.Data.Sql;
+using System.ComponentModel;
 
 namespace LanguageAppWpf
 {
     public partial class LanguageChoose : Window
     {
+        private NewLanguage newLanguage;
         public LanguageChoose()
         {
             InitializeComponent();
             this.Loaded += ActivData;
             this.Activated += ActivData;
         }
-        private void ActivData(object sender, EventArgs e)
+        private void ActivData(object sender, EventArgs e) // Adding flags as buttons when window is loaded or activated 
         {
             AddingFlagsAsButtons();
-        } 
+        }
+        private void BtnFlag(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
-            NewLanguage newLanguage = new NewLanguage();
+            newLanguage = new NewLanguage();
+            newLanguage.Owner = this;
             this.IsEnabled = false;
             newLanguage.Show();
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
-        }
-        
+        } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
             int gridRows = 1;
@@ -87,7 +93,7 @@ namespace LanguageAppWpf
                     gridRows += 2;
                 }
             }
-        }
+        } // Adding flags as buttons
         private void ExistingFolder(string path, ref List<Language> languages)
         {
             if (!Directory.Exists(path))
@@ -104,9 +110,15 @@ namespace LanguageAppWpf
                 string json = File.ReadAllText(System.IO.Path.Combine(path, "Languages"));
                 languages = JsonConvert.DeserializeObject<List<Language>>(json);
             }
-        }
-        private void BtnFlag(object sender, RoutedEventArgs e)
+        } // Checking if folder exists
+        protected override void OnClosing(CancelEventArgs e)
         {
-        }
+            base.OnClosing(e);
+            if (newLanguage != null && newLanguage.IsVisible)
+            {
+                e.Cancel = true;
+                newLanguage.Focus();
+            }
+        } // Preventing from closing main window when new language window is open
     }
 }

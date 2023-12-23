@@ -47,24 +47,27 @@ namespace LanguageAppWpf
         }
         public void BtnNewLanguage(object sender, RoutedEventArgs e)
         {
-            string selectedLanguage = ComboLan.SelectedItem.ToString();
-            MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure to add {selectedLanguage}","Question",MessageBoxButton.YesNo,MessageBoxImage.Information);
-
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if(ComboLan.SelectedItem != null)
             {
-                string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
-                string jsonRead = File.ReadAllText(path);
-                List<Language> languagesJson = JsonConvert.DeserializeObject<List<Language>>(jsonRead);
-                languagesJson.Add(new Language((NameOfLanguage)Enum.Parse(typeof(NameOfLanguage), selectedLanguage)));
-                string jsonWrite = JsonConvert.SerializeObject(languagesJson);
-                File.WriteAllText(path, jsonWrite);
-                this.Close();
+                string selectedLanguage = ComboLan.SelectedItem.ToString();
+                MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure to add {selectedLanguage}", "Question", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
+                    string jsonRead = File.ReadAllText(path);
+                    List<Language> languagesJson = JsonConvert.DeserializeObject<List<Language>>(jsonRead);
+                    languagesJson.Add(new Language((NameOfLanguage)Enum.Parse(typeof(NameOfLanguage), selectedLanguage)));
+                    string jsonWrite = JsonConvert.SerializeObject(languagesJson);
+                    File.WriteAllText(path, jsonWrite);
+                    this.Close();
+                }
             }
-        }
+        } // Adding new language to json file
         public void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Closing window
         private void AddingList(object sender, RoutedEventArgs e)
         {
             string appDataFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
@@ -75,7 +78,11 @@ namespace LanguageAppWpf
             {
                 ComboLan.Items.Add(language.nameOfLanguage);
             }
-        }
+            if (ComboLan.Items.Count == 0)
+            {
+                AddLanguage.IsEnabled = false;
+            }
+        } // Adding list of languages to combobox
         private List<Language> EqualsLists(List<Language> l1, List<Language> l2)
         {
             bool equal = false;
@@ -97,6 +104,6 @@ namespace LanguageAppWpf
                 equal = false;
             }
             return l3;
-        }
+        } // Checking if lists are equal and returning list of languages that are not in json file
     }
 }
