@@ -23,6 +23,7 @@ namespace LanguageAppWpf
     public partial class LanguageChoose : Window
     {
         private NewLanguage newLanguage;
+        private ChoosingUnit choosingUnit;
         public LanguageChoose()
         {
             InitializeComponent();
@@ -38,13 +39,20 @@ namespace LanguageAppWpf
             int column = Grid.GetColumn(sender as Button);
             int row = Grid.GetRow(sender as Button);
             string nameOfLanguage = MainGrid.Children.OfType<TextBlock>().Where(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == row + 1).Select(x => x.Text).FirstOrDefault();
+            choosingUnit = new ChoosingUnit();
+            choosingUnit.Owner = this;
+            this.IsEnabled = false;
+            choosingUnit.Show();
+            choosingUnit.Closed += (s, args) => this.IsEnabled = true;
+            choosingUnit.Closed += (s, args) => this.Focus();
+            
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
             newLanguage = new NewLanguage();
             newLanguage.Owner = this;
-            this.IsEnabled = false;
             newLanguage.Show();
+            this.IsEnabled = false;
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
             newLanguage.Closed += (s, args) => this.Focus();
         } // Creating new window for adding new language
@@ -113,6 +121,11 @@ namespace LanguageAppWpf
             {
                 e.Cancel = true;
                 newLanguage.Focus();
+            }
+            if (choosingUnit != null && choosingUnit.IsVisible)
+            {
+                e.Cancel = true;
+                choosingUnit.Focus();
             }
         } // Preventing from closing main window when new language window is open
     }

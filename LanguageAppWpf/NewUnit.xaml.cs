@@ -19,8 +19,12 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class NewUnit : Window
     {
-        public NewUnit()
+        private string lan;
+        private string directPath;
+        public NewUnit(string language)
         {
+            lan = language;
+            directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", language);
             InitializeComponent();
         }
 
