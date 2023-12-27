@@ -39,7 +39,7 @@ namespace LanguageAppWpf
             int column = Grid.GetColumn(sender as Button);
             int row = Grid.GetRow(sender as Button);
             string nameOfLanguage = MainGrid.Children.OfType<TextBlock>().Where(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == row + 1).Select(x => x.Text).FirstOrDefault();
-            choosingUnit = new ChoosingUnit();
+            choosingUnit = new ChoosingUnit(nameOfLanguage,this);
             choosingUnit.Owner = this;
             this.IsEnabled = false;
             choosingUnit.Show();
@@ -120,12 +120,10 @@ namespace LanguageAppWpf
             if (newLanguage != null && newLanguage.IsVisible)
             {
                 e.Cancel = true;
-                newLanguage.Focus();
             }
             if (choosingUnit != null && choosingUnit.IsVisible)
             {
                 e.Cancel = true;
-                choosingUnit.Focus();
             }
         } // Preventing from closing main window when new language window is open
     }
