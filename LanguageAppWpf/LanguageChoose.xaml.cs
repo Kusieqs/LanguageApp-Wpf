@@ -35,7 +35,9 @@ namespace LanguageAppWpf
         }
         private void BtnFlag(object sender, RoutedEventArgs e)
         {
-
+            int column = Grid.GetColumn(sender as Button);
+            int row = Grid.GetRow(sender as Button);
+            string nameOfLanguage = MainGrid.Children.OfType<TextBlock>().Where(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == row + 1).Select(x => x.Text).FirstOrDefault();
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
         {
@@ -44,6 +46,7 @@ namespace LanguageAppWpf
             this.IsEnabled = false;
             newLanguage.Show();
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
+            newLanguage.Closed += (s, args) => this.Focus();
         } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
@@ -51,13 +54,13 @@ namespace LanguageAppWpf
             int gridColumns = 0;
             string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string path = System.IO.Path.Combine(appDataFolder, "LanguageAppWpf");
-            List<Language> languages = new List<Language>();
+            List<string> languages = new List<string>();
             ExistingFolder(path, ref languages);
 
-            foreach (Language lan in languages)
+            foreach (string lan in languages)
             {
                 TextBlock textBlock = new TextBlock();
-                textBlock.Text = lan.nameOfLanguage.ToString();
+                textBlock.Text = lan.ToString();
                 textBlock.HorizontalAlignment = HorizontalAlignment.Center;
                 textBlock.VerticalAlignment = VerticalAlignment.Center;
                 textBlock.FontSize = 20;
@@ -71,7 +74,7 @@ namespace LanguageAppWpf
                 Image image = new Image();
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.abbreviation + ".png");
+                bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.Substring(0,3) + ".png");
                 bitmap.EndInit();
 
                 image.Source = bitmap;
@@ -94,22 +97,14 @@ namespace LanguageAppWpf
                 }
             }
         } // Adding flags as buttons
-        private void ExistingFolder(string path, ref List<Language> languages)
+        private void ExistingFolder(string path, ref List<string> languages)
         {
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-                Language english = new Language(NameOfLanguage.English);
-                languages.Add(english);
-                string jsonCreator = JsonConvert.SerializeObject(languages);
-                File.WriteAllText(System.IO.Path.Combine(path, "Languages"), jsonCreator);
                 Directory.CreateDirectory(System.IO.Path.Combine(path, NameOfLanguage.English.ToString()));
             }
-            else
-            {
-                string json = File.ReadAllText(System.IO.Path.Combine(path, "Languages"));
-                languages = JsonConvert.DeserializeObject<List<Language>>(json);
-            }
+            languages = new List<string>(Directory.GetDirectories(path).Select(System.IO.Path.GetFileName).ToList());
         } // Checking if folder exists
         protected override void OnClosing(CancelEventArgs e)
         {
