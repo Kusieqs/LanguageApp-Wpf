@@ -31,6 +31,7 @@ namespace LanguageAppWpf
             this.lan = lan;
             directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan);
             this.Loaded += ActivData;
+            this.Activated += ActivData;
             InitializeComponent();
         }
         private void BtnExit(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace LanguageAppWpf
         }
         private void NewUnitBtn(object sender, RoutedEventArgs e)
         {
-            newUnit = new NewUnit(directPath);
+            newUnit = new NewUnit(directPath, ComboUnit);
             newUnit.Owner = this;
             newUnit.Show();
             this.IsEnabled = false;
@@ -52,6 +53,7 @@ namespace LanguageAppWpf
         }
         private void ActivData(object sender, EventArgs e) // Adding flags as buttons when window is loaded or activated 
         {
+            ComboUnit.Items.Clear();
             List<string> units = new List<string>(Directory.GetDirectories(directPath).Select(System.IO.Path.GetFileName).ToList());
             foreach(string unit in units)
             {
