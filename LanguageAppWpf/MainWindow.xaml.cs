@@ -23,5 +23,40 @@ namespace LanguageAppWpf
         {
             InitializeComponent();
         }
+
+        private void BtnAddWord(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnReview(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnListOfWords(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnChangeLanguage(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnReadJson(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
