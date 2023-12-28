@@ -1,0 +1,36 @@
+﻿<Window x:Class="LanguageAppWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageAppWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TitleLanguage" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="0"/>
+        <Button Click="BtnAddWord" Grid.Column="0" Grid.Row="1" Content="Add words"/>
+        <Button Click="BtnReview" Grid.Column="0" Grid.Row="2" Content="Review"/>
+        <Button Click="BtnListOfWords" Grid.Column="0" Grid.Row="3" Content="List of words"/>
+        <Button Click="BtnChangeLanguage" Grid.Column="0" Grid.Row="4" Content="Change language"/>
+        <Button Click="BtnDownWriteToJson" Grid.Column="0" Grid.Row="5" Content="Down wirte to json"/>
+        <Button Click="BtnReadJson" Grid.Column="0" Grid.Row="6" Content="Read json file"/>
+        <Button Click="Exit" Grid.Column="0" Grid.Row="7" Content="Exit"/>
+    </Grid>
+</Window>
