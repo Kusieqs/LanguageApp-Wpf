@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace LanguageAppWpf
 {
     /// <summary>
@@ -19,19 +20,41 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class NewUnit : Window
     {
-        public NewUnit()
+        private string directPath;
+        ComboBox ComboBox;
+        public NewUnit(string path, ComboBox box)
         {
             InitializeComponent();
+            directPath = path;
+            ComboBox = box;
         }
-
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
-
         private void BtnAddUnit(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (UnitName.Text != "" && !ComboBox.Items.Contains(UnitName.Text))
+                {
+                    string path = System.IO.Path.Combine(directPath, UnitName.Text);
+                    System.IO.Directory.CreateDirectory(path);
+                    this.Close();
+                }
+                else if (UnitName.Text == "")
+                {
+                    throw new FormatException("You have to enter the name of unit");
+                }
+                else if (ComboBox.Items.Contains(UnitName.Text))
+                {
+                    throw new FormatException("This unit already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

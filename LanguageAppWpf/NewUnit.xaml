@@ -22,7 +22,7 @@
         <Border  Grid.Column="0" Grid.Row="1" >
             <TextBlock Text="Unit Name" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10,0,0,0" />
         </Border>
-        <TextBox Grid.Row="1" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="121,32,10,32" Grid.ColumnSpan="2" x:Name="UnitName" />
+        <TextBox Grid.Row="1" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="121,22,10,22" Grid.ColumnSpan="2" x:Name="UnitName" />
         <Button Content="Exit" Grid.Column="0" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnExit"  BorderThickness="2">
             <Button.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" Opacity="0.5"/>

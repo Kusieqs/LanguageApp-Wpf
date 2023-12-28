@@ -8,12 +8,13 @@ namespace LanguageAppWpf
 {
     internal class Language
     {
-        public NameOfLanguage nameOfLanguage { get; set;}
-        public string abbreviation { get; set;}
-        public Language(NameOfLanguage nameOfLanguage)
+        private NameOfLanguage nameOfLanguage { get; set;}
+        private List<Unit> units { get; set; }
+
+        public Language(NameOfLanguage nameOfLanguage, List<Unit> units)
         {
             this.nameOfLanguage = nameOfLanguage;
-            abbreviation = nameOfLanguage.ToString().Substring(0, 3);
+            this.units = units;
         }
     }
     enum NameOfLanguage

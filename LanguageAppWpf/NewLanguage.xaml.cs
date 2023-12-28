@@ -24,20 +24,20 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class NewLanguage : Window
     {
-        private List<Language> languages = new List<Language>
+        private List<string> languages = new List<string>
         {
-            new Language(NameOfLanguage.English),
-            new Language(NameOfLanguage.Polish),
-            new Language(NameOfLanguage.German),
-            new Language(NameOfLanguage.French),
-            new Language(NameOfLanguage.Spanish),
-            new Language(NameOfLanguage.Italian),
-            new Language(NameOfLanguage.Russian),
-            new Language(NameOfLanguage.Portuguese),
-            new Language(NameOfLanguage.Swedish),
-            new Language(NameOfLanguage.Norwegian),
-            new Language(NameOfLanguage.Chinese),
-            new Language(NameOfLanguage.Arabic),
+            NameOfLanguage.Polish.ToString(),
+            NameOfLanguage.English.ToString(),
+            NameOfLanguage.German.ToString(),
+            NameOfLanguage.French.ToString(),
+            NameOfLanguage.Spanish.ToString(),
+            NameOfLanguage.Italian.ToString(),
+            NameOfLanguage.Russian.ToString(),
+            NameOfLanguage.Portuguese.ToString(),
+            NameOfLanguage.Swedish.ToString(),
+            NameOfLanguage.Norwegian.ToString(),
+            NameOfLanguage.Chinese.ToString(),
+            NameOfLanguage.Arabic.ToString(),
         };
         
         public NewLanguage()
@@ -54,12 +54,8 @@ namespace LanguageAppWpf
 
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
-                    string jsonRead = File.ReadAllText(path);
-                    List<Language> languagesJson = JsonConvert.DeserializeObject<List<Language>>(jsonRead);
-                    languagesJson.Add(new Language((NameOfLanguage)Enum.Parse(typeof(NameOfLanguage), selectedLanguage)));
-                    string jsonWrite = JsonConvert.SerializeObject(languagesJson);
-                    File.WriteAllText(path, jsonWrite);
+                    string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf");
+                    Directory.CreateDirectory(System.IO.Path.Combine(path,selectedLanguage));
                     this.Close();
                 }
             }
@@ -70,28 +66,26 @@ namespace LanguageAppWpf
         } // Closing window
         private void AddingList(object sender, RoutedEventArgs e)
         {
-            string appDataFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Languages");
-            string jsonRead = File.ReadAllText(appDataFolder);
-            List<Language> languagesJson = JsonConvert.DeserializeObject<List<Language>>(jsonRead);
+            List<string> languagesJson = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"LanguageAppWpf")).Select(System.IO.Path.GetFileName).ToList());
             languagesJson = EqualsLists(languages, languagesJson);
-            foreach (Language language in languagesJson)
+            foreach (string language in languagesJson)
             {
-                ComboLan.Items.Add(language.nameOfLanguage);
+                ComboLan.Items.Add(language);
             }
             if (ComboLan.Items.Count == 0)
             {
                 AddLanguage.IsEnabled = false;
             }
         } // Adding list of languages to combobox
-        private List<Language> EqualsLists(List<Language> l1, List<Language> l2)
+        private List<string> EqualsLists(List<string> l1, List<string> l2)
         {
             bool equal = false;
-            List<Language> l3 = new List<Language>();
-            foreach (Language lan1 in l1)
+            List<string> l3 = new List<string>();
+            foreach (string lan1 in l1)
             {
-                foreach (Language lan2 in l2)
+                foreach (string lan2 in l2)
                 {
-                    if(lan1.nameOfLanguage == lan2.nameOfLanguage)
+                    if(lan1 == lan2)
                     {
                         equal = true;
                         break;
