@@ -54,7 +54,6 @@ namespace LanguageAppWpf
             newLanguage.Show();
             this.IsEnabled = false;
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
-            newLanguage.Closed += (s, args) => this.Focus();
         } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
@@ -67,13 +66,18 @@ namespace LanguageAppWpf
 
             foreach (string lan in languages)
             {
+                UIElement elementRemoveTextBlock = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows + 1);
+                if (elementRemoveTextBlock != null)
+                {
+                    MainGrid.Children.Remove(elementRemoveTextBlock);
+                }
                 TextBlock textBlock = new TextBlock();
                 textBlock.Text = lan.ToString();
                 textBlock.HorizontalAlignment = HorizontalAlignment.Center;
                 textBlock.VerticalAlignment = VerticalAlignment.Center;
                 textBlock.FontSize = 20;
                 textBlock.FontWeight = FontWeights.Bold;
-                textBlock.Foreground = Brushes.Black;
+                textBlock.Foreground = Brushes.White;
                 Grid.SetColumn(textBlock, gridColumns);
                 Grid.SetRow(textBlock, gridRows + 1);
                 MainGrid.Children.Add(textBlock);
@@ -96,6 +100,11 @@ namespace LanguageAppWpf
                 button.Click += BtnFlag;
                 Grid.SetColumn(button, gridColumns);
                 Grid.SetRow(button, gridRows);
+                UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows);
+                if (elementRemoveBtn != null)
+                {
+                    MainGrid.Children.Remove(elementRemoveBtn);
+                }
                 MainGrid.Children.Add(button);
                 gridColumns++;
                 if (gridColumns == 4)
