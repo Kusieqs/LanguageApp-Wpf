@@ -148,5 +148,26 @@
   <ItemGroup>
     <Resource Include="Resources\fre.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconReview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconDownWrite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconChange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconExit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconRead.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
