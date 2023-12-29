@@ -70,5 +70,6 @@ namespace LanguageAppWpf
                 e.Cancel = true;
             } 
         }
+
     }
 }
