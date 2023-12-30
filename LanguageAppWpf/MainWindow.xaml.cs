@@ -58,5 +58,11 @@ namespace LanguageAppWpf
         {
 
         }
+
+
+        private void SwitchButton(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
