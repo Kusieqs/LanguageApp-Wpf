@@ -1,0 +1,173 @@
+﻿<Window x:Class="LanguageAppWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageAppWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900">
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="White" BorderBrush="#FF565656">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="border" Property="Background" Value ="#FF565656"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF373737">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <TextBlock Text="LanguageAppWpf" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="0" Foreground="Yellow" FontWeight="DemiBold" FontStyle="Italic"/>
+
+        <Grid Grid.Row="0" Grid.RowSpan="9" Background="#FF565656"/>
+        <TextBlock Text="Contact:" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold"/>
+        <TextBlock Text="Konrad.kus@edu.uekat.pl" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold" Margin="0,20,0,0"/>
+        <Button Click="BtnAddWord" Grid.Column="0" Grid.Row="1" Content="Add words" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="BtnReview" Grid.Column="0" Grid.Row="2" Content="Review" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="BtnListOfWords" Grid.Column="0" Grid.Row="3" Content="List of words" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="BtnChangeLanguage" Grid.Column="0" Grid.Row="4" Content="Change language" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="BtnDownWriteToJson" Grid.Column="0" Grid.Row="5" Content="Down wirte to json" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="BtnReadJson" Grid.Column="0" Grid.Row="6" Content="Read json file" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Click="Exit" Grid.Column="0" Grid.Row="7" Content="Exit" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
+        <Image Source="/LanguageAppWpf;component/Resources/uncorrect.png" Width="20" Height="20"/>
+
+        <Border CornerRadius="34" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="#FF565656" Margin="15" BorderBrush="Yellow" BorderThickness="2.5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <TextBlock Text="Statistics" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Number of Words: " Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfWords" Grid.Column="5" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Correct: " Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfCorrect" Grid.Column="5" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Uncorrect: " Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfUncorrect" Grid.Column="5" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Review: " Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfReview" Grid.Column="5" Grid.Row="4" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconNumberOfReview.png" Width="37" Height="38" Grid.Row="4" Margin="12,34,0,0" IsHitTestVisible="False" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconUnCorrect.png" Grid.Column="0" Grid.Row="3" Margin="12,34,17,28" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconCorrect.png" Width="40" Height="40" Grid.Column="0" Grid.Row="2" Margin="12,0,0,0" IsHitTestVisible="False"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconWords.png" Width="36" Height="39" Grid.Column="0" Grid.Row="1" IsHitTestVisible="False"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <Border CornerRadius="34" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#FF565656" Margin="15" BorderBrush="Yellow" BorderThickness="2.5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Most uncorrect words" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="23" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="FirstOne" Text="" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="SecondOne" Text="" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="ThirdOne" Text="" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="MistakeOne" Text="" Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="MistakeTwo" Text="" Grid.Column="1" Grid.Row="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock x:Name="MistakeThree" Text="" Grid.Column="1" Grid.Row="3" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                <Button Content="Switch" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" FontSize="25" FontWeight="DemiBold" Click="SwitchButton"  Foreground="Black">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+                    </Button.Effect>
+                    <Button.Margin>100,5,100,5</Button.Margin>
+                    <Button.Cursor>Hand</Button.Cursor>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="1.3">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="Yellow"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+        </Border>
+        <Border CornerRadius="34" Grid.Column="3" Grid.Row="5" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="#FF565656" Margin="15" BorderBrush="Yellow" BorderThickness="2.5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Information" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="Language" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+                <TextBlock x:Name="Unit" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+            </Grid>
+        </Border>
+        <Image Source="/LanguageAppWpf;component/Resources/iconPlus.png" Width="50" Height="50" Grid.Column="0" Grid.Row="1" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconReview.png" Width="36" Height="36" Grid.Column="0" Grid.Row="2" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconList.png" Width="40" Height="40" Grid.Column="0" Grid.Row="3" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconChange.png" Width="40" Height="40" Grid.Column="0" Grid.Row="4" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconDownWrite.png" Width="40" Height="40" Grid.Column="0" Grid.Row="5" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconRead.png" Width="40" Height="40" Grid.Column="0" Grid.Row="6" Margin="0,12,130,10" IsHitTestVisible="False"/>
+        <Image Source="/LanguageAppWpf;component/Resources/iconExit.png" Width="40" Height="40" Grid.Column="0" Grid.Row="7" Margin="0,12,130,10" IsHitTestVisible="False"/>
+    </Grid>
+</Window>

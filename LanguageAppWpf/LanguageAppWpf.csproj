@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Unit.cs" />
     <Page Include="ChoosingUnit.xaml">
       <SubType>Designer</SubType>
@@ -79,6 +82,10 @@
       <DependentUpon>LanguageChoose.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +147,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\fre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconReview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconDownWrite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconChange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconExit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconRead.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconCorrect.png" />
+    <Resource Include="Resources\iconNumberOfReview.png" />
+    <Resource Include="Resources\iconUncorrect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconWords.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
