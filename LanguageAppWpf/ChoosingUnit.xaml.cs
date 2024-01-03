@@ -40,7 +40,7 @@ namespace LanguageAppWpf
         }
         private void ContinueBtn(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(lan, ComboUnit.Text);
             mainWindow.Show();
             this.Close();
             languageChoose.Close();

@@ -112,7 +112,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Most uncorrect words" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="23" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Most uncorrect words" Name="WordsList" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="23" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="FirstOne" Text="" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 <TextBlock x:Name="SecondOne" Text="" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 <TextBlock x:Name="ThirdOne" Text="" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
@@ -158,8 +158,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Information" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="Language" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
-                <TextBlock x:Name="Unit" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+                <TextBlock x:Name="Language" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="25" FontWeight="DemiBold"/>
+                <TextBlock x:Name="Unit" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="25" FontWeight="DemiBold"/>
             </Grid>
         </Border>
         <Image Source="/LanguageAppWpf;component/Resources/iconPlus.png" Width="50" Height="50" Grid.Column="0" Grid.Row="1" Margin="0,12,130,10" IsHitTestVisible="False"/>
