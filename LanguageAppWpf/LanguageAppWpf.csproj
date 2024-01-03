@@ -169,5 +169,13 @@
   <ItemGroup>
     <Resource Include="Resources\iconRead.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconCorrect.png" />
+    <Resource Include="Resources\iconNumberOfReview.png" />
+    <Resource Include="Resources\iconUncorrect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\iconWords.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

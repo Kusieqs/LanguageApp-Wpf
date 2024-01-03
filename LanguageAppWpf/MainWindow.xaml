@@ -55,7 +55,8 @@
         <TextBlock Text="LanguageAppWpf" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="0" Foreground="Yellow" FontWeight="DemiBold" FontStyle="Italic"/>
 
         <Grid Grid.Row="0" Grid.RowSpan="9" Background="#FF565656"/>
-
+        <TextBlock Text="Contact:" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold"/>
+        <TextBlock Text="Konrad.kus@edu.uekat.pl" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold" Margin="0,20,0,0"/>
         <Button Click="BtnAddWord" Grid.Column="0" Grid.Row="1" Content="Add words" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
         <Button Click="BtnReview" Grid.Column="0" Grid.Row="2" Content="Review" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
         <Button Click="BtnListOfWords" Grid.Column="0" Grid.Row="3" Content="List of words" Foreground="White" Style="{StaticResource CustomButtonStyle}"/>
@@ -83,14 +84,18 @@
 
                 </Grid.RowDefinitions>
                 <TextBlock Text="Statistics" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="Number of Words: " Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock Text="0" x:Name="NumberOfWords" Grid.Column="5" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                <TextBlock Text="Number of Correct: " Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock Text="0" x:Name="NumberOfCorrect" Grid.Column="5" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                <TextBlock Text="Number of Uncorrect: " Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock Text="0" x:Name="NumberOfUncorrect" Grid.Column="5" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                <TextBlock Text="Number of Review: " Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock Text="0" x:Name="NumberOfReview" Grid.Column="5" Grid.Row="4" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Words: " Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfWords" Grid.Column="5" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Correct: " Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfCorrect" Grid.Column="5" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Uncorrect: " Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfUncorrect" Grid.Column="5" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock Text="Number of Review: " Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="54,0,0,0"/>
+                <TextBlock Text="0" x:Name="NumberOfReview" Grid.Column="5" Grid.Row="4" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconNumberOfReview.png" Width="37" Height="38" Grid.Row="4" Margin="12,34,0,0" IsHitTestVisible="False" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconUnCorrect.png" Grid.Column="0" Grid.Row="3" Margin="12,34,17,28" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconCorrect.png" Width="40" Height="40" Grid.Column="0" Grid.Row="2" Margin="12,0,0,0" IsHitTestVisible="False"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Image Source="/LanguageAppWpf;component/Resources/iconWords.png" Width="36" Height="39" Grid.Column="0" Grid.Row="1" IsHitTestVisible="False"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -153,10 +158,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Information" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Foreground="White" FontSize="40" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="Language: " Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock x:Name="Language" Grid.Column="2" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                <TextBlock Text="Unit: " Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="55,0,0,0"/>
-                <TextBlock x:Name="Level" Grid.Column="2" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBlock x:Name="Language" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+                <TextBlock x:Name="Unit" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
             </Grid>
         </Border>
         <Image Source="/LanguageAppWpf;component/Resources/iconPlus.png" Width="50" Height="50" Grid.Column="0" Grid.Row="1" Margin="0,12,130,10" IsHitTestVisible="False"/>
