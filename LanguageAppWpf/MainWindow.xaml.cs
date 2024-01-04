@@ -29,7 +29,9 @@ namespace LanguageAppWpf
             this.unit = unit;
             this.directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
             this.Loaded += LoadingData;
+            this.Activated += ActivData;
         }
+
 
         private void BtnAddWord(object sender, RoutedEventArgs e)
         {
@@ -78,13 +80,24 @@ namespace LanguageAppWpf
             {
                 WordsList.Text = "Most uncorrect words";
             }
-
             /// wczytywanie danych z pliku json do statystyk
         }
         private void LoadingData(object sender, RoutedEventArgs e)
         {
             Language.Text = lan;
             Unit.Text = unit;
+        }
+        private void ActivData(object sender, EventArgs e)
+        {
+            if(System.IO.File.Exists(directPath))
+            {
+                string jsonRead = System.IO.File.ReadAllText(directPath);
+                List<Word> words = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Word>>(jsonRead);
+            }
+            else
+            {
+
+            }
         }
     }
 }
