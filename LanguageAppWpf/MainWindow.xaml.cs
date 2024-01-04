@@ -19,9 +19,12 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int review;
         private string lan;
         private string unit;
         private string directPath;
+        private List<Word> words;
+        private bool switcher = false;
         public MainWindow(string lan, string unit)
         {
             InitializeComponent();
@@ -75,29 +78,124 @@ namespace LanguageAppWpf
             if(WordsList.Text == "Most uncorrect words")
             {
                 WordsList.Text = "Most correct words";
+                switcher = true;
             }
             else
             {
                 WordsList.Text = "Most uncorrect words";
+                switcher = false;
             }
-            /// wczytywanie danych z pliku json do statystyk
+
+            MostCorrectAndUncorrect(words.Count);
         }
         private void LoadingData(object sender, RoutedEventArgs e)
         {
             Language.Text = lan;
             Unit.Text = unit;
-        }
-        private void ActivData(object sender, EventArgs e)
-        {
-            if(System.IO.File.Exists(directPath))
+
+            if (System.IO.File.Exists(directPath))
             {
                 string jsonRead = System.IO.File.ReadAllText(directPath);
-                List<Word> words = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Word>>(jsonRead);
+                words = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Word>>(jsonRead);
             }
             else
             {
-
+                words = new List<Word>();
             }
+
+            int count = words.Count;
+            NumberOfWords.Text = count.ToString();
+            NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
+            NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
+
+            if(System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf","Review.txt")))
+            {
+                string readFile = System.IO.File.ReadAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Review.txt"));
+                review = int.Parse(readFile);
+            }
+            else
+            {
+                review = 0;
+            }
+
+            MostCorrectAndUncorrect(count);
         }
-    }
+        private void ActivData(object sender, EventArgs e)
+        {
+
+        }
+        private void MostCorrectAndUncorrect(int count)
+        {
+            if(switcher == false)
+            {
+                switch (count)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        FirstOne.Text = words[0].WordName;
+                        MistakeOne.Text = words[0].Mistake.ToString();
+                        break;
+                    case 2:
+                        List<Word> sortedWords = words.OrderByDescending(x => x.Mistake).ToList();
+                        FirstOne.Text = sortedWords[0].WordName;
+                        SecondOne.Text = sortedWords[1].WordName;
+                        MistakeOne.Text = sortedWords[0].Mistake.ToString();
+                        MistakeTwo.Text = sortedWords[1].Mistake.ToString();
+                        break;
+                    default:
+                        List<Word> sortedWords2 = words.OrderByDescending(x => x.Mistake).ToList();
+                        FirstOne.Text = sortedWords2[0].WordName;
+                        SecondOne.Text = sortedWords2[1].WordName;
+                        ThirdOne.Text = sortedWords2[2].WordName;
+                        MistakeOne.Text = sortedWords2[0].Mistake.ToString();
+                        MistakeTwo.Text = sortedWords2[1].Mistake.ToString();
+                        MistakeThree.Text = sortedWords2[2].Mistake.ToString();
+                        break;
+                }
+            }
+            else
+            {
+                switch (count)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        FirstOne.Text = words[0].WordName;
+                        MistakeOne.Text = words[0].Mistake.ToString();
+                        break;
+                    case 2:
+                        List<Word> sortedWords = words.OrderBy(x => x.Mistake).ToList();
+                        FirstOne.Text = sortedWords[0].WordName;
+                        SecondOne.Text = sortedWords[1].WordName;
+                        MistakeOne.Text = sortedWords[0].Mistake.ToString();
+                        MistakeTwo.Text = sortedWords[1].Mistake.ToString();
+                        break;
+                    default:
+                        List<Word> sortedWords2 = words.OrderBy(x => x.Mistake).ToList();
+                        FirstOne.Text = sortedWords2[0].WordName;
+                        SecondOne.Text = sortedWords2[1].WordName;
+                        ThirdOne.Text = sortedWords2[2].WordName;
+                        MistakeOne.Text = sortedWords2[0].Mistake.ToString();
+                        MistakeTwo.Text = sortedWords2[1].Mistake.ToString();
+                        MistakeThree.Text = sortedWords2[2].Mistake.ToString();
+                        break;
+                }
+            }
+
+            if(FirstOne.Text == null)
+            {
+                FirstOne.Text = "You have to add words";
+            }
+            if (SecondOne.Text == null)
+            {
+                SecondOne.Text = "You have to add words";
+            }
+            if (ThirdOne.Text == null)
+            {
+                ThirdOne.Text = "You have to add words";
+            }
+
+        }
+    }            
 }

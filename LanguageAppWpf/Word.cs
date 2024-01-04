@@ -46,6 +46,72 @@ namespace LanguageAppWpf
 
         }
 
+        public int Correct
+        {
+            get
+            {
+                return _correct;
+            }
+            set
+            {
+                _correct = value;
+            }
+        }
+        public int Mistake
+        {
+            get
+            {
+                return _mistake;
+            }
+            set
+            {
+                _mistake = value;
+            }
+        }
+        public NameOfLanguage Language
+        {
+            get
+            {
+                return _language;
+            }
+            set
+            {
+                _language = value;
+            }
+        }
+        public string Unit
+        {
+            get
+            {
+                return _unit;
+            }
+            set
+            {
+                _unit = value;
+            }
+        }
+        public string WordName
+        {
+            get
+            {
+                return _word;
+            }
+            set
+            {
+                _word = value;
+            }
+        }
+        public string Translation
+        {
+            get
+            {
+                return _translation;
+            }
+            set
+            {
+                _translation = value;
+            }
+        }
     }
     enum Category
     {
