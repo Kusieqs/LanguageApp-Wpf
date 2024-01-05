@@ -123,8 +123,6 @@ namespace LanguageAppWpf
         Conjunction,
         Pronoun,
         Numeral,
-        Interjection,
-        Article,
         Other,
     }
 }

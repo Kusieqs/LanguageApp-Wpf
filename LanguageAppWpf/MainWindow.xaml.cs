@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,16 +15,13 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private int review;
         private string lan;
         private string unit;
         private string directPath;
-        private List<Word> words;
+        private List<Word> words = new List<Word>();
         private bool switcher = false;
         public MainWindow(string lan, string unit)
         {
@@ -40,17 +38,14 @@ namespace LanguageAppWpf
         {
 
         }
-
         private void BtnReview(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void BtnListOfWords(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void BtnChangeLanguage(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -60,9 +55,36 @@ namespace LanguageAppWpf
 
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
         {
+            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            Random random = new Random();
+            string pattern = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
+            if(words.Count == 0)
+            {
+                MessageBox.Show("No words to down write","Error",MessageBoxButton.OK,MessageBoxImage.Information);
+            }
+            else
+            {
+                do
+                {
+                    string word = "";
+                    for (int i = 0; i < 10; i++)
+                    {
+                        word += pattern[random.Next(0, pattern.Length)];
+                    }
+
+                    if (System.IO.File.Exists(System.IO.Path.Combine(path, word)))
+                        continue;
+                    else
+                    {
+                        string json = JsonConvert.SerializeObject(words);
+                        System.IO.File.WriteAllText(System.IO.Path.Combine(path, word), json);
+                        MessageBox.Show("File was created", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    }
+                } while (true);
+            }
         }
-
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
 
@@ -72,7 +94,6 @@ namespace LanguageAppWpf
         {
             this.Close();
         }
-
         private void SwitchButton(object sender, RoutedEventArgs e)
         {
             if(WordsList.Text == "Most uncorrect words")
@@ -117,11 +138,18 @@ namespace LanguageAppWpf
             {
                 review = 0;
             }
-
+            NumberOfReview.Text = review.ToString();
+            
             MostCorrectAndUncorrect(count);
         }
         private void ActivData(object sender, EventArgs e)
         {
+
+            MostCorrectAndUncorrect(words.Count);
+            NumberOfWords.Text = words.Count.ToString();
+            NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
+            NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
+            NumberOfReview.Text = review.ToString();
 
         }
         private void MostCorrectAndUncorrect(int count)
@@ -183,15 +211,15 @@ namespace LanguageAppWpf
                 }
             }
 
-            if(FirstOne.Text == null)
+            if(string.IsNullOrEmpty(FirstOne.Text))
             {
                 FirstOne.Text = "You have to add words";
             }
-            if (SecondOne.Text == null)
+            if (string.IsNullOrEmpty(SecondOne.Text))
             {
                 SecondOne.Text = "You have to add words";
             }
-            if (ThirdOne.Text == null)
+            if (string.IsNullOrEmpty(ThirdOne.Text))
             {
                 ThirdOne.Text = "You have to add words";
             }
