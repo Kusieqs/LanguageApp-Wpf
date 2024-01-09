@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,10 @@ namespace LanguageAppWpf
         private string directPath;
         private List<Word> words = new List<Word>();
         private bool switcher = false;
+        private AddWords addWords;
+        private Review reviewWindow;
+        private ListOfWords listOfWords;
+        private ReadJsonFile readJsonFile;
         public MainWindow(string lan, string unit)
         {
             InitializeComponent();
@@ -36,21 +41,37 @@ namespace LanguageAppWpf
 
         private void BtnAddWord(object sender, RoutedEventArgs e)
         {
-
+            addWords = new AddWords();
+            addWords.Owner = this;
+            addWords.Show();
+            addWords.Focus();
+            this.IsEnabled = false;
+            addWords.Closed += (s, args) => this.IsEnabled = true;
         }
         private void BtnReview(object sender, RoutedEventArgs e)
         {
-
+            reviewWindow = new Review();
+            reviewWindow.Owner = this;
+            reviewWindow.Show();
+            reviewWindow.Focus();
+            this.IsEnabled = false;
+            reviewWindow.Closed += (s, args) => this.IsEnabled = true;
         }
         private void BtnListOfWords(object sender, RoutedEventArgs e)
         {
-
+            listOfWords = new ListOfWords();
+            listOfWords.Owner = this;
+            listOfWords.Show();
+            listOfWords.Focus();
+            this.IsEnabled = false;
+            listOfWords.Closed += (s, args) => this.IsEnabled = true;
         }
         private void BtnChangeLanguage(object sender, RoutedEventArgs e)
         {
-            this.Close();
             LanguageChoose languageChoose = new LanguageChoose();
             languageChoose.Show();
+            languageChoose.Focus();
+            this.Close();
         }
 
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
@@ -87,9 +108,13 @@ namespace LanguageAppWpf
         }
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-
+            readJsonFile = new ReadJsonFile();
+            readJsonFile.Owner = this;
+            readJsonFile.Show();
+            readJsonFile.Focus();
+            this.IsEnabled = false;
+            readJsonFile.Closed += (s, args) => this.IsEnabled = true;
         }
-
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -224,6 +249,14 @@ namespace LanguageAppWpf
                 ThirdOne.Text = "You have to add words";
             }
 
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if ((reviewWindow!= null && reviewWindow.IsVisible) || (readJsonFile != null && readJsonFile.IsVisible) || (addWords != null&&addWords.IsVisible) || (listOfWords!= null && listOfWords.IsVisible))
+            {
+                e.Cancel = true;
+            }
         }
     }            
 }
