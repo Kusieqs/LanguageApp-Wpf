@@ -169,13 +169,11 @@ namespace LanguageAppWpf
         }
         private void ActivData(object sender, EventArgs e)
         {
-
             MostCorrectAndUncorrect(words.Count);
             NumberOfWords.Text = words.Count.ToString();
             NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
             NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
             NumberOfReview.Text = review.ToString();
-
         }
         private void MostCorrectAndUncorrect(int count)
         {

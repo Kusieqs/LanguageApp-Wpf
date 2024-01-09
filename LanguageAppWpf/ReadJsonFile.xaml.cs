@@ -23,5 +23,15 @@ namespace LanguageAppWpf
         {
             InitializeComponent();
         }
+
+        private void BtnExit(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRead(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
