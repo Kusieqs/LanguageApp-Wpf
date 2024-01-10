@@ -58,10 +58,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddWords.xaml.cs">
+      <DependentUpon>AddWords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfWords.xaml.cs">
+      <DependentUpon>ListOfWords.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReadJsonFile.xaml.cs">
+      <DependentUpon>ReadJsonFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Review.xaml.cs">
+      <DependentUpon>Review.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Unit.cs" />
+    <Compile Include="Word.cs" />
+    <Page Include="AddWords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChoosingUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -82,6 +99,10 @@
       <DependentUpon>LanguageChoose.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ListOfWords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +112,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewUnit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReadJsonFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Review.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
