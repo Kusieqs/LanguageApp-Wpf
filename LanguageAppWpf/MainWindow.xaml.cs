@@ -108,7 +108,7 @@ namespace LanguageAppWpf
         }
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-            readJsonFile = new ReadJsonFile();
+            readJsonFile = new ReadJsonFile(words);
             readJsonFile.Owner = this;
             readJsonFile.Show();
             readJsonFile.Focus();

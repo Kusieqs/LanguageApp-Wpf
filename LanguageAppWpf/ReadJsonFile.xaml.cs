@@ -19,14 +19,16 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ReadJsonFile : Window
     {
-        public ReadJsonFile()
+        List<Word> words = new List<Word>();
+        public ReadJsonFile(List<Word> words)
         {
             InitializeComponent();
+            this.words = words;
         }
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void BtnRead(object sender, RoutedEventArgs e)
