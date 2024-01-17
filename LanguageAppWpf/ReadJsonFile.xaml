@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="File name: " Foreground="white" FontSize="24" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFileName" Foreground="white" FontSize="20" FontWeight="DemiBold" Margin="17,17,17,10" Background="#FF636363"/>
-        <Button Content="Read" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnRead"  Foreground="White">
+        <Button x:Name="ReadBtn" Content="Read" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnRead"  Foreground="White">
             <Button.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" Opacity="0.5"/>
             </Button.Effect>

@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IFile
     {
         private int review;
         private string lan;
         private string unit;
         private string directPath;
-        private List<Word> words = new List<Word>();
+        public static List<Word> words = new List<Word>();
         private bool switcher = false;
         private AddWords addWords;
         private Review reviewWindow;
@@ -256,5 +256,5 @@ namespace LanguageAppWpf
                 e.Cancel = true;
             }
         }
-    }            
+    }    
 }

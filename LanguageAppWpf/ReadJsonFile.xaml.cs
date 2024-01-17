@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,12 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ReadJsonFile : Window
     {
-        List<Word> words = new List<Word>();
+        public List<Word> words { get; set; }
         public ReadJsonFile(List<Word> words)
         {
             InitializeComponent();
             this.words = words;
         }
-
         private void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -33,7 +33,49 @@ namespace LanguageAppWpf
 
         private void BtnRead(object sender, RoutedEventArgs e)
         {
+            if(txtFileName.Text == "")
+            {
+                MessageBox.Show("Text box is empty","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string pathFile = System.IO.Path.Combine(path, txtFileName.Text + ".json");
+            if (!System.IO.File.Exists(pathFile))
+            {
+                MessageBox.Show("File doesn't exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            try
+            {
+                int repeat = 0;
+                string json = System.IO.File.ReadAllText(pathFile);
+                List<Word> wordsFromFile = JsonConvert.DeserializeObject<List<Word>>(json);
+                if(wordsFromFile.Count == 0)
+                {
+                    MessageBox.Show("File is empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                foreach (var word in wordsFromFile)
+                {
+                    if (!words.Any(x => x.WordName.ToLower() == word.WordName.ToLower() && x.Translation.ToLower() == word.Translation.ToLower()))
+                    {
+                        words.Add(word);
+                    }
+                    else
+                        repeat++;
+                }
+                MessageBox.Show($"File has been read\nCount of words repeat: {repeat}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow.words = words;
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("File can't be read.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            // sprawdzanie czy jest pusty text, czy jest taki plik na pulpicie, sprawdzenie czy slowka sie powtarzaja, przypisanie tych slowek do listy, zapisanie do pliku (unitu)
         }
+
     }
 }
