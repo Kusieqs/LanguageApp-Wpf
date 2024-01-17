@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    public partial class MainWindow : Window, IFile
+    public partial class MainWindow : Window
     {
-        private int review;
-        private string lan;
-        private string unit;
-        private string directPath;
+        public int review { get; set;}
+        public string lan { get; set; }
+        public string unit { get; set; }
+        public static string directPath { get; set; }
         public static List<Word> words = new List<Word>();
         private bool switcher = false;
         private AddWords addWords;
@@ -33,7 +33,7 @@ namespace LanguageAppWpf
             InitializeComponent();
             this.lan = lan;
             this.unit = unit;
-            this.directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
+            directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
             this.Loaded += LoadingData;
             this.Activated += ActivData;
         }
@@ -108,12 +108,13 @@ namespace LanguageAppWpf
         }
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-            readJsonFile = new ReadJsonFile(words);
+            readJsonFile = new ReadJsonFile(words, unit);
             readJsonFile.Owner = this;
             readJsonFile.Show();
             readJsonFile.Focus();
             this.IsEnabled = false;
             readJsonFile.Closed += (s, args) => this.IsEnabled = true;
+            readJsonFile.Closed += (s, args) => this.Focus();
         }
         private void Exit(object sender, RoutedEventArgs e)
         {
@@ -247,6 +248,11 @@ namespace LanguageAppWpf
                 ThirdOne.Text = "You have to add words";
             }
 
+        }
+        public static void SaveData()
+        {
+            string json = JsonConvert.SerializeObject(words);
+            System.IO.File.WriteAllText(directPath,json);
         }
         protected override void OnClosing(CancelEventArgs e)
         {

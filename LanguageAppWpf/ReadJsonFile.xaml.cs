@@ -21,7 +21,7 @@ namespace LanguageAppWpf
     public partial class ReadJsonFile : Window
     {
         public List<Word> words { get; set; }
-        public ReadJsonFile(List<Word> words)
+        public ReadJsonFile(List<Word> words, string unit)
         {
             InitializeComponent();
             this.words = words;
@@ -68,13 +68,13 @@ namespace LanguageAppWpf
                 }
                 MessageBox.Show($"File has been read\nCount of words repeat: {repeat}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow.words = words;
+                MainWindow.SaveData();
 
             }
             catch(Exception ex)
             {
                 MessageBox.Show("File can't be read.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            // sprawdzanie czy jest pusty text, czy jest taki plik na pulpicie, sprawdzenie czy slowka sie powtarzaja, przypisanie tych slowek do listy, zapisanie do pliku (unitu)
         }
 
     }
