@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LanguageAppWpf
 {
-    internal class Word
+    public class Word
     {
         private NameOfLanguage _language;
         private string _word;
@@ -113,7 +113,7 @@ namespace LanguageAppWpf
             }
         }
     }
-    enum Category
+    public enum Category
     {
         Noun,
         Verb,

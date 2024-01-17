@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="ReadJsonFile" Height="450" Width="800">
-    <Grid>
-        
+        Title="ReadJsonFile" Height="150" Width="300">
+    <Grid Background="#FF373737">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="File name: " Foreground="white" FontSize="24" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFileName" Foreground="white" FontSize="20" FontWeight="DemiBold" Margin="17,17,17,10" Background="#FF636363"/>
+        <Button x:Name="ReadBtn" Content="Read" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnRead"  Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>
+                <Thickness Left="10" Right="10" Bottom="10" Top="10"/>
+            </Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" Background="White" BorderBrush="Yellow" BorderThickness="1.3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF565656"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Exit" Grid.Column="0" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnExit"  Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>
+                <Thickness Left="10" Right="10" Bottom="10" Top="10"/>
+            </Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" Background="White" BorderBrush="Yellow" BorderThickness="1.3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF565656"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

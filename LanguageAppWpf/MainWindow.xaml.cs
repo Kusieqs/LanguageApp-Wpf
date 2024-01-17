@@ -18,11 +18,11 @@ namespace LanguageAppWpf
 {
     public partial class MainWindow : Window
     {
-        private int review;
-        private string lan;
-        private string unit;
-        private string directPath;
-        private List<Word> words = new List<Word>();
+        public int review { get; set;}
+        public string lan { get; set; }
+        public string unit { get; set; }
+        public static string directPath { get; set; }
+        public static List<Word> words = new List<Word>();
         private bool switcher = false;
         private AddWords addWords;
         private Review reviewWindow;
@@ -33,7 +33,7 @@ namespace LanguageAppWpf
             InitializeComponent();
             this.lan = lan;
             this.unit = unit;
-            this.directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
+            directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
             this.Loaded += LoadingData;
             this.Activated += ActivData;
         }
@@ -108,12 +108,13 @@ namespace LanguageAppWpf
         }
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-            readJsonFile = new ReadJsonFile();
+            readJsonFile = new ReadJsonFile(words, unit);
             readJsonFile.Owner = this;
             readJsonFile.Show();
             readJsonFile.Focus();
             this.IsEnabled = false;
             readJsonFile.Closed += (s, args) => this.IsEnabled = true;
+            readJsonFile.Closed += (s, args) => this.Focus();
         }
         private void Exit(object sender, RoutedEventArgs e)
         {
@@ -169,13 +170,11 @@ namespace LanguageAppWpf
         }
         private void ActivData(object sender, EventArgs e)
         {
-
             MostCorrectAndUncorrect(words.Count);
             NumberOfWords.Text = words.Count.ToString();
             NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
             NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
             NumberOfReview.Text = review.ToString();
-
         }
         private void MostCorrectAndUncorrect(int count)
         {
@@ -250,6 +249,11 @@ namespace LanguageAppWpf
             }
 
         }
+        public static void SaveData()
+        {
+            string json = JsonConvert.SerializeObject(words);
+            System.IO.File.WriteAllText(directPath,json);
+        }
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -258,5 +262,5 @@ namespace LanguageAppWpf
                 e.Cancel = true;
             }
         }
-    }            
+    }    
 }
