@@ -8,32 +8,115 @@
         Title="Language" Height="650" Width="700">
     <Grid Name="MainGrid" Background="#FF373737">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Border Grid.Row="0" Grid.ColumnSpan ="4" Background="#FF565656">
-            <TextBlock Text="Choose Language" FontSize="30" FontWeight="Bold"  Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Background="#FF565656" CornerRadius="50" Margin="20" BorderBrush="Yellow" BorderThickness="2" x:Name="BorderLang">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Choose Language" Foreground="Yellow" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            </Grid>
         </Border>
-        <Button Content="Add Language" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White">
+        <ComboBox Name="ComboUnit" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="87,25,25,25" FontSize="16" FontWeight="DemiBold" IsEnabled="False"/>
+        <TextBlock Text="Unit:" Foreground="Yellow" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"/>
+        <Button Content="New Language" Grid.Column="1" Grid.Row="4" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White">
             <Button.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
             </Button.Effect>
-            <Button.Margin>
-                <Thickness Left="20" Top="20" Right="20" Bottom="20"/>
-            </Button.Margin>
+            <Button.Margin>20,20,20,20</Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" BorderBrush="Yellow" BorderThickness="1.3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF565656"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Exit" Grid.Column="1" Grid.Row="5" FontSize="30" FontWeight="Bold" Click="BtnExit"  Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>20,20,20,20</Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" BorderBrush="Yellow" BorderThickness="1.3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF565656"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="New Unit" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="Bold" Click="BtnNewUnit" IsEnabled="False"  Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>20,20,20,20</Button.Margin>
+            <Button.Cursor>
+                <Cursor>Hand</Cursor>
+            </Button.Cursor>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" CornerRadius="10" BorderBrush="Yellow" BorderThickness="1.3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="#FF565656"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Continue" Grid.Column="1" Grid.Row="2" FontSize="30" FontWeight="Bold" Click="BtnContinue"  Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+            </Button.Effect>
+            <Button.Margin>20,20,20,20</Button.Margin>
             <Button.Cursor>
                 <Cursor>Hand</Cursor>
             </Button.Cursor>
