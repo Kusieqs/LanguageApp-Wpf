@@ -66,22 +66,6 @@ namespace LanguageAppWpf
 
             foreach (string lan in languages)
             {
-                UIElement elementRemoveTextBlock = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows + 1);
-                if (elementRemoveTextBlock != null)
-                {
-                    MainGrid.Children.Remove(elementRemoveTextBlock);
-                }
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = lan.ToString();
-                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                textBlock.VerticalAlignment = VerticalAlignment.Center;
-                textBlock.FontSize = 20;
-                textBlock.FontWeight = FontWeights.Bold;
-                textBlock.Foreground = Brushes.White;
-                Grid.SetColumn(textBlock, gridColumns);
-                Grid.SetRow(textBlock, gridRows + 1);
-                MainGrid.Children.Add(textBlock);
-
                 Button button = new Button();
                 Image image = new Image();
                 BitmapImage bitmap = new BitmapImage();
@@ -92,7 +76,7 @@ namespace LanguageAppWpf
                 image.Source = bitmap;
                 image.Stretch = Stretch.Fill;
                 button.Content = image;
-                button.Margin = new Thickness(10);
+                button.Margin = new Thickness(20,10,20,10);
                 button.Background = Brushes.Transparent;
                 button.BorderBrush = Brushes.Transparent;
                 button.Foreground = Brushes.Transparent;
@@ -100,17 +84,17 @@ namespace LanguageAppWpf
                 button.Click += BtnFlag;
                 Grid.SetColumn(button, gridColumns);
                 Grid.SetRow(button, gridRows);
-                UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows);
+                UIElement elementRemoveBtn = BorderLan.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows);
                 if (elementRemoveBtn != null)
                 {
-                    MainGrid.Children.Remove(elementRemoveBtn);
+                    BorderLan.Children.Remove(elementRemoveBtn);
                 }
-                MainGrid.Children.Add(button);
+                BorderLan.Children.Add(button);
                 gridColumns++;
-                if (gridColumns == 4)
+                if (gridColumns == 2)
                 {
                     gridColumns = 0;
-                    gridRows += 2;
+                    gridRows++;
                 }
             }
         } // Adding flags as buttons
@@ -135,5 +119,20 @@ namespace LanguageAppWpf
                 e.Cancel = true;
             }
         } // Preventing from closing main window when new language window is open
+
+        private void BtnExit(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnContinue(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnNewUnit(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
