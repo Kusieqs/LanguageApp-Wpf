@@ -36,15 +36,19 @@ namespace LanguageAppWpf
         }
         private void BtnFlag(object sender, RoutedEventArgs e)
         {
-            int column = Grid.GetColumn(sender as Button);
-            int row = Grid.GetRow(sender as Button);
-            string nameOfLanguage = MainGrid.Children.OfType<TextBlock>().Where(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == row + 1).Select(x => x.Text).FirstOrDefault();
-            choosingUnit = new ChoosingUnit(nameOfLanguage,this);
-            choosingUnit.Owner = this;
-            this.IsEnabled = false;
-            choosingUnit.Show();
-            choosingUnit.Closed += (s, args) => this.IsEnabled = true;
-            choosingUnit.Closed += (s, args) => this.Focus();
+            string nameOfLanguage = (sender as Button).Name;
+            Image image = new Image();
+            image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + nameOfLanguage.Substring(0, 3) + ".png"));
+            image.Margin = new Thickness(20, 10, 20, 10);
+            Grid.SetColumn(image, 1);
+            Grid.SetRow(image, 0);
+            UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
+            if (elementRemoveBtn != null)
+            {
+                MainGrid.Children.Remove(elementRemoveBtn);
+            }
+            MainGrid.Children.Add(image);
+            // dokonczyc
             
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
@@ -77,6 +81,7 @@ namespace LanguageAppWpf
                 image.Stretch = Stretch.Fill;
                 button.Content = image;
                 button.Margin = new Thickness(20,10,20,10);
+                button.Name = lan;
                 button.Background = Brushes.Transparent;
                 button.BorderBrush = Brushes.Transparent;
                 button.Foreground = Brushes.Transparent;
@@ -122,9 +127,8 @@ namespace LanguageAppWpf
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
-
         private void BtnContinue(object sender, RoutedEventArgs e)
         {
 
