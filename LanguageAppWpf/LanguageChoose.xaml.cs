@@ -17,13 +17,15 @@ using Newtonsoft.Json;
 using System.Data.Common;
 using System.Data.Sql;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace LanguageAppWpf
 {
     public partial class LanguageChoose : Window
     {
         private NewLanguage newLanguage;
-        private ChoosingUnit choosingUnit;
+        private NewUnit newUnit;
+        private string actualLanguage;
         public LanguageChoose()
         {
             InitializeComponent();
@@ -36,15 +38,21 @@ namespace LanguageAppWpf
         }
         private void BtnFlag(object sender, RoutedEventArgs e)
         {
-            int column = Grid.GetColumn(sender as Button);
-            int row = Grid.GetRow(sender as Button);
-            string nameOfLanguage = MainGrid.Children.OfType<TextBlock>().Where(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == row + 1).Select(x => x.Text).FirstOrDefault();
-            choosingUnit = new ChoosingUnit(nameOfLanguage,this);
-            choosingUnit.Owner = this;
-            this.IsEnabled = false;
-            choosingUnit.Show();
-            choosingUnit.Closed += (s, args) => this.IsEnabled = true;
-            choosingUnit.Closed += (s, args) => this.Focus();
+            actualLanguage = (sender as Button).Name;
+            Image image = new Image();
+            image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png"));
+            image.Margin = new Thickness(20, 10, 20, 10);
+            Grid.SetColumn(image, 1);
+            Grid.SetRow(image, 0);
+            UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
+            
+            if (elementRemoveBtn != null)
+            {
+                MainGrid.Children.Remove(elementRemoveBtn);
+            }
+
+            MainGrid.Children.Add(image);
+            ReadComboBox(sender, e);
             
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
@@ -54,6 +62,8 @@ namespace LanguageAppWpf
             newLanguage.Show();
             this.IsEnabled = false;
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
+            newLanguage.Closed += (s, args) => AddingFlagsAsButtons();
+            newLanguage.Closed += (s, args) => this.Focus();
         } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
@@ -66,22 +76,6 @@ namespace LanguageAppWpf
 
             foreach (string lan in languages)
             {
-                UIElement elementRemoveTextBlock = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows + 1);
-                if (elementRemoveTextBlock != null)
-                {
-                    MainGrid.Children.Remove(elementRemoveTextBlock);
-                }
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = lan.ToString();
-                textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-                textBlock.VerticalAlignment = VerticalAlignment.Center;
-                textBlock.FontSize = 20;
-                textBlock.FontWeight = FontWeights.Bold;
-                textBlock.Foreground = Brushes.White;
-                Grid.SetColumn(textBlock, gridColumns);
-                Grid.SetRow(textBlock, gridRows + 1);
-                MainGrid.Children.Add(textBlock);
-
                 Button button = new Button();
                 Image image = new Image();
                 BitmapImage bitmap = new BitmapImage();
@@ -92,7 +86,8 @@ namespace LanguageAppWpf
                 image.Source = bitmap;
                 image.Stretch = Stretch.Fill;
                 button.Content = image;
-                button.Margin = new Thickness(10);
+                button.Margin = new Thickness(20,10,20,10);
+                button.Name = lan;
                 button.Background = Brushes.Transparent;
                 button.BorderBrush = Brushes.Transparent;
                 button.Foreground = Brushes.Transparent;
@@ -100,19 +95,21 @@ namespace LanguageAppWpf
                 button.Click += BtnFlag;
                 Grid.SetColumn(button, gridColumns);
                 Grid.SetRow(button, gridRows);
-                UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows);
+                UIElement elementRemoveBtn = BorderLan.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == gridColumns && Grid.GetRow(x) == gridRows);
                 if (elementRemoveBtn != null)
                 {
-                    MainGrid.Children.Remove(elementRemoveBtn);
+                    BorderLan.Children.Remove(elementRemoveBtn);
                 }
-                MainGrid.Children.Add(button);
+                BorderLan.Children.Add(button);
                 gridColumns++;
-                if (gridColumns == 4)
+                if (gridColumns == 2)
                 {
                     gridColumns = 0;
-                    gridRows += 2;
+                    gridRows++;
                 }
             }
+            if(languages.Count == 12)
+                newLanguageBtn.IsEnabled = false;
         } // Adding flags as buttons
         private void ExistingFolder(string path, ref List<string> languages)
         {
@@ -126,14 +123,57 @@ namespace LanguageAppWpf
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            if (newLanguage != null && newLanguage.IsVisible)
-            {
-                e.Cancel = true;
-            }
-            if (choosingUnit != null && choosingUnit.IsVisible)
+            if ((newLanguage != null && newLanguage.IsVisible) || (newUnit != null && newUnit.IsVisible))
             {
                 e.Cancel = true;
             }
         } // Preventing from closing main window when new language window is open
+        private void BtnExit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        } // Closing window
+        private void BtnContinue(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(actualLanguage,comboUnit.SelectedItem.ToString());
+            this.Close();
+            mainWindow.Show();
+            mainWindow.Focus();
+        } // Creating new window for learning words
+        private void BtnNewUnit(object sender, RoutedEventArgs e)
+        {
+            newUnit = new NewUnit(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage), comboUnit);
+            newUnit.Owner = this;
+            newUnit.Show();
+            this.IsEnabled = false;
+            newUnit.Closed += (s, args) => this.IsEnabled = true;
+            newUnit.Closed += (s, args) => this.Focus();
+            newUnit.Closed += ReadComboBox;
+        } // Creating new window for adding new unit
+        private void ReadComboBox(object sender, EventArgs e)
+        {
+            continueBtn.IsEnabled = true;
+            newUnitBtn.IsEnabled = true;
+            comboUnit.IsEnabled = true;
+            comboUnit.Items.Clear();
+            List<string> units = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage)).Select(System.IO.Path.GetFileName).ToList());
+
+            if (units.Count == 0)
+            {
+                continueBtn.IsEnabled = false;
+                comboUnit.IsEnabled = false;
+            }
+            else
+            {
+                comboUnit.IsEnabled = true;
+                continueBtn.IsEnabled = true;
+            }
+
+            foreach (string unit in units)
+            {
+                comboUnit.Items.Add(unit);
+                comboUnit.SelectedIndex = 0;
+            }
+        } // Reading units from folder and adding them to combobox
+
     }
 }
