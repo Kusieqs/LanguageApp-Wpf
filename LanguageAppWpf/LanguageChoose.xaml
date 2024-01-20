@@ -38,9 +38,9 @@
                 <TextBlock Text="Choose Language" FontWeight="DemiBold" Foreground="Yellow" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
-        <ComboBox Name="comboUnit" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="125,25,25,25" FontSize="16" FontWeight="DemiBold" IsEnabled="False"/>
+        <ComboBox Name="comboUnit" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="125,25,25,25" FontSize="20" FontWeight="DemiBold" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBlock Text="Unit:" Foreground="Yellow" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"/>
-        <Button Content="New Language" Grid.Column="1" Grid.Row="4" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White">
+        <Button x:Name="newLanguageBtn" Content="New Language" Grid.Column="1" Grid.Row="4" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White">
             <Button.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
             </Button.Effect>

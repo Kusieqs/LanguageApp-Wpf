@@ -24,7 +24,7 @@ namespace LanguageAppWpf
     public partial class LanguageChoose : Window
     {
         private NewLanguage newLanguage;
-        private ChoosingUnit choosingUnit;
+        private string actualLanguage;
         public LanguageChoose()
         {
             InitializeComponent();
@@ -37,9 +37,9 @@ namespace LanguageAppWpf
         }
         private void BtnFlag(object sender, RoutedEventArgs e)
         {
-            string nameOfLanguage = (sender as Button).Name;
+            actualLanguage = (sender as Button).Name;
             Image image = new Image();
-            image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + nameOfLanguage.Substring(0, 3) + ".png"));
+            image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png"));
             image.Margin = new Thickness(20, 10, 20, 10);
             Grid.SetColumn(image, 1);
             Grid.SetRow(image, 0);
@@ -51,28 +51,7 @@ namespace LanguageAppWpf
             }
 
             MainGrid.Children.Add(image);
-            continueBtn.IsEnabled = true;
-            newUnitBtn.IsEnabled = true;
-            comboUnit.IsEnabled = true;
-            comboUnit.Items.Clear();
-            List<string> units = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", nameOfLanguage)).Select(System.IO.Path.GetFileName).ToList());
-            
-            if(units.Count == 0)
-            {
-                continueBtn.IsEnabled = false;
-                comboUnit.IsEnabled = false;
-            }
-            else
-            {
-                comboUnit.IsEnabled = true;
-                continueBtn.IsEnabled = true;
-            }
-
-            foreach (string unit in units)
-            {
-                comboUnit.Items.Add(unit);
-                comboUnit.SelectedIndex = 0;
-            }
+            ReadComboBox(sender, e);
             
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
@@ -128,6 +107,8 @@ namespace LanguageAppWpf
                     gridRows++;
                 }
             }
+            if(languages.Count == 12)
+                newLanguageBtn.IsEnabled = false;
         } // Adding flags as buttons
         private void ExistingFolder(string path, ref List<string> languages)
         {
@@ -145,10 +126,6 @@ namespace LanguageAppWpf
             {
                 e.Cancel = true;
             }
-            if (choosingUnit != null && choosingUnit.IsVisible)
-            {
-                e.Cancel = true;
-            }
         } // Preventing from closing main window when new language window is open
 
         private void BtnExit(object sender, RoutedEventArgs e)
@@ -161,7 +138,40 @@ namespace LanguageAppWpf
         }
         private void BtnNewUnit(object sender, RoutedEventArgs e)
         {
-
+            NewUnit newUnit = new NewUnit(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage), comboUnit);
+            newUnit.Owner = this;
+            newUnit.Show();
+            this.IsEnabled = false;
+            newUnit.Closed += (s, args) => this.IsEnabled = true;
+            newUnit.Closed += (s, args) => this.Focus();
+            newUnit.Closed += ReadComboBox;
         }
+
+        private void ReadComboBox(object sender, EventArgs e)
+        {
+            continueBtn.IsEnabled = true;
+            newUnitBtn.IsEnabled = true;
+            comboUnit.IsEnabled = true;
+            comboUnit.Items.Clear();
+            List<string> units = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage)).Select(System.IO.Path.GetFileName).ToList());
+
+            if (units.Count == 0)
+            {
+                continueBtn.IsEnabled = false;
+                comboUnit.IsEnabled = false;
+            }
+            else
+            {
+                comboUnit.IsEnabled = true;
+                continueBtn.IsEnabled = true;
+            }
+
+            foreach (string unit in units)
+            {
+                comboUnit.Items.Add(unit);
+                comboUnit.SelectedIndex = 0;
+            }
+        }
+
     }
 }

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewUnit.xaml
-    /// </summary>
     public partial class NewUnit : Window
     {
         private string directPath;
