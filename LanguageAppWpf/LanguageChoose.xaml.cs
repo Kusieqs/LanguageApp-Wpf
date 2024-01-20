@@ -24,6 +24,7 @@ namespace LanguageAppWpf
     public partial class LanguageChoose : Window
     {
         private NewLanguage newLanguage;
+        private NewUnit newUnit;
         private string actualLanguage;
         public LanguageChoose()
         {
@@ -122,31 +123,32 @@ namespace LanguageAppWpf
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            if (newLanguage != null && newLanguage.IsVisible)
+            if ((newLanguage != null && newLanguage.IsVisible) || (newUnit != null && newUnit.IsVisible))
             {
                 e.Cancel = true;
             }
         } // Preventing from closing main window when new language window is open
-
         private void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Closing window
         private void BtnContinue(object sender, RoutedEventArgs e)
         {
-
-        }
+            MainWindow mainWindow = new MainWindow(actualLanguage,comboUnit.SelectedItem.ToString());
+            this.Close();
+            mainWindow.Show();
+            mainWindow.Focus();
+        } // Creating new window for learning words
         private void BtnNewUnit(object sender, RoutedEventArgs e)
         {
-            NewUnit newUnit = new NewUnit(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage), comboUnit);
+            newUnit = new NewUnit(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage), comboUnit);
             newUnit.Owner = this;
             newUnit.Show();
             this.IsEnabled = false;
             newUnit.Closed += (s, args) => this.IsEnabled = true;
             newUnit.Closed += (s, args) => this.Focus();
             newUnit.Closed += ReadComboBox;
-        }
-
+        } // Creating new window for adding new unit
         private void ReadComboBox(object sender, EventArgs e)
         {
             continueBtn.IsEnabled = true;
@@ -171,7 +173,7 @@ namespace LanguageAppWpf
                 comboUnit.Items.Add(unit);
                 comboUnit.SelectedIndex = 0;
             }
-        }
+        } // Reading units from folder and adding them to combobox
 
     }
 }
