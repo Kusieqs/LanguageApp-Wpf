@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using System.Data.Common;
 using System.Data.Sql;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace LanguageAppWpf
 {
@@ -43,12 +44,35 @@ namespace LanguageAppWpf
             Grid.SetColumn(image, 1);
             Grid.SetRow(image, 0);
             UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
+            
             if (elementRemoveBtn != null)
             {
                 MainGrid.Children.Remove(elementRemoveBtn);
             }
+
             MainGrid.Children.Add(image);
-            // dokonczyc
+            continueBtn.IsEnabled = true;
+            newUnitBtn.IsEnabled = true;
+            comboUnit.IsEnabled = true;
+            comboUnit.Items.Clear();
+            List<string> units = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", nameOfLanguage)).Select(System.IO.Path.GetFileName).ToList());
+            
+            if(units.Count == 0)
+            {
+                continueBtn.IsEnabled = false;
+                comboUnit.IsEnabled = false;
+            }
+            else
+            {
+                comboUnit.IsEnabled = true;
+                continueBtn.IsEnabled = true;
+            }
+
+            foreach (string unit in units)
+            {
+                comboUnit.Items.Add(unit);
+                comboUnit.SelectedIndex = 0;
+            }
             
         }
         private void BtnAddLanguage(object sender, RoutedEventArgs e)
@@ -58,6 +82,8 @@ namespace LanguageAppWpf
             newLanguage.Show();
             this.IsEnabled = false;
             newLanguage.Closed += (s, args) => this.IsEnabled = true;
+            newLanguage.Closed += (s, args) => AddingFlagsAsButtons();
+            newLanguage.Closed += (s, args) => this.Focus();
         } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
@@ -133,7 +159,6 @@ namespace LanguageAppWpf
         {
 
         }
-
         private void BtnNewUnit(object sender, RoutedEventArgs e)
         {
 

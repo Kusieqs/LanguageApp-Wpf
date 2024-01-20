@@ -23,6 +23,7 @@ namespace LanguageAppWpf
     {
         private NewUnit newUnit;
         private LanguageChoose languageChoose;
+
         private string lan;
         private string directPath;
         public ChoosingUnit(string lan, LanguageChoose languageChoose)
