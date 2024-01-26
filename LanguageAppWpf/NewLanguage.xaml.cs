@@ -74,7 +74,7 @@ namespace LanguageAppWpf
             }
             if (ComboLan.Items.Count == 0)
             {
-                AddLanguage.IsEnabled = false;
+                AddLan.IsEnabled = false;
             }
         } // Adding list of languages to combobox
         private List<string> EqualsLists(List<string> l1, List<string> l2)
