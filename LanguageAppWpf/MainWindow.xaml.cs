@@ -41,12 +41,13 @@ namespace LanguageAppWpf
 
         private void BtnAddWord(object sender, RoutedEventArgs e)
         {
-            addWords = new AddWords();
+            addWords = new AddWords(lan,unit);
             addWords.Owner = this;
             addWords.Show();
             addWords.Focus();
             this.IsEnabled = false;
             addWords.Closed += (s, args) => this.IsEnabled = true;
+            addWords.Closed += (s, args) => this.Focus();
         }
         private void BtnReview(object sender, RoutedEventArgs e)
         {
