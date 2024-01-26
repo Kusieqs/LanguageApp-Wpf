@@ -79,11 +79,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Category:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
-                <ComboBox Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" Background="#FF373737"/>
+                <ComboBox x:Name="TypeComboBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" Background="#FF373737"/>
             </Grid>
         </Border>
-        <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Exit" FontSize="25"/>
-        <Button Grid.Column="1" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Add" FontSize="25"/>
+        <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Exit" FontSize="25" Click="ExitBtn"/>
+        <Button Grid.Column="1" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Add" FontSize="25" Click="AddWordBtn"/>
     </Grid>
 
 </Window>

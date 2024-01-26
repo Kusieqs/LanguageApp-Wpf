@@ -22,6 +22,27 @@ namespace LanguageAppWpf
         public AddWords()
         {
             InitializeComponent();
+            this.Loaded += LoadComboBox;
+        }
+
+        private void ExitBtn(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddWordBtn(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void LoadComboBox(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Content = Enum.GetNames(typeof(Category))[i];
+                TypeComboBox.Items.Add(item);
+            }
+            TypeComboBox.SelectedIndex = 0;
         }
     }
 }
