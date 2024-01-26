@@ -59,6 +59,27 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Word:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
+                <TextBox Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" />
+            </Grid>
+        </Border>
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Translation:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
+                <TextBox Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" />
+            </Grid>
+        </Border>
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Category:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
+                <ComboBox Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" Background="#FF373737"/>
             </Grid>
         </Border>
         <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Exit" FontSize="25"/>

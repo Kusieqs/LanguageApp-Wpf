@@ -56,7 +56,7 @@
         <Border Grid.Column="0" Grid.Row="1">
             <TextBlock Text="You choosed: " FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         </Border>
-        <Button Content="Add Language" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="Bold" Click="BtnNewLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name ="AddLan"  Content="Add Language" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="Bold" Click="BtnNewLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
         <Button Content="Exit" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
 
     </Grid>
