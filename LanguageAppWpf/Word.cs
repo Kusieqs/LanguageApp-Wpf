@@ -26,6 +26,8 @@ namespace LanguageAppWpf
             _word = word;
             _translation = translation;
             _category = category;
+            _mistake = 0;
+            _correct = 0;
         }
         public Word(NameOfLanguage language, string word, string translation, Category category, string unit, int mistake, int correct)
         {

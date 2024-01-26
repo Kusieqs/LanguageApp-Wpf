@@ -19,10 +19,14 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class AddWords : Window
     {
-        public AddWords()
+        private NameOfLanguage _language;
+        private string _unit;
+        public AddWords(string lan, string unit)
         {
             InitializeComponent();
             this.Loaded += LoadComboBox;
+            _language = (NameOfLanguage)Enum.Parse(typeof(NameOfLanguage), lan);
+            _unit = unit;
         }
 
         private void ExitBtn(object sender, RoutedEventArgs e)
@@ -32,6 +36,16 @@ namespace LanguageAppWpf
 
         private void AddWordBtn(object sender, RoutedEventArgs e)
         {
+            if(WordTextBox.Text == "" || TranslationTextBox.Text == "")
+            {
+                MessageBox.Show("Word or translation is empty","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+            Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
+            Word word = new Word(_language,WordTextBox.Text,TranslationTextBox.Text,category,_unit);
+            MainWindow.words.Add(word); 
+            WordTextBox.Text = "";
+            TranslationTextBox.Text = "";
 
         }
         private void LoadComboBox(object sender, RoutedEventArgs e)
