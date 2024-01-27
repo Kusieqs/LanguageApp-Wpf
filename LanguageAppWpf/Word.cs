@@ -122,9 +122,7 @@ namespace LanguageAppWpf
         Adjective,
         Adverb,
         Preposition,
-        Conjunction,
         Pronoun,
-        Numeral,
         Other,
     }
 }
