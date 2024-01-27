@@ -23,5 +23,19 @@ namespace LanguageAppWpf
         {
             InitializeComponent();
         }
+
+        private void Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitBtn(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
