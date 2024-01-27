@@ -31,38 +31,80 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Alfabetical" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="15" Width="16" Checked="Alfa_Checked" Unchecked="Alfa_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="19" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Noun" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="15" Width="16" Checked="Noun_Checked" Unchecked="Noun_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Verb" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="15" Width="16" Checked="Verb_Checked" Unchecked="Verb_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Adjective" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="15" Width="16" Checked="Adjective_Checked" Unchecked="Adjective_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Adverb" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Height="15" Width="16" Checked="Adverb_Checked" Unchecked="Adverb_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Preposition" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" Height="15" Width="16" Checked="Preposition_Checked" Unchecked="Preposition_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Conjunction" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1" Height="15" Width="16" Checked="Conjunction_Checked" Unchecked="Conjunction_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Pronoun" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1" Height="15" Width="16" Checked="Pronoun_Checked" Unchecked="Pronoun_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Other" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1" Height="15" Width="16" Checked="Other_Checked" Unchecked="Other_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Correct" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1" Height="15" Width="16" Checked="Correct_Checked" Unchecked="Correct_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
                 <TextBlock Text="Uncorrect" FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="10" Grid.Column="0"/>
-                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="10" Grid.Column="1" Height="15" Width="16" Checked="Uncorrect_Checked" Unchecked="Uncorrect_Unchecked" Background="Yellow"/>
+                <CheckBox Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="10" Grid.Column="1" Height="15" Width="16" Checked="Checked" Unchecked="Unchecked" Background="Yellow"/>
 
+            </Grid>
+        </Border>
+        <Border Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="List of words" FontSize="30" FontWeight="DemiBold" Foreground="Yellow" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                        <Button Content="Exit" Grid.Column="1" FontSize="25" FontWeight="DemiBold" Click="ExitBtn"  Foreground="Black">
+                            <Button.Effect>
+                                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+                            </Button.Effect>
+                            <Button.Margin>170,5,10,5</Button.Margin>
+                            <Button.Cursor>Hand</Button.Cursor>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="1.3">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter TargetName="border" Property="Background" Value="Yellow"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" BorderBrush="Yellow" BorderThickness="1.5" Background="#FF565656">
+                    <ScrollViewer x:Name="ScrollList" Grid.Row="1" FontSize="20"/>
+                </Border>
             </Grid>
         </Border>
     </Grid>
