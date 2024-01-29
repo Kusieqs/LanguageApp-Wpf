@@ -38,9 +38,29 @@ namespace LanguageAppWpf
                 if (SortBy.Children.Cast<UIElement>().FirstOrDefault(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 0) is TextBlock textBlock)
                 {
                     x = textBlock.Text;
-                    if (x.ToLower() == "alfhabet")
+                    if (x.ToLower() == "correct")
+                    {
+                        if(Uncorrect.IsChecked == true)
+                        {
+                            Uncorrect.IsChecked = false;
+                        }
+                        return list.OrderBy(y => y.Correct).ToList();
+                    }
+                    else if(x.ToLower() == "Uncorrect")
+                    {
+                        if(Correct.IsChecked == true)
+                        {
+                            Correct.IsChecked = false;
+                        }
+                        return list.OrderBy(y => y.Mistake).ToList();
+                    }
+                    else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == true)
                     {
                         return list.OrderBy(y => y.WordName).ToList();
+                    }
+                    else if(x.ToLower() == "alfabetical")
+                    {
+                        return list;
                     }
                 }
             }
@@ -52,7 +72,19 @@ namespace LanguageAppWpf
                     wordsToNewList.Add(word);
                 }
             };  
-
+             
+            if(Alfabetical.IsChecked == true)
+            {
+                wordsToNewList.OrderBy(y => y.WordName).ToList();
+            }
+            else if(Correct.IsChecked == true)
+            {
+                wordsToNewList.OrderBy(y => y.Correct).ToList();
+            }
+            else if(Uncorrect.IsChecked == true)
+            {
+                wordsToNewList.OrderBy(y => y.Mistake).ToList();
+            }
             return wordsToNewList;
 
         }
