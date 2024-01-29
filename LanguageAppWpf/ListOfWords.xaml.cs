@@ -19,19 +19,54 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ListOfWords : Window
     {
+        List<Word> list = new List<Word>();
+        List<Word> actualList = MainWindow.words;
         public ListOfWords()
         {
             InitializeComponent();
             this.Loaded += LoadScrollView;
         }
+        private List<Word> ListOfWordsToMethods(object sender)
+        {
+            string x = "";
+            int row = 0;
+            List<Word> words = MainWindow.words;
+            List<Word> wordsToNewList = new List<Word>();
+            if (sender is CheckBox checkBox)
+            {
+                row = Grid.GetRow(checkBox);
+                if (SortBy.Children.Cast<UIElement>().FirstOrDefault(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 0) is TextBlock textBlock)
+                {
+                    x = textBlock.Text;
+                    if (x.ToLower() == "alfhabet")
+                    {
+                        return list.OrderBy(y => y.WordName).ToList();
+                    }
+                }
+            }
 
+            foreach (Word word in words)
+            {
+                if (word.Category.ToString().ToLower() == x.ToLower())
+                {
+                    wordsToNewList.Add(word);
+                }
+            };  
+
+            return wordsToNewList;
+
+        }
         private void Checked(object sender, RoutedEventArgs e)
         {
-
+            List<Word> wordsToAdd = ListOfWordsToMethods(sender);
+            list = list.Union(wordsToAdd).ToList();
+            ItemsScrollView(list);
         }
         private void Unchecked(object sender, RoutedEventArgs e)
         {
-
+            List<Word> wordsToDelete = ListOfWordsToMethods(sender);
+            list = list.Except(wordsToDelete).ToList();
+            ItemsScrollView(list);
         }
 
         private void ExitBtn(object sender, RoutedEventArgs e)
@@ -40,17 +75,29 @@ namespace LanguageAppWpf
         }
         private void LoadScrollView(object sender, RoutedEventArgs e)
         {
-            StackPanel panel = new StackPanel();
-            foreach (Word word in MainWindow.words)
+            ItemsScrollView(actualList);
+        }
+        private void Modify(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ItemsScrollView(List<Word> list)
+        {
+            if (ScrollList != null)
             {
-                //add me here to scroll view every single object of word and translation and mistake and category
+                ScrollList.ClearValue(ScrollViewer.ContentProperty);
+            }
+
+            StackPanel panel = new StackPanel();
+            foreach (Word word in list)
+            {
                 if (word != null)
                 {
                     StackPanel stackPanel = new StackPanel();
                     stackPanel.Orientation = Orientation.Horizontal;
                     TextBlock textBlock = new TextBlock();
-                    textBlock.Text = word.WordName;
-                    textBlock.Width = 250;
+                    textBlock.Text = " " + word.WordName;
+                    textBlock.Width = 280;
                     textBlock.Height = 30;
                     textBlock.TextAlignment = TextAlignment.Left;
                     textBlock.VerticalAlignment = VerticalAlignment.Center;
@@ -60,7 +107,7 @@ namespace LanguageAppWpf
                     stackPanel.Children.Add(textBlock);
                     TextBlock textBlock1 = new TextBlock();
                     textBlock1.Text = word.Translation;
-                    textBlock1.Width = 250;
+                    textBlock1.Width = 280;
                     textBlock1.Height = 30;
                     textBlock1.TextAlignment = TextAlignment.Left;
                     textBlock1.VerticalAlignment = VerticalAlignment.Center;
@@ -70,7 +117,7 @@ namespace LanguageAppWpf
                     stackPanel.Children.Add(textBlock1);
                     TextBlock textBlock2 = new TextBlock();
                     textBlock2.Text = word.Mistake.ToString();
-                    textBlock2.Width = 50;
+                    textBlock2.Width = 70;
                     textBlock2.Height = 30;
                     textBlock2.TextAlignment = TextAlignment.Left;
                     textBlock2.VerticalAlignment = VerticalAlignment.Center;
@@ -80,7 +127,7 @@ namespace LanguageAppWpf
                     stackPanel.Children.Add(textBlock2);
                     TextBlock textBlock3 = new TextBlock();
                     textBlock3.Text = word.Correct.ToString();
-                    textBlock3.Width = 50;
+                    textBlock3.Width = 70;
                     textBlock3.Height = 30;
                     textBlock3.TextAlignment = TextAlignment.Left;
                     textBlock3.VerticalAlignment = VerticalAlignment.Center;
@@ -115,11 +162,9 @@ namespace LanguageAppWpf
                 ScrollList.Content = panel;
 
             }
-            
-        }
-        private void Modify(object sender, RoutedEventArgs e)
-        {
+
 
         }
+
     }
 }
