@@ -19,14 +19,13 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ListOfWords : Window
     {
-        List<Word> list = new List<Word>();
         List<Word> actualList = MainWindow.words;
         public ListOfWords()
         {
             InitializeComponent();
             this.Loaded += LoadScrollView;
         }
-        private List<Word> ListOfWordsToMethods(object sender)
+        private (List<Word>,bool) ListOfWordsToMethods(object sender)
         {
             string x = "";
             int row = 0;
@@ -38,29 +37,30 @@ namespace LanguageAppWpf
                 if (SortBy.Children.Cast<UIElement>().FirstOrDefault(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 0) is TextBlock textBlock)
                 {
                     x = textBlock.Text;
+
                     if (x.ToLower() == "correct")
                     {
                         if(Uncorrect.IsChecked == true)
                         {
-                            Uncorrect.IsChecked = false;
+                            Correct.IsChecked = false;
                         }
-                        return list.OrderBy(y => y.Correct).ToList();
+                        return (actualList.OrderBy(y => y.Correct).ToList(),false);
                     }
-                    else if(x.ToLower() == "Uncorrect")
+                    else if(x.ToLower() == "uncorrect")
                     {
                         if(Correct.IsChecked == true)
                         {
-                            Correct.IsChecked = false;
+                            Uncorrect.IsChecked = false;
                         }
-                        return list.OrderBy(y => y.Mistake).ToList();
+                        return (actualList.OrderBy(y => y.Mistake).ToList(),false);
                     }
                     else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == true)
                     {
-                        return list.OrderBy(y => y.WordName).ToList();
+                        return (actualList.OrderBy(y => y.WordName).ToList(),false);
                     }
-                    else if(x.ToLower() == "alfabetical")
+                    else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == false)
                     {
-                        return list;
+                        return (actualList,false);
                     }
                 }
             }
@@ -72,41 +72,69 @@ namespace LanguageAppWpf
                     wordsToNewList.Add(word);
                 }
             };  
-             
-            if(Alfabetical.IsChecked == true)
-            {
-                wordsToNewList.OrderBy(y => y.WordName).ToList();
-            }
-            else if(Correct.IsChecked == true)
-            {
-                wordsToNewList.OrderBy(y => y.Correct).ToList();
-            }
-            else if(Uncorrect.IsChecked == true)
-            {
-                wordsToNewList.OrderBy(y => y.Mistake).ToList();
-            }
-            return wordsToNewList;
+            return (wordsToNewList, true);
 
         }
         private void Checked(object sender, RoutedEventArgs e)
         {
-            List<Word> wordsToAdd = ListOfWordsToMethods(sender);
-            list = list.Union(wordsToAdd).ToList();
-            ItemsScrollView(list);
+            var items = ListOfWordsToMethods(sender);
+            if(items.Item2 == true)
+            {
+                actualList = actualList.Union(items.Item1).ToList();
+                ExceptionsWithSort();
+            }
+            else
+            {
+                actualList = items.Item1;
+            }
+            ItemsScrollView(actualList);
         }
         private void Unchecked(object sender, RoutedEventArgs e)
         {
-            List<Word> wordsToDelete = ListOfWordsToMethods(sender);
-            list = list.Except(wordsToDelete).ToList();
-            ItemsScrollView(list);
+            var items = ListOfWordsToMethods(sender);
+            if (items.Item2 == true)
+            {
+                actualList = actualList.Except(items.Item1).ToList();
+                ExceptionsWithSort();
+            }
+            else
+            {
+                actualList = items.Item1;
+            }
+            ItemsScrollView(actualList);
         }
-
+        private void ExceptionsWithSort()
+        {
+            if (Alfabetical.IsChecked == true)
+            {
+                actualList = actualList.OrderBy(y => y.WordName).ToList();
+            }
+            else if (Correct.IsChecked == true)
+            {
+                actualList = actualList.OrderBy(y => y.Correct).ToList();
+            }
+            else if (Uncorrect.IsChecked == true)
+            {
+                actualList = actualList.OrderBy(y => y.Mistake).ToList();
+            }
+        }
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
         private void LoadScrollView(object sender, RoutedEventArgs e)
         {
+            #region LoadCheckedBoxes
+            Verb.IsChecked = true;
+            Noun.IsChecked = true;
+            Adjective.IsChecked = true;
+            Conjunction.IsChecked = true;
+            Adverb.IsChecked = true;
+            Other.IsChecked = true;
+            Pronun.IsChecked = true;
+            Presposition.IsChecked = true;
+            #endregion LoadCheckedBoxes
+
             ItemsScrollView(actualList);
         }
         private void Modify(object sender, RoutedEventArgs e)
