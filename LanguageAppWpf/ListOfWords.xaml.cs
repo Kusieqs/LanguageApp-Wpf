@@ -19,6 +19,7 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ListOfWords : Window
     {
+        private ContextMenu myContextMenu;
         List<Word> actualList = MainWindow.words;
         public ListOfWords()
         {
@@ -139,7 +140,7 @@ namespace LanguageAppWpf
         }
         private void Modify(object sender, RoutedEventArgs e)
         {
-
+            myContextMenu.IsOpen = true;
         }
         private void ItemsScrollView(List<Word> list)
         {
@@ -215,16 +216,43 @@ namespace LanguageAppWpf
                     button.IsEnabled = true;
 
                     button.Click += Modify;
+                    myContextMenu = CreateContextMenu();
+                    button.ContextMenu = myContextMenu;
+
                     stackPanel.Children.Add(button);
                     panel.Children.Add(stackPanel);
 
                 }
                 ScrollList.Content = panel;
-
             }
+        }
+        private ContextMenu CreateContextMenu()
+        {
+            ContextMenu contextMenu = new ContextMenu();
+           
 
+            MenuItem menuItem1 = new MenuItem();
+            menuItem1.Header = "Edit word";
+            menuItem1.Click += MenuItem_Click;
 
+            MenuItem menuItem2 = new MenuItem();
+            menuItem2.Header = "Edit translation";
+            menuItem2.Click += MenuItem_Click;
+
+            MenuItem menuItem3 = new MenuItem();
+            menuItem3.Header = "Edit category";
+            menuItem3.Click += MenuItem_Click;
+
+            contextMenu.Items.Add(menuItem1);
+            contextMenu.Items.Add(menuItem2);
+            contextMenu.Items.Add(menuItem3);
+
+            return contextMenu;
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
