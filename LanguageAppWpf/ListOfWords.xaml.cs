@@ -19,6 +19,8 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ListOfWords : Window
     {
+        private Button buttonSender;
+        private Dictionary<Button, Word> buttonWordDictionary = new Dictionary<Button, Word>();
         private ContextMenu myContextMenu;
         List<Word> actualList = MainWindow.words;
         public ListOfWords()
@@ -140,10 +142,13 @@ namespace LanguageAppWpf
         }
         private void Modify(object sender, RoutedEventArgs e)
         {
+            buttonSender = sender as Button;
             myContextMenu.IsOpen = true;
         }
         private void ItemsScrollView(List<Word> list)
         {
+            int count = 0;
+            buttonWordDictionary.Clear();
             if (ScrollList != null)
             {
                 ScrollList.ClearValue(ScrollViewer.ContentProperty);
@@ -209,12 +214,14 @@ namespace LanguageAppWpf
                     button.Width = 30;
                     button.Height = 30;
                     button.Margin = new Thickness(20, 10, 20, 10);
-                    button.Name = "iconList";
+                    button.Name = "iconList" + count;
+                    count++;
                     button.Background = Brushes.Transparent;
                     button.BorderBrush = Brushes.Transparent;
                     button.Foreground = Brushes.Transparent;
                     button.IsEnabled = true;
 
+                    buttonWordDictionary.Add(button, word);
                     button.Click += Modify;
                     myContextMenu = CreateContextMenu();
                     button.ContextMenu = myContextMenu;
@@ -236,11 +243,11 @@ namespace LanguageAppWpf
             menuItem1.Click += MenuItem_Click;
 
             MenuItem menuItem2 = new MenuItem();
-            menuItem2.Header = "Edit translation";
+            menuItem2.Header = "Delete word";
             menuItem2.Click += MenuItem_Click;
 
             MenuItem menuItem3 = new MenuItem();
-            menuItem3.Header = "Edit category";
+            menuItem3.Header = "Delete counting";
             menuItem3.Click += MenuItem_Click;
 
             contextMenu.Items.Add(menuItem1);
@@ -252,7 +259,24 @@ namespace LanguageAppWpf
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            string header = (sender as MenuItem).Header.ToString();
 
+            Word word = buttonWordDictionary[buttonSender];
+            int index = MainWindow.words.IndexOf(word);
+            switch (header)
+            {
+                case "Edit word":
+                    // nowe okno wpf?
+                case "Delete word":
+                    MainWindow.words.RemoveAt(index);
+                    ItemsScrollView(MainWindow.words);
+                    break;
+                case "Delete counting":
+                    MainWindow.words[index].Correct = 0;
+                    MainWindow.words[index].Mistake = 0;
+                    ItemsScrollView(MainWindow.words);
+                    break;
+            }
         }
     }
 }
