@@ -66,6 +66,7 @@ namespace LanguageAppWpf
             listOfWords.Focus();
             this.IsEnabled = false;
             listOfWords.Closed += (s, args) => this.IsEnabled = true;
+            listOfWords.Closed += (s, args) => this.Focus();
         }
         private void BtnChangeLanguage(object sender, RoutedEventArgs e)
         {

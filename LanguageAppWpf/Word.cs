@@ -114,6 +114,17 @@ namespace LanguageAppWpf
                 _translation = value;
             }
         }
+        public Category Category
+        {
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                _category = value;
+            }
+        }
     }
     public enum Category
     {
