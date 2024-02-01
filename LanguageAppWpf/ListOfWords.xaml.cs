@@ -19,6 +19,7 @@ namespace LanguageAppWpf
     /// </summary>
     public partial class ListOfWords : Window
     {
+        private Modify modify;
         private Button buttonSender;
         private Dictionary<Button, Word> buttonWordDictionary = new Dictionary<Button, Word>();
         private ContextMenu myContextMenu;
@@ -266,7 +267,13 @@ namespace LanguageAppWpf
             switch (header)
             {
                 case "Edit word":
-                    // nowe okno wpf?
+                    modify = new Modify(index);
+                    modify.Show();
+                    this.IsEnabled = false;
+                    modify.Closing += (s, args) => ItemsScrollView(MainWindow.words);
+                    modify.Closed += (s,args) => this.IsEnabled = true;
+                    modify.Closing += (s, args) => this.Focus();
+                    break;
                 case "Delete word":
                     MainWindow.words.RemoveAt(index);
                     ItemsScrollView(MainWindow.words);
