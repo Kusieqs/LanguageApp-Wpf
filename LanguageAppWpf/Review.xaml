@@ -103,16 +103,30 @@
                 <CheckBox x:Name="Pronoun" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="2" Grid.Column="3" />
                 <TextBlock Text="Other"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" />
                 <CheckBox x:Name="Other" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="3" Grid.Column="3" />
+                
+                <Border Grid.Row="0" Grid.RowSpan="4" Grid.Column="5" Grid.ColumnSpan="2">
+                    <Grid x:Name="Level">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="25"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Easy"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
+                        <CheckBox x:Name="Easy" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl" Unchecked="UncheckedLvl" Background="Yellow" Grid.Row="0" Grid.Column="1" />
+                        <TextBlock Text="Medium"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                        <CheckBox x:Name="Medium" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl" Unchecked="UncheckedLvl" Background="Yellow" Grid.Row="1" Grid.Column="1" />
+                        <TextBlock Text="Hard"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                        <CheckBox x:Name="Hard" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl" Unchecked="UncheckedLvl" Background="Yellow" Grid.Row="2" Grid.Column="1" />
+                        <TextBlock Text="Mistake"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                        <CheckBox x:Name="Mistake" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl" Unchecked="UncheckedLvl" Background="Yellow" Grid.Row="3" Grid.Column="1" />
 
-                <TextBlock Text="Easy"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="5" />
-                <CheckBox x:Name="Easy" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="Checked" Unchecked="Unchecked" Background="Yellow" Grid.Row="0" Grid.Column="6" />
-                <TextBlock Text="Medium"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="5" />
-                <CheckBox x:Name="Medium" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="Checked" Unchecked="Unchecked" Background="Yellow" Grid.Row="1" Grid.Column="6" />
-                <TextBlock Text="Hard"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="5" />
-                <CheckBox x:Name="Hard" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="Checked" Unchecked="Unchecked" Background="Yellow" Grid.Row="2" Grid.Column="6" />
-                <TextBlock Text="Mistake"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="5" />
-                <CheckBox x:Name="Mistake" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="Checked" Unchecked="Unchecked" Background="Yellow" Grid.Row="3" Grid.Column="6" />
-
+                    </Grid>
+                </Border>
 
                 <Border Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="4">
                     <Grid>
