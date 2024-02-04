@@ -21,7 +21,7 @@ namespace LanguageAppWpf
         private bool theme = false;
         private bool level = false;
         private bool mode = false;
-        List<Word> wordList;
+        List<Word> wordList = new List<Word>();
         Dictionary<string, int> wordDictionary = new Dictionary<string, int>
         {
             {"Easy", 15 },
@@ -48,12 +48,11 @@ namespace LanguageAppWpf
             int column = 1;
             for(int i = 0; i < 8; i++)
             {
-                if (Theme.Children.Cast<CheckBox>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column).IsChecked == false)
+                if (Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) is CheckBox checkBox)
                 {
                     theme = false;
-                    break;
                 }
-                if(i == 3)
+                if (i == 3)
                 {
                     column = 3;
                     row = 0;
@@ -67,6 +66,8 @@ namespace LanguageAppWpf
         }
         private void CheckedLvl(object sender, RoutedEventArgs e)
         {
+            int senderRow = Grid.GetRow((sender as CheckBox));
+            int senderColumn = Grid.GetColumn((sender as CheckBox));
             if(!level)
             {
                 level = true;
@@ -74,15 +75,20 @@ namespace LanguageAppWpf
             }
             else
             {
+                int column = 1;
                 for(int i = 0; i < 4; i++)
                 {
-                    if (Level.Children.Cast<CheckBox>().First(x => Grid.GetRow(x) == i).IsChecked == true)
+                    if (Level.Children.Cast<UIElement>().First(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == i) is CheckBox && senderRow != i)
                     {
-                        Level.Children.Cast<CheckBox>().First(x => Grid.GetRow(x) == i).IsChecked = false;
-                        break;
+                        (Level.Children.Cast<UIElement>().First(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == i) as CheckBox).IsChecked = false;
+                        (Level.Children.Cast<UIElement>().First(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == i) as CheckBox).IsEnabled = true;
                     }
                 }
+
             }
+
+            CheckBox checkBox1 = (sender as CheckBox);
+            checkBox1.IsEnabled = false;
             string name = (sender as CheckBox).Name;
             wordCount = wordDictionary[name];   
 
@@ -98,7 +104,6 @@ namespace LanguageAppWpf
 
         private void UncheckedLvl(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void StartBtnActive()
@@ -122,5 +127,13 @@ namespace LanguageAppWpf
 
         }
 
+        private void Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
