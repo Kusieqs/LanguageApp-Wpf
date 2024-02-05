@@ -21,6 +21,7 @@ namespace LanguageAppWpf
         private bool theme = false;
         private bool level = false;
         private bool mode = false;
+        private string modeName = "";
         List<Word> wordList = new List<Word>();
         Dictionary<string, int> wordDictionary = new Dictionary<string, int>
         {
@@ -41,16 +42,16 @@ namespace LanguageAppWpf
             string name = (sender as CheckBox).Name;
             wordList = wordList.Union(MainWindow.words.Where(x => x.Category.ToString() == name)).ToList();
         }
-
         private void UncheckedTheme(object sender, RoutedEventArgs e)
         {
             int row = 0;
             int column = 1;
+            int count = 0;
             for(int i = 0; i < 8; i++)
             {
-                if (Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) is CheckBox checkBox)
+                if ((Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) as CheckBox).IsChecked == false)
                 {
-                    theme = false;
+                    count++;
                 }
                 if (i == 3)
                 {
@@ -60,7 +61,12 @@ namespace LanguageAppWpf
                 }
                 row++;
             }
-            StartBtnActive();
+
+            if (count == 8)
+            {
+                theme = false;
+                StartBtnActive();
+            }
             string name = (sender as CheckBox).Name;
             wordList = wordList.Where(x => x.Category.ToString() != name).ToList();
         }
@@ -101,9 +107,30 @@ namespace LanguageAppWpf
                 mistake = false;
             }
         }
-
-        private void UncheckedLvl(object sender, RoutedEventArgs e)
+        private void CheckedMode(object sender, RoutedEventArgs e)
         {
+            CheckBox checkBox = (sender as CheckBox);
+            checkBox.IsEnabled = false;
+            int senderRow = Grid.GetRow((sender as CheckBox));
+            if(!mode)
+            {
+                mode = true;
+                StartBtnActive();
+            }
+            else
+            {
+                for(int i = 0; i < 3; i++)
+                {
+                    if(Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == i && Grid.GetColumn(x) == 1) is CheckBox checkBox1 && i != senderRow)
+                    {
+                        (Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == i && Grid.GetColumn(x) == 1) as CheckBox).IsEnabled = true;
+                        (Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == i && Grid.GetColumn(x) == 1) as CheckBox).IsChecked = false;
+                    }
+                }
+            }
+
+            modeName = (Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == senderRow && Grid.GetColumn(x) == 0) as TextBlock).Text;
+
         }
 
         private void StartBtnActive()
@@ -111,7 +138,9 @@ namespace LanguageAppWpf
             if(theme && level && mode)
             {
                 Start.IsEnabled = true;
+                return;
             }
+            Start.IsEnabled = false;
         }
         private void StartBtn(object sender, RoutedEventArgs e)
         {
@@ -123,15 +152,6 @@ namespace LanguageAppWpf
         }
 
         private void StopBtn(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Unchecked(object sender, RoutedEventArgs e)
         {
 
         }
