@@ -16,23 +16,25 @@ namespace LanguageAppWpf
 {
     public partial class Review : Window
     {
+        private int loop = 0;
         private int wordCount = 0;
-        private bool mistake = false;
         private bool theme = false;
         private bool level = false;
         private bool mode = false;
         private string modeName = "";
         List<Word> wordList = new List<Word>();
+        List<Word> listToReview = new List<Word>();
         Dictionary<string, int> wordDictionary = new Dictionary<string, int>
         {
             {"Easy", 15 },
             {"Medium", 30 },
             {"Hard", MainWindow.words.Count },
-            {"Mistake", 10}
+            {"Mistake", 20}
         };
         public Review()
         {
             InitializeComponent();
+            TranslationBox.PreviewKeyDown += ReviewWord;
         }
 
         private void CheckedTheme(object sender, RoutedEventArgs e)
@@ -97,15 +99,6 @@ namespace LanguageAppWpf
             checkBox1.IsEnabled = false;
             string name = (sender as CheckBox).Name;
             wordCount = wordDictionary[name];   
-
-            if(name == "Mistake")
-            {
-                mistake = true;
-            }
-            else
-            {
-                mistake = false;
-            }
         }
         private void CheckedMode(object sender, RoutedEventArgs e)
         {
@@ -144,8 +137,52 @@ namespace LanguageAppWpf
         }
         private void StartBtn(object sender, RoutedEventArgs e)
         {
+            Restart.IsEnabled = true;
+            Stop.IsEnabled = true;
+            Start.IsEnabled = false;
+            TranslationBox.IsEnabled = true;
+            Theme.IsEnabled = false;
+            Level.IsEnabled = false;
+            Mode.IsEnabled = false;
+
+
+            Random random = new Random();
+            List<Word> copyWordList = wordList;
+
+            for (int i = 0; i < wordList.Count; i++)
+            {
+                int index = random.Next(0, copyWordList.Count);
+                listToReview.Add(copyWordList[index]);
+                copyWordList.RemoveAt(index);
+            }
+
+            if (wordCount == 20)
+            {
+                listToReview = listToReview.OrderBy(x => x.Mistake).ToList();
+            }
+            else
+            {
+                if(listToReview.Count < wordCount)
+                {
+                    listToReview = listToReview.GetRange(0, listToReview.Count);
+                }
+                else
+                {
+                    listToReview = listToReview.GetRange(0, wordCount);
+                }
+            }
+
+            // napisac kod z modem wybranym przez uzytkownika (metoda najlepiej)
 
         }
+        private void ReviewWord(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                // napisac sprawdzanie poprawnosci tlumaczenia (metoda najlepiej) 
+            }
+        }
+        
         private void RestartBtn(object sender, RoutedEventArgs e)
         {
 
