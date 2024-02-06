@@ -171,18 +171,60 @@ namespace LanguageAppWpf
                     listToReview = listToReview.GetRange(0, wordCount);
                 }
             }
-
-            // napisac kod z modem wybranym przez uzytkownika (metoda najlepiej)
+            ModeChoosed();
 
         }
         private void ReviewWord(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                // napisac sprawdzanie poprawnosci tlumaczenia (metoda najlepiej) 
+                // sprawdzenie jakii tryb wybrany, potem sprawdzenie slowa czy jest poprawne a potem dodanie mistake lub correct a na sam koniec nowe slowo
+
+                loop++;
+                if (loop == listToReview.Count)
+                {
+                    EnabledButtons();
+                    // danie ostatni slowo czy prawdilowe czy nie
+                    return;
+                }
             }
         }
-        
+        private void ModeChoosed() 
+        {
+            switch (modeName)
+            {
+                case "Word":
+                    WordName.Text = listToReview[loop].WordName;
+                    break;
+                case "Translation":
+                    WordName.Text = listToReview[loop].Translation;
+                    break;
+                case "Mix":
+                    Random random = new Random();
+                    int index = random.Next(0, 2);
+                    if(index == 0)
+                    {
+                        WordName.Text = listToReview[loop].WordName;
+                    }
+                    else
+                    {
+                        WordName.Text = listToReview[loop].Translation;
+                    }
+                    break;
+            }
+        } // Choosing the mode of the review
+        private void EnabledButtons()
+        {
+            loop = 0;
+            WordName.Text = "";
+            Theme.IsEnabled = true;
+            Level.IsEnabled = true;
+            Mode.IsEnabled = true;
+            TranslationBox.IsEnabled = false;
+            Start.IsEnabled = true;
+            Restart.IsEnabled = false;
+            Stop.IsEnabled = false;
+        }
         private void RestartBtn(object sender, RoutedEventArgs e)
         {
 
@@ -190,7 +232,7 @@ namespace LanguageAppWpf
 
         private void StopBtn(object sender, RoutedEventArgs e)
         {
-
-        }
+            EnabledButtons();
+        } // Stopping the review, Changing the buttons to the default state
     }
 }
