@@ -178,19 +178,74 @@ namespace LanguageAppWpf
         {
             if (e.Key == Key.Enter)
             {
-                // sprawdzenie jakii tryb wybrany, potem sprawdzenie slowa czy jest poprawne a potem dodanie mistake lub correct a na sam koniec nowe slowo
-
+                Word word = listToReview[loop];
+                switch (modeName)
+                {
+                    case "Word":
+                        if (TranslationBox.Text == word.Translation)
+                        {
+                            listToReview[loop].Correct++;
+                        }
+                        else
+                        {
+                            listToReview[loop].Mistake++;
+                        }
+                        break;
+                    case "Translation":
+                        if (TranslationBox.Text == word.WordName)
+                        {
+                            listToReview[loop].Correct++;
+                        }
+                        else
+                        {
+                            listToReview[loop].Mistake++;
+                        }
+                        break;
+                    case "Mix":
+                        if(WordName.Text == word.WordName)
+                        {
+                            if (TranslationBox.Text == word.Translation)
+                            {
+                                listToReview[loop].Correct++;
+                            }
+                            else
+                            {
+                                listToReview[loop].Mistake++;
+                            }
+                        }
+                        else
+                        {
+                            if (TranslationBox.Text == word.WordName)
+                            {
+                                listToReview[loop].Correct++;
+                            }
+                            else
+                            {
+                                listToReview[loop].Mistake++;
+                            }
+                        }
+                        break;
+                }
                 loop++;
+                
                 if (loop == listToReview.Count)
                 {
                     EnabledButtons();
-                    // danie ostatni slowo czy prawdilowe czy nie
+                    // danie ostatni slowo czy prawdilowe czy nie + dodanie komunikatu ile poprawnych ile nie itp
                     return;
                 }
+                TranslationBox.Text = "";
+                ModeChoosed();
             }
         }
         private void ModeChoosed() 
         {
+            if(listToReview.Count == 0)
+            {
+                EnabledButtons();
+                MessageBox.Show("No words in review", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             switch (modeName)
             {
                 case "Word":
@@ -227,9 +282,10 @@ namespace LanguageAppWpf
         }
         private void RestartBtn(object sender, RoutedEventArgs e)
         {
-
+            TranslationBox.Text = "";
+            loop = 0;
+            ModeChoosed();
         }
-
         private void StopBtn(object sender, RoutedEventArgs e)
         {
             EnabledButtons();
