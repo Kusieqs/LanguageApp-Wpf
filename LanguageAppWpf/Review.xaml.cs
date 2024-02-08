@@ -30,7 +30,7 @@ namespace LanguageAppWpf
             {"Medium", 30 },
             {"Hard", MainWindow.words.Count },
             {"Mistake", 20}
-        };
+        }; // Dictionary with the number of words for each level
         public Review()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace LanguageAppWpf
             StartBtnActive();
             string name = (sender as CheckBox).Name;
             wordList = wordList.Union(MainWindow.words.Where(x => x.Category.ToString() == name)).ToList();
-        }
+        } // Checking and unchecking the theme of the review
         private void UncheckedTheme(object sender, RoutedEventArgs e)
         {
             int row = 0;
@@ -71,7 +71,7 @@ namespace LanguageAppWpf
             }
             string name = (sender as CheckBox).Name;
             wordList = wordList.Where(x => x.Category.ToString() != name).ToList();
-        }
+        } // Checking and unchecking the theme of the review
         private void CheckedLvl(object sender, RoutedEventArgs e)
         {
             int senderRow = Grid.GetRow((sender as CheckBox));
@@ -99,7 +99,7 @@ namespace LanguageAppWpf
             checkBox1.IsEnabled = false;
             string name = (sender as CheckBox).Name;
             wordCount = wordDictionary[name];   
-        }
+        } // Checking the level of the review
         private void CheckedMode(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (sender as CheckBox);
@@ -124,8 +124,7 @@ namespace LanguageAppWpf
 
             modeName = (Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == senderRow && Grid.GetColumn(x) == 0) as TextBlock).Text;
 
-        }
-
+        }  // Checking the mode of the review
         private void StartBtnActive()
         {
             if(theme && level && mode)
@@ -134,7 +133,7 @@ namespace LanguageAppWpf
                 return;
             }
             Start.IsEnabled = false;
-        }
+        } // Checking if the start button should be active
         private void StartBtn(object sender, RoutedEventArgs e)
         {
             Restart.IsEnabled = true;
@@ -147,14 +146,15 @@ namespace LanguageAppWpf
 
 
             Random random = new Random();
-            List<Word> copyWordList = wordList;
+            List<Word> copyWordList = wordList.ToList();
 
-            for (int i = 0; i < wordList.Count; i++)
+            foreach (var item in wordList)
             {
                 int index = random.Next(0, copyWordList.Count);
                 listToReview.Add(copyWordList[index]);
                 copyWordList.RemoveAt(index);
             }
+            listToReview = listToReview.Distinct().ToList();
 
             if (wordCount == 20)
             {
@@ -173,9 +173,10 @@ namespace LanguageAppWpf
             }
             ModeChoosed();
 
-        }
+        } // Starting the review
         private void ReviewWord(object sender, KeyEventArgs e)
         {
+            bool mistake = false;
             if (e.Key == Key.Enter)
             {
                 Word word = listToReview[loop];
@@ -188,6 +189,7 @@ namespace LanguageAppWpf
                         }
                         else
                         {
+                            mistake = true;
                             listToReview[loop].Mistake++;
                         }
                         break;
@@ -198,6 +200,7 @@ namespace LanguageAppWpf
                         }
                         else
                         {
+                            mistake = true;
                             listToReview[loop].Mistake++;
                         }
                         break;
@@ -210,6 +213,7 @@ namespace LanguageAppWpf
                             }
                             else
                             {
+                                mistake = true;
                                 listToReview[loop].Mistake++;
                             }
                         }
@@ -221,23 +225,35 @@ namespace LanguageAppWpf
                             }
                             else
                             {
+                                mistake = true;
                                 listToReview[loop].Mistake++;
                             }
                         }
                         break;
                 }
+
+                if(mistake)
+                {
+                    LastResult.Text = "Uncorrect";
+                    LastResult.Foreground = Brushes.Red;
+                }
+                else
+                {
+                    LastResult.Text = "Correct";
+                    LastResult.Foreground = Brushes.Green;
+                }
+                WordList.Text = listToReview[loop].WordName;
+                TranslationList.Text = listToReview[loop].Translation;
                 loop++;
-                
+                TranslationBox.Text = "";
                 if (loop == listToReview.Count)
                 {
                     EnabledButtons();
-                    // danie ostatni slowo czy prawdilowe czy nie + dodanie komunikatu ile poprawnych ile nie itp
                     return;
                 }
-                TranslationBox.Text = "";
                 ModeChoosed();
             }
-        }
+        } // Reviewing the words
         private void ModeChoosed() 
         {
             if(listToReview.Count == 0)
@@ -279,13 +295,13 @@ namespace LanguageAppWpf
             Start.IsEnabled = true;
             Restart.IsEnabled = false;
             Stop.IsEnabled = false;
-        }
+        } // Changing the buttons to the default state
         private void RestartBtn(object sender, RoutedEventArgs e)
         {
             TranslationBox.Text = "";
             loop = 0;
             ModeChoosed();
-        }
+        } // Restarting the review
         private void StopBtn(object sender, RoutedEventArgs e)
         {
             EnabledButtons();

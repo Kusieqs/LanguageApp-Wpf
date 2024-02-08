@@ -189,8 +189,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="WordList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                        <TextBlock x:Name="TranslationList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock x:Name="WordList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TranslationList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="109,0,0,0"/>
                     </Grid>
                 </Border>
 
