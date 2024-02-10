@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace LanguageAppWpf
@@ -28,7 +18,7 @@ namespace LanguageAppWpf
         private void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Closing window
         private void BtnAddUnit(object sender, RoutedEventArgs e)
         {
             try
@@ -40,27 +30,22 @@ namespace LanguageAppWpf
                     this.Close();
                 }
                 else if (UnitName.Text == "")
-                {
                     throw new FormatException("You have to enter the name of unit");
-                }
                 else if (ComboBox.Items.Contains(UnitName.Text))
-                {
                     throw new FormatException("This unit already exists");
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+        } // Adding new unit as new directory
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if(sender is TextBox textbox && textbox.Text.Length>0)
             {
-                
                 textbox.Text = char.ToUpper(textbox.Text[0]) + textbox.Text.Substring(1);
                 textbox.SelectionStart = textbox.Text.Length;
             }
-        }
+        } // Capitalizing first letter
     }
 }

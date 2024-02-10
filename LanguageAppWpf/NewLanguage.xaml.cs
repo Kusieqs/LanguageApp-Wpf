@@ -1,27 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Newtonsoft.Json;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewLanguage.xaml
-    /// </summary>
     public partial class NewLanguage : Window
     {
         private List<string> languages = new List<string>
@@ -38,8 +22,7 @@ namespace LanguageAppWpf
             NameOfLanguage.Norwegian.ToString(),
             NameOfLanguage.Chinese.ToString(),
             NameOfLanguage.Arabic.ToString(),
-        };
-        
+        };      
         public NewLanguage()
         {
             InitializeComponent();
