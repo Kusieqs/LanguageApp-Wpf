@@ -3,16 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
@@ -37,36 +28,50 @@ namespace LanguageAppWpf
             this.Loaded += LoadingData;
             this.Activated += ActivData;
         }
-
-
         private void BtnAddWord(object sender, RoutedEventArgs e)
         {
-            addWords = new AddWords(lan,unit);
-            addWords.Owner = this;
+            addWords = new AddWords(lan, unit)
+            {
+                Owner = this
+            };
             addWords.Show();
             addWords.Focus();
             this.IsEnabled = false;
-            addWords.Closed += (s, args) => this.IsEnabled = true;
-            addWords.Closed += (s, args) => this.Focus();
+            addWords.Closed += (s, args) =>
+            {
+                IsEnabled = true;
+                Focus();
+            };
         }
         private void BtnReview(object sender, RoutedEventArgs e)
         {
-            reviewWindow = new Review();
-            reviewWindow.Owner = this;
+            reviewWindow = new Review()
+            {
+                Owner = this
+            };
             reviewWindow.Show();
             reviewWindow.Focus();
             this.IsEnabled = false;
-            reviewWindow.Closed += (s, args) => this.IsEnabled = true;
+            reviewWindow.Closed += (s, args) =>
+            {
+                IsEnabled = true;
+                Focus();
+            };
         }
         private void BtnListOfWords(object sender, RoutedEventArgs e)
         {
-            listOfWords = new ListOfWords();
-            listOfWords.Owner = this;
+            listOfWords = new ListOfWords()
+            {
+                Owner = this
+            };
             listOfWords.Show();
             listOfWords.Focus();
             this.IsEnabled = false;
-            listOfWords.Closed += (s, args) => this.IsEnabled = true;
-            listOfWords.Closed += (s, args) => this.Focus();
+            listOfWords.Closed += (s, args) =>
+            {
+                IsEnabled = true;
+                Focus();
+            };
         }
         private void BtnChangeLanguage(object sender, RoutedEventArgs e)
         {
@@ -79,15 +84,13 @@ namespace LanguageAppWpf
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-            Random random = new Random();
             string pattern = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
             if(words.Count == 0)
-            {
                 MessageBox.Show("No words to down write","Error",MessageBoxButton.OK,MessageBoxImage.Information);
-            }
             else
             {
+                Random random = new Random();
                 do
                 {
                     string word = "";
@@ -110,13 +113,18 @@ namespace LanguageAppWpf
         }
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-            readJsonFile = new ReadJsonFile(words, unit);
-            readJsonFile.Owner = this;
+            readJsonFile = new ReadJsonFile(words, unit)
+            {
+                Owner = this
+            };
             readJsonFile.Show();
             readJsonFile.Focus();
             this.IsEnabled = false;
-            readJsonFile.Closed += (s, args) => this.IsEnabled = true;
-            readJsonFile.Closed += (s, args) => this.Focus();
+            readJsonFile.Closed += (s, args) =>
+            {
+                IsEnabled = true;
+                Focus();
+            };
         }
         private void Exit(object sender, RoutedEventArgs e)
         {

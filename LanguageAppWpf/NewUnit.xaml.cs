@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Text.RegularExpressions;
 
 namespace LanguageAppWpf
 {
@@ -23,7 +23,7 @@ namespace LanguageAppWpf
         {
             try
             {
-                if (UnitName.Text != "" && !ComboBox.Items.Contains(UnitName.Text))
+                if (UnitName.Text != "" && !ComboBox.Items.Contains(UnitName.Text) && Regex.IsMatch(UnitName.Text,"^[a-zA-Z]+$"))
                 {
                     string path = System.IO.Path.Combine(directPath, UnitName.Text);
                     System.IO.Directory.CreateDirectory(path);
@@ -33,6 +33,8 @@ namespace LanguageAppWpf
                     throw new FormatException("You have to enter the name of unit");
                 else if (ComboBox.Items.Contains(UnitName.Text))
                     throw new FormatException("This unit already exists");
+                else if (!Regex.IsMatch(UnitName.Text, "^[a-zA-Z]+$"))
+                    throw new FormatException("You have to enter only letters");
             }
             catch (Exception ex)
             {
