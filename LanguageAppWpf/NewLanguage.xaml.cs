@@ -59,7 +59,7 @@ namespace LanguageAppWpf
                     this.Close();
                 }
             }
-        } // Adding new language to json file
+        } // Adding new language as new directory
         public void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -67,7 +67,7 @@ namespace LanguageAppWpf
         private void AddingList(object sender, RoutedEventArgs e)
         {
             List<string> languagesJson = new List<string>(Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"LanguageAppWpf")).Select(System.IO.Path.GetFileName).ToList());
-            languagesJson = EqualsLists(languages, languagesJson);
+            languagesJson = languages.Except(languagesJson).ToList();
             foreach (string language in languagesJson)
             {
                 ComboLan.Items.Add(language);
@@ -75,29 +75,8 @@ namespace LanguageAppWpf
             if (ComboLan.Items.Count == 0)
             {
                 AddLan.IsEnabled = false;
+                ComboLan.IsEnabled = false;
             }
         } // Adding list of languages to combobox
-        private List<string> EqualsLists(List<string> l1, List<string> l2)
-        {
-            bool equal = false;
-            List<string> l3 = new List<string>();
-            foreach (string lan1 in l1)
-            {
-                foreach (string lan2 in l2)
-                {
-                    if(lan1 == lan2)
-                    {
-                        equal = true;
-                        break;
-                    }
-                }
-                if (!equal)
-                {
-                    l3.Add(lan1);
-                }
-                equal = false;
-            }
-            return l3;
-        } // Checking if lists are equal and returning list of languages that are not in json file
     }
 }
