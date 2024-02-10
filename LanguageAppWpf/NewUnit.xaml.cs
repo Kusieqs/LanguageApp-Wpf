@@ -53,5 +53,14 @@ namespace LanguageAppWpf
                 MessageBox.Show(ex.Message);
             }
         }
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(sender is TextBox textbox && textbox.Text.Length>0)
+            {
+                
+                textbox.Text = char.ToUpper(textbox.Text[0]) + textbox.Text.Substring(1);
+                textbox.SelectionStart = textbox.Text.Length;
+            }
+        }
     }
 }

@@ -55,7 +55,7 @@
         <Border  Grid.Column="0" Grid.Row="1" >
             <TextBlock Text="Unit Name:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10,0,0,0" Foreground="White"/>
         </Border>
-        <TextBox Grid.Row="1" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="143,22,10,22" Grid.ColumnSpan="2" x:Name="UnitName" MaxLength="15"  />
+        <TextBox Grid.Row="1" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="143,22,10,22" Grid.ColumnSpan="2" x:Name="UnitName" MaxLength="15"  TextChanged="OnTextChanged" CharacterCasing="Lower"/>
         <Button Content="Exit" Grid.Column="0" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
         <Button Content="Add Unit" Grid.Column="1" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnAddUnit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
     </Grid>
