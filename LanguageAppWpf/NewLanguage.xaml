@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="NewLanguage" Height="200" Width="450">
+        Title="NewLanguage" Height="200" Width="450"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="30"/>
@@ -49,15 +50,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ComboBox Name="ComboLan" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="25" Grid.ColumnSpan="3" FontSize="16" FontWeight="Bold"/>
+        <ComboBox Name="ComboLan" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="56,23,10,23" Grid.ColumnSpan="3" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Border Background="#FF565656" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <TextBlock Text="New Language" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="Yellow"/>
         </Border>
-        <Border Grid.Column="0" Grid.Row="1">
-            <TextBlock Text="You choosed: " FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-        </Border>
-        <Button x:Name ="AddLan"  Content="Add Language" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="Bold" Click="BtnNewLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <TextBlock Grid.Row="1" Text="You choosed: " FontSize="20" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="140"/>
+        <Button x:Name ="AddLan"  Content="Add Language" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="DemiBold" Click="BtnNewLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
         <Button Content="Exit" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" FontSize="25" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
-
     </Grid>
 </Window>

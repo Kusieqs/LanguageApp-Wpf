@@ -70,11 +70,9 @@ namespace LanguageAppWpf
             foreach (string lan in languages)
             {
                 #region Adding flags as buttons
-                BitmapImage bitmap = new BitmapImage()
-                {
-                    UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.Substring(0, 3) + ".png")
-                };
+                BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
+                bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + lan.Substring(0, 3) + ".png");
                 bitmap.EndInit();
 
                 Image image = new Image()
