@@ -1,26 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AddWords.xaml
-    /// </summary>
     public partial class AddWords : Window
     {
         private NameOfLanguage _language;
         private string _unit;
+        private bool WordBox = false;
+        private bool TranslationBox = false;
         public AddWords(string lan, string unit)
         {
             InitializeComponent();
@@ -32,22 +21,18 @@ namespace LanguageAppWpf
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
+        } // Exit button
         private void AddWordBtn(object sender, RoutedEventArgs e)
         {
-            if(WordTextBox.Text == "" || TranslationTextBox.Text == "")
-            {
-                MessageBox.Show("Word or translation is empty","Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                return;
-            }
             Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
             Word word = new Word(_language,WordTextBox.Text,TranslationTextBox.Text,category,_unit);
             MainWindow.words.Add(word); 
+            MainWindow.SaveData();
             WordTextBox.Text = "";
             TranslationTextBox.Text = "";
+            AddWord.IsEnabled = false;
 
-        }
+        } // Add word button
         private void LoadComboBox(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < Enum.GetNames(typeof(Category)).Length; i++)
@@ -57,6 +42,38 @@ namespace LanguageAppWpf
                 TypeComboBox.Items.Add(item);
             }
             TypeComboBox.SelectedIndex = 0;
-        }
+        } // Load combobox
+
+        private void TranslationTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(TranslationTextBox.Text.Length > 0)
+            {
+                TranslationTextBox.Text = char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1);
+                TranslationTextBox.SelectionStart = TranslationTextBox.Text.Length;
+                TranslationBox = true;
+            }
+            else
+                TranslationBox = false;
+            CheckBtn();
+        } // Capitalizing first letter and checking if translation box is not empty
+        private void WordTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(WordTextBox.Text.Length > 0)
+            {
+                WordTextBox.Text = char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1);
+                WordTextBox.SelectionStart = WordTextBox.Text.Length;
+                WordBox = true;
+            }
+            else
+                WordBox = false;
+            CheckBtn();
+        } // Capitalizing first letter and checking if word box is not empty
+        private void CheckBtn()
+        {
+            if(WordBox && TranslationBox)
+                AddWord.IsEnabled = true;
+            else
+                AddWord.IsEnabled = false;
+        } // Checking if both boxes are not empty and enabling add word button
     }
 }
