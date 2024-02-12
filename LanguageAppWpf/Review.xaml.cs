@@ -48,7 +48,7 @@ namespace LanguageAppWpf
             int row = 0;
             int column = 1;
             int count = 0;
-            for(int i = 0; i < 8; i++)
+            for(int i = 1; i < 9; i++)
             {
                 if ((Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) as CheckBox).IsChecked == false)
                 {

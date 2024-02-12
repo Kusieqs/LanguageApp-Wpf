@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LanguageAppWpf
 {
@@ -185,39 +186,41 @@ namespace LanguageAppWpf
         private void MostCorrectAndUncorrect(int count)
         {
             List<Word> sort = words.OrderByDescending(x => switcher ? x.Correct : x.Mistake).ToList();
-
-            switch(count)
+            switch (count)
             {
                 case 0:
                     break;
                 case 1:
-                    FirstOne.Text = sort[0].WordName;
-                    MistakeOne.Text = sort[0].Mistake.ToString();
+                    SetTextAndMistakes(FirstOne,MistakeOne, sort,0);
                     break;
                 case 2:
-                    FirstOne.Text = sort[0].WordName;
-                    SecondOne.Text = sort[1].WordName;
-                    MistakeOne.Text = sort[0].Mistake.ToString();
-                    MistakeTwo.Text = sort[1].Mistake.ToString();
+                    SetTextAndMistakes(FirstOne,MistakeOne,sort,0);
+                    SetTextAndMistakes(SecondOne,MistakeTwo, sort,1);
                     break;
                 default:
-                    FirstOne.Text = sort[0].WordName;
-                    SecondOne.Text = sort[1].WordName;
-                    ThirdOne.Text = sort[2].WordName;
-                    MistakeOne.Text = sort[0].Mistake.ToString();
-                    MistakeTwo.Text = sort[1].Mistake.ToString();
-                    MistakeThree.Text = sort[2].Mistake.ToString();
+                    SetTextAndMistakes(FirstOne,MistakeOne, sort,0);
+                    SetTextAndMistakes(SecondOne,MistakeTwo, sort,1);
+                    SetTextAndMistakes(ThirdOne,MistakeThree, sort,2);
                     break;
             }
-
-            if(string.IsNullOrEmpty(FirstOne.Text))
-                FirstOne.Text = "Lack of word";
-            if (string.IsNullOrEmpty(SecondOne.Text))
-                SecondOne.Text = "Lack of word";
-            if (string.IsNullOrEmpty(ThirdOne.Text))
-                ThirdOne.Text = "Lack of word";
+            SetDefaultTextIfEmpty(FirstOne,MistakeOne);
+            SetDefaultTextIfEmpty(SecondOne,MistakeTwo);
+            SetDefaultTextIfEmpty(ThirdOne,MistakeThree);
 
         }
+        void SetTextAndMistakes(TextBlock textBlock1, TextBlock textBlock2, List<Word> sortedWords, int index)
+        {
+            textBlock1.Text = sortedWords[index].WordName;
+            textBlock2.Text = switcher ? sortedWords[index].Correct.ToString() : sortedWords[index].Mistake.ToString();
+        } // Set text and mistakes
+        void SetDefaultTextIfEmpty(TextBlock textBlock,TextBlock textBlock1)
+        {
+            if(!words.Any(x => x.WordName == textBlock.Text))
+            {
+                textBlock.Text = "Lack of word";
+                textBlock1.Text = "";
+            }
+        }// Set default text if there is no word in list
         public static void SaveData()
         {
             string json = JsonConvert.SerializeObject(words);
