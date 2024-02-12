@@ -119,7 +119,7 @@
         <Border CornerRadius="34" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Background="#FF565656" Margin="15" BorderBrush="Yellow" BorderThickness="2.5">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -130,12 +130,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Most uncorrect words" Name="WordsList" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="31" FontWeight="DemiBold" VerticalAlignment ="Top" HorizontalAlignment="Center" Margin="8,10,0,0" Grid.RowSpan="2"/>
-                <TextBlock x:Name="FirstOne" Text="" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBlock x:Name="SecondOne" Text="" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBlock x:Name="ThirdOne" Text="" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBlock x:Name="MistakeOne" Text="" Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock x:Name="MistakeTwo" Text="" Grid.Column="1" Grid.Row="2" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <TextBlock x:Name="MistakeThree" Text="" Grid.Column="1" Grid.Row="3" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock x:Name="FirstOne" Text="" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="SecondOne" Text="" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="ThirdOne" Text="" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock x:Name="MistakeOne" Text="" Grid.Column="1" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="MistakeTwo" Text="" Grid.Column="1" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock x:Name="MistakeThree" Text="" Grid.Column="1" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                 <Button Content="Switch" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" FontSize="25" FontWeight="DemiBold" Click="SwitchButton"  Foreground="Black">
                     <Button.Effect>

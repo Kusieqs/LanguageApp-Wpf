@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="AddWords" Height="450" Width="400">
+        Title="AddWords" Height="450" Width="580"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="30"/>
@@ -43,43 +44,39 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Border Background="#FF565656" Grid.ColumnSpan="2">
-            <TextBlock Text="Add word" FontSize="20" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"/>
-        </Border>
-        <Border Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5">
+        <Border Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Word:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
-                <TextBox x:Name="WordTextBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" />
+                <TextBox x:Name="WordTextBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Width="376" MaxLength="25" CharacterCasing="Lower"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Translation:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
+                <TextBox x:Name="TranslationTextBox" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Width="376" MaxLength="25" CharacterCasing="Lower" Grid.Column="1"/>
             </Grid>
         </Border>
         <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Translation:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
-                <TextBox x:Name="TranslationTextBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" />
-            </Grid>
-        </Border>
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Background="#FF565656" BorderBrush="Yellow" BorderThickness="2" CornerRadius="34" Margin="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Category:" Foreground="White" FontSize="30" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="DemiBold" Margin="14,0,0,0"/>
-                <ComboBox x:Name="TypeComboBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="163" Background="#FF373737"/>
+                <ComboBox x:Name="TypeComboBox" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Width="376" Background="#FF373737"/>
             </Grid>
         </Border>
         <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource ButtonStyle}" Content="Exit" FontSize="25" Click="ExitBtn"/>

@@ -25,7 +25,7 @@ namespace LanguageAppWpf
             InitializeComponent();
             this.lan = lan;
             this.unit = unit;
-            directPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
+            directPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
             this.Loaded += LoadingData;
             this.Activated += ActivData;
         }
@@ -81,7 +81,6 @@ namespace LanguageAppWpf
             languageChoose.Focus();
             this.Close();
         }
-
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
@@ -212,17 +211,17 @@ namespace LanguageAppWpf
             }
 
             if(string.IsNullOrEmpty(FirstOne.Text))
-                FirstOne.Text = "You have to add words";
+                FirstOne.Text = "Lack of word";
             if (string.IsNullOrEmpty(SecondOne.Text))
-                SecondOne.Text = "You have to add words";
+                SecondOne.Text = "Lack of word";
             if (string.IsNullOrEmpty(ThirdOne.Text))
-                ThirdOne.Text = "You have to add words";
+                ThirdOne.Text = "Lack of word";
 
         }
         public static void SaveData()
         {
             string json = JsonConvert.SerializeObject(words);
-            System.IO.File.WriteAllText(directPath,json);
+            File.WriteAllText(directPath,json);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
