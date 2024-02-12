@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="Review" Height="450" Width="700">
+        Title="Review" Height="450" Width="750"
+        ResizeMode="NoResize">
     <Window.Resources>
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="Yellow"/>
+            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -31,6 +39,9 @@
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#FF565656"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -40,7 +51,6 @@
     <Grid Background="#FF373737">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="2"/>
             <RowDefinition Height="150"/>
             <RowDefinition Height="2"/>
             <RowDefinition Height="*"/>
@@ -49,22 +59,8 @@
             <ColumnDefinition Width="260"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="3" Background="Yellow" Grid.ColumnSpan="2"/>
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="Yellow"/>
-        <Border Background="#FF565656" Grid.ColumnSpan="2">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="181*"/>
-                    <ColumnDefinition Width="167*"/>
-                    <ColumnDefinition Width="178*"/>
-                    <ColumnDefinition Width="174*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Theme" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" />
-                <TextBlock Text="Level" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2"/>
-                <TextBlock Text="Mode" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" />
-            </Grid>
-        </Border>
-        <Border  Background="#FF565656" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+        <Border Grid.Row="2" Background="Yellow" Grid.ColumnSpan="2"/>
+        <Border  Background="#FF565656" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid x:Name="Theme" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -84,27 +80,30 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Background="Yellow" Grid.Column="4" Grid.RowSpan="4"/>
-                <Border Background="Yellow" Grid.Column="7" Grid.RowSpan="4"/>
-                <TextBlock Text="Noun"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="0" />
-                <CheckBox x:Name="Noun" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="0" Grid.Column="1" />
-                <TextBlock Text="Verb"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" />
-                <CheckBox x:Name="Verb" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="1" Grid.Column="1" />
-                <TextBlock Text="Adjective"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="0" />
-                <CheckBox x:Name="Adjective" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="2" Grid.Column="1" />
-                <TextBlock Text="Adverb"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-                <CheckBox x:Name="Adverb"  Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="3" Grid.Column="1" />
-                <TextBlock Text="Preposition"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0" Grid.Column="2" />
-                <CheckBox x:Name="Preposition" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="0" Grid.Column="3" />
-                <TextBlock Text="Conjunction"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="2" />
-                <CheckBox x:Name="Conjunction" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="1" Grid.Column="3" />
-                <TextBlock Text="Pronoun"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" />
-                <CheckBox x:Name="Pronoun" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"  Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="2" Grid.Column="3" />
-                <TextBlock Text="Other"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" />
-                <CheckBox x:Name="Other" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedTheme" Unchecked="UncheckedTheme" Background="Yellow" Grid.Row="3" Grid.Column="3" />
+                <Border Background="Yellow" Grid.Column="4" Grid.RowSpan="5"/>
+                <Border Background="Yellow" Grid.Column="7" Grid.RowSpan="5"/>
+                <TextBlock Text="Theme" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="4" />
+                
+                <TextBlock Text="Noun"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" />
+                <CheckBox x:Name="Noun" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="1" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Verb"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="0" />
+                <CheckBox x:Name="Verb" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Adjective"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="0" />
+                <CheckBox x:Name="Adjective" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="3" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Adverb"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+                <CheckBox x:Name="Adverb" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="4" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Preposition"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="2" />
+                <CheckBox x:Name="Preposition" Checked="CheckedTheme" Unchecked="UncheckedTheme"  Grid.Row="1" Grid.Column="3" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Conjunction"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="2" Grid.Column="2" />
+                <CheckBox x:Name="Conjunction" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="2" Grid.Column="3" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Pronoun"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="3" Grid.Column="2" />
+                <CheckBox x:Name="Pronoun" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="3" Grid.Column="3" Style="{StaticResource CheckBoxStyle}"/>
+                <TextBlock Text="Other"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="2" />
+                <CheckBox x:Name="Other" Checked="CheckedTheme" Unchecked="UncheckedTheme" Grid.Row="4" Grid.Column="3" Style="{StaticResource CheckBoxStyle}"/>
 
-                <Border Grid.Row="0" Grid.RowSpan="4" Grid.Column="5" Grid.ColumnSpan="2">
+                <Border Grid.Row="0" Grid.RowSpan="5" Grid.Column="5" Grid.ColumnSpan="2">
                     <Grid x:Name="Level">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -115,20 +114,22 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Easy"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-                        <CheckBox x:Name="Easy" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl"  Background="Yellow" Grid.Row="0" Grid.Column="1" />
-                        <TextBlock Text="Medium"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-                        <CheckBox x:Name="Medium" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl"  Background="Yellow" Grid.Row="1" Grid.Column="1" />
-                        <TextBlock Text="Hard"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                        <CheckBox x:Name="Hard" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl"  Background="Yellow" Grid.Row="2" Grid.Column="1" />
-                        <TextBlock Text="Mistake"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
-                        <CheckBox x:Name="Mistake" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedLvl" Background="Yellow" Grid.Row="3" Grid.Column="1" />
+                        <TextBlock Text="Level" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Easy"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                        <CheckBox x:Name="Easy" Checked="CheckedLvl"  Grid.Row="1" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                        <TextBlock Text="Medium"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                        <CheckBox x:Name="Medium" Checked="CheckedLvl" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                        <TextBlock Text="Hard"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                        <CheckBox x:Name="Hard" Checked="CheckedLvl" Grid.Row="3" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                        <TextBlock Text="Mistake"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" />
+                        <CheckBox x:Name="Mistake" Checked="CheckedLvl" Grid.Row="4" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
 
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="4">
+                <Border Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="5">
                     <Grid Name="Mode">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="152*"/>
@@ -138,18 +139,20 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Word"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" />
-                        <CheckBox x:Name="Word" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Checked="CheckedMode" Background="Yellow" Grid.Column="1" Margin="0,0,4,0" />
-                        <TextBlock Text="Translation"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
-                        <CheckBox x:Name="Translation" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedMode" Background="Yellow" Grid.Row="1" Grid.Column="1" />
-                        <TextBlock Text="Mix"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
-                        <CheckBox x:Name="Mix" Foreground="Yellow" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="CheckedMode" Background="Yellow" Grid.Row="2" Grid.Column="1" />
+                        <TextBlock Text="Mode" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBlock Text="Word"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" />
+                        <CheckBox x:Name="Word" Checked="CheckedMode" Grid.Column="1" Grid.Row="1" Style="{StaticResource CheckBoxStyle}"/>
+                        <TextBlock Text="Translation"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" />
+                        <CheckBox x:Name="Translation" Checked="CheckedMode" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
+                        <TextBlock Text="Mix"  FontWeight="DemiBold" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" />
+                        <CheckBox x:Name="Mix" Checked="CheckedMode" Grid.Row="3" Grid.Column="1" Style="{StaticResource CheckBoxStyle}"/>
                     </Grid>
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Column="0" Grid.Row="4">
+        <Border Grid.Column="0" Grid.Row="3">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -161,7 +164,7 @@
                 <Button x:Name="Restart" Grid.Row="1" Content="Restart" Style="{StaticResource ButtonStyle}" Margin="15" Click="RestartBtn" IsEnabled="False"/>
             </Grid>
         </Border>
-        <Border Grid.Column="1" Grid.Row="5">
+        <Border Grid.Column="1" Grid.Row="4">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

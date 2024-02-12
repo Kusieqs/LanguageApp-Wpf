@@ -44,8 +44,7 @@ namespace LanguageAppWpf
             string name = (sender as CheckBox).Name;
             wordList = wordList.Union(MainWindow.words.Where(x => x.Category.ToString() == name)).ToList();
         } // Checking and unchecking the theme of the review
-        private void UncheckedTheme(object sender, RoutedEventArgs e)
-        {
+        private void UncheckedTheme(object sender, RoutedEventArgs e)        {
             int row = 0;
             int column = 1;
             int count = 0;

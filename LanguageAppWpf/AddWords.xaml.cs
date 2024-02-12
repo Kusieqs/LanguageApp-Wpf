@@ -43,7 +43,6 @@ namespace LanguageAppWpf
             }
             TypeComboBox.SelectedIndex = 0;
         } // Load combobox
-
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
             if(TranslationTextBox.Text.Length > 0)
