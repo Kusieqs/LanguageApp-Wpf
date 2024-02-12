@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -150,113 +151,72 @@ namespace LanguageAppWpf
             Language.Text = lan;
             Unit.Text = unit;
 
-            if (System.IO.File.Exists(directPath))
+            if (File.Exists(directPath) && !string.IsNullOrEmpty(File.ReadAllText(directPath)))
             {
-                string jsonRead = System.IO.File.ReadAllText(directPath);
-                words = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Word>>(jsonRead);
+                string jsonRead = File.ReadAllText(directPath);
+                words = JsonConvert.DeserializeObject<List<Word>>(jsonRead);
             }
             else
-            {
                 words = new List<Word>();
-            }
 
             int count = words.Count;
             NumberOfWords.Text = count.ToString();
-            NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
-            NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
+            NumberOfCorrect.Text = words.Sum(x => x.Correct).ToString();
+            NumberOfUncorrect.Text = words.Sum(x => x.Mistake).ToString();
 
-            if(System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf","Review.txt")))
+            if(File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf","Review.txt")))
             {
-                string readFile = System.IO.File.ReadAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Review.txt"));
+                string readFile = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Review.txt"));
                 review = int.Parse(readFile);
             }
             else
-            {
                 review = 0;
-            }
+
             NumberOfReview.Text = review.ToString();
-            
             MostCorrectAndUncorrect(count);
         }
         private void ActivData(object sender, EventArgs e)
         {
             MostCorrectAndUncorrect(words.Count);
             NumberOfWords.Text = words.Count.ToString();
-            NumberOfCorrect.Text = words.Select(x => x.Correct).Count().ToString();
-            NumberOfUncorrect.Text = words.Select(x => x.Mistake).Count().ToString();
+            NumberOfCorrect.Text = words.Sum(x => x.Correct).ToString();
+            NumberOfUncorrect.Text = words.Sum(x => x.Mistake).ToString();
             NumberOfReview.Text = review.ToString();
         }
         private void MostCorrectAndUncorrect(int count)
         {
-            if(switcher == false)
+            List<Word> sort = words.OrderByDescending(x => switcher ? x.Correct : x.Mistake).ToList();
+
+            switch(count)
             {
-                switch (count)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        FirstOne.Text = words[0].WordName;
-                        MistakeOne.Text = words[0].Mistake.ToString();
-                        break;
-                    case 2:
-                        List<Word> sortedWords = words.OrderByDescending(x => x.Mistake).ToList();
-                        FirstOne.Text = sortedWords[0].WordName;
-                        SecondOne.Text = sortedWords[1].WordName;
-                        MistakeOne.Text = sortedWords[0].Mistake.ToString();
-                        MistakeTwo.Text = sortedWords[1].Mistake.ToString();
-                        break;
-                    default:
-                        List<Word> sortedWords2 = words.OrderByDescending(x => x.Mistake).ToList();
-                        FirstOne.Text = sortedWords2[0].WordName;
-                        SecondOne.Text = sortedWords2[1].WordName;
-                        ThirdOne.Text = sortedWords2[2].WordName;
-                        MistakeOne.Text = sortedWords2[0].Mistake.ToString();
-                        MistakeTwo.Text = sortedWords2[1].Mistake.ToString();
-                        MistakeThree.Text = sortedWords2[2].Mistake.ToString();
-                        break;
-                }
-            }
-            else
-            {
-                switch (count)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        FirstOne.Text = words[0].WordName;
-                        MistakeOne.Text = words[0].Mistake.ToString();
-                        break;
-                    case 2:
-                        List<Word> sortedWords = words.OrderBy(x => x.Mistake).ToList();
-                        FirstOne.Text = sortedWords[0].WordName;
-                        SecondOne.Text = sortedWords[1].WordName;
-                        MistakeOne.Text = sortedWords[0].Mistake.ToString();
-                        MistakeTwo.Text = sortedWords[1].Mistake.ToString();
-                        break;
-                    default:
-                        List<Word> sortedWords2 = words.OrderBy(x => x.Mistake).ToList();
-                        FirstOne.Text = sortedWords2[0].WordName;
-                        SecondOne.Text = sortedWords2[1].WordName;
-                        ThirdOne.Text = sortedWords2[2].WordName;
-                        MistakeOne.Text = sortedWords2[0].Mistake.ToString();
-                        MistakeTwo.Text = sortedWords2[1].Mistake.ToString();
-                        MistakeThree.Text = sortedWords2[2].Mistake.ToString();
-                        break;
-                }
+                case 0:
+                    break;
+                case 1:
+                    FirstOne.Text = sort[0].WordName;
+                    MistakeOne.Text = sort[0].Mistake.ToString();
+                    break;
+                case 2:
+                    FirstOne.Text = sort[0].WordName;
+                    SecondOne.Text = sort[1].WordName;
+                    MistakeOne.Text = sort[0].Mistake.ToString();
+                    MistakeTwo.Text = sort[1].Mistake.ToString();
+                    break;
+                default:
+                    FirstOne.Text = sort[0].WordName;
+                    SecondOne.Text = sort[1].WordName;
+                    ThirdOne.Text = sort[2].WordName;
+                    MistakeOne.Text = sort[0].Mistake.ToString();
+                    MistakeTwo.Text = sort[1].Mistake.ToString();
+                    MistakeThree.Text = sort[2].Mistake.ToString();
+                    break;
             }
 
             if(string.IsNullOrEmpty(FirstOne.Text))
-            {
                 FirstOne.Text = "You have to add words";
-            }
             if (string.IsNullOrEmpty(SecondOne.Text))
-            {
                 SecondOne.Text = "You have to add words";
-            }
             if (string.IsNullOrEmpty(ThirdOne.Text))
-            {
                 ThirdOne.Text = "You have to add words";
-            }
 
         }
         public static void SaveData()
