@@ -83,7 +83,7 @@ namespace LanguageAppWpf
             else
             {
                 int column = 1;
-                for(int i = 0; i < 4; i++)
+                for(int i = 1; i < 5; i++)
                 {
                     if (Level.Children.Cast<UIElement>().First(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == i) is CheckBox && senderRow != i)
                     {
@@ -111,7 +111,7 @@ namespace LanguageAppWpf
             }
             else
             {
-                for(int i = 0; i < 3; i++)
+                for(int i = 1; i < 4; i++)
                 {
                     if(Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == i && Grid.GetColumn(x) == 1) is CheckBox checkBox1 && i != senderRow)
                     {
