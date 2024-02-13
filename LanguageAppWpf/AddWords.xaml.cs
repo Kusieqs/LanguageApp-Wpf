@@ -47,27 +47,33 @@ namespace LanguageAppWpf
         } // Load combobox
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$"))
+            if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(TranslationTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 TranslationTextBox.Text = (char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1)).Trim();
                 TranslationTextBox.SelectionStart = TranslationTextBox.Text.Length;
                 TranslationBox = true;
             }
-            else
+            else if (TranslationTextBox.Text.Length == 0)
                 TranslationBox = false;
+            else if (TranslationTextBox.Text.Length > 0 && !Regex.IsMatch(TranslationTextBox.Text, @"^[a-zA-Z\s]+$"))
+                TranslationTextBox.Text = TranslationTextBox.Text.Remove(TranslationTextBox.Text.Length - 1);
+
             CheckBtn();
         } // Capitalizing first letter and checking if translation box is not empty
         private void WordTextChanged(object sender, TextChangedEventArgs e)
         {
 
-            if(WordTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$"))
+            if(WordTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 WordTextBox.Text = (char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1)).Trim();
                 WordTextBox.SelectionStart = WordTextBox.Text.Length;
                 WordBox = true;
             }
-            else
+            else if(WordTextBox.Text.Length == 0)
                 WordBox = false;
+            else if(WordTextBox.Text.Length > 0 && !Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]+$"))
+                WordTextBox.Text = WordTextBox.Text.Remove(WordTextBox.Text.Length - 1);
+
             CheckBtn();
         } // Capitalizing first letter and checking if word box is not empty
         private void CheckBtn()
