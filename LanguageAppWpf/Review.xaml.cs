@@ -157,6 +157,10 @@ namespace LanguageAppWpf
             ModeChoosed();
 
         } // Starting the review
+        private bool CompareWords(string input, string target)
+        {
+            return input.ToLower() == target.ToLower();
+        }
         private void ReviewWord(object sender, KeyEventArgs e)
         {
             bool mistake = false;
@@ -166,54 +170,29 @@ namespace LanguageAppWpf
                 switch (modeName)
                 {
                     case "Word":
-                        if (TranslationBox.Text.ToLower() == word.Translation.ToLower())
-                            listToReview[loop].Correct++;
-                        else
-                        {
-                            mistake = true;
-                            listToReview[loop].Mistake++;
-                        }
+                        mistake = !CompareWords(TranslationBox.Text, word.Translation);
                         break;
                     case "Translation":
-                        if (TranslationBox.Text.ToLower() == word.WordName.ToLower())
-                            listToReview[loop].Correct++;
-                        else
-                        {
-                            mistake = true;
-                            listToReview[loop].Mistake++;
-                        }
+                        mistake = !CompareWords(TranslationBox.Text, word.WordName);
                         break;
                     case "Mix":
                         if(WordName.Text.ToLower() == word.WordName.ToLower())
-                        {
-                            if (TranslationBox.Text.ToLower() == word.Translation.ToLower())
-                                listToReview[loop].Correct++;
-                            else
-                            {
-                                mistake = true;
-                                listToReview[loop].Mistake++;
-                            }
-                        }
+                            mistake = !CompareWords(TranslationBox.Text, word.Translation);
                         else
-                        {
-                            if (TranslationBox.Text.ToLower() == word.WordName.ToLower())
-                                listToReview[loop].Correct++;
-                            else
-                            {
-                                mistake = true;
-                                listToReview[loop].Mistake++;
-                            }
-                        }
+                            mistake = !CompareWords(TranslationBox.Text, word.WordName);
+
                         break;
                 }
 
                 if(mistake)
                 {
+                    listToReview[loop].Mistake++;
                     LastResult.Text = "Uncorrect";
                     LastResult.Foreground = Brushes.Red;
                 }
                 else
                 {
+                    listToReview[loop].Correct++;
                     LastResult.Text = "Correct";
                     LastResult.Foreground = Brushes.Green;
                 }
