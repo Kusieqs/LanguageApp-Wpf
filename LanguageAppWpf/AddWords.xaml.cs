@@ -47,7 +47,7 @@ namespace LanguageAppWpf
         } // Load combobox
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$")
+            if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$"))
             {
                 TranslationTextBox.Text = (char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1)).Trim();
                 TranslationTextBox.SelectionStart = TranslationTextBox.Text.Length;

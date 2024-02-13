@@ -160,7 +160,7 @@ namespace LanguageAppWpf
         private bool CompareWords(string input, string target)
         {
             return input.ToLower() == target.ToLower();
-        }
+        }// Comparing the words
         private void ReviewWord(object sender, KeyEventArgs e)
         {
             bool mistake = false;
