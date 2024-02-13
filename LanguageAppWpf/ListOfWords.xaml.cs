@@ -123,7 +123,7 @@ namespace LanguageAppWpf
         }
         private void ItemsScrollView(List<Word> list)
         {
-            int count = 0;
+            int count = 0, height = 30;
             buttonWordDictionary.Clear();
             if (ScrollList != null)
             {
@@ -131,30 +131,53 @@ namespace LanguageAppWpf
             }
 
             StackPanel panel = new StackPanel();
+            StackPanel stackTheme = new StackPanel();
+            stackTheme.Orientation = Orientation.Horizontal;
+            for (int i = 0; i < 5; i++)
+            {
+                int width = 0;
+
+                if (i == 0 || i == 1)     
+                    width = 290;
+                else if (i == 2)
+                    width = 130;
+                else
+                    width = 100;
+
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = i == 0 ? "Word" : i == 1 ? "Translation" : i == 2 ? "Category" : i == 3 ? "Mistake" : "Correct",
+                    Width = width,
+                    Height = height,
+                    TextAlignment = TextAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontSize = 20,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = Brushes.White
+                };
+                stackTheme.Children.Add(textBlock);
+            }
+            panel.Children.Add(stackTheme);
             foreach (Word word in list)
             {
                 if (word != null)
                 {
                     StackPanel stackPanel = new StackPanel();
                     stackPanel.Orientation = Orientation.Horizontal;
-                    for(int i = 0; i < 4; i++)
+                    for(int i = 0; i < 5; i++)
                     {
                         int width = 0;
-                        int height = 0;
+
                         if(i == 0 || i == 1)
-                        {
-                            width = 280;
-                            height = 30;
-                        }
+                            width = 290;
+                        else if(i == 2)
+                            width = 130;
                         else
-                        {
-                            width = 70;
-                            height = 30;
-                        }
+                            width = 100;
 
                         TextBlock textBlock = new TextBlock()
                         {
-                            Text = i == 0 ? word.WordName : i == 1 ? word.Category.ToString() : i == 2 ? word.Mistake.ToString() : word.Correct.ToString(),
+                            Text = i == 0 ? word.WordName : i == 1 ? word.Translation.ToString() : i == 2 ? word.Category.ToString() : i == 3 ? word.Mistake.ToString() : word.Correct.ToString(),
                             Width = width,
                             Height = height,
                             TextAlignment = TextAlignment.Left,

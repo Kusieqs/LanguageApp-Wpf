@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="ListOfWords" Height="450" Width="1000">
+        Title="ListOfWords" Height="450" Width="1200"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
             <Setter Property="Foreground" Value="Yellow"/>
@@ -109,7 +110,7 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="#FF636363"/>
+                                            <Setter TargetName="border" Property="Background" Value="#FFFFF83F"/>
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="False">
                                             <Setter TargetName="border" Property="Background" Value="Yellow"/>
@@ -120,7 +121,7 @@
                         </Button>
                     </Grid>
                 </Border>
-                <Border Grid.Row="1" BorderBrush="Yellow" BorderThickness="1.5" Background="#FF565656">
+                <Border Grid.Row="2" BorderBrush="Yellow" BorderThickness="1.5" Background="#FF565656">
                     <ScrollViewer x:Name="ScrollList" Grid.Row="1" FontSize="20"/>
                 </Border>
             </Grid>
