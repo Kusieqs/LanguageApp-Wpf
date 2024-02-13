@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace LanguageAppWpf
 {
@@ -25,7 +27,7 @@ namespace LanguageAppWpf
         private void AddWordBtn(object sender, RoutedEventArgs e)
         {
             Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
-            Word word = new Word(_language,WordTextBox.Text,TranslationTextBox.Text,category,_unit);
+            Word word = new Word(_language,WordTextBox.Text.Trim(),TranslationTextBox.Text.Trim(),category,_unit);
             MainWindow.words.Add(word); 
             MainWindow.SaveData();
             WordTextBox.Text = "";
@@ -45,9 +47,9 @@ namespace LanguageAppWpf
         } // Load combobox
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(TranslationTextBox.Text.Length > 0)
+            if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$")
             {
-                TranslationTextBox.Text = char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1);
+                TranslationTextBox.Text = (char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1)).Trim();
                 TranslationTextBox.SelectionStart = TranslationTextBox.Text.Length;
                 TranslationBox = true;
             }
@@ -57,9 +59,10 @@ namespace LanguageAppWpf
         } // Capitalizing first letter and checking if translation box is not empty
         private void WordTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(WordTextBox.Text.Length > 0)
+
+            if(WordTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]$"))
             {
-                WordTextBox.Text = char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1);
+                WordTextBox.Text = (char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1)).Trim();
                 WordTextBox.SelectionStart = WordTextBox.Text.Length;
                 WordBox = true;
             }
