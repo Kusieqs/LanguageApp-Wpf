@@ -61,7 +61,7 @@ namespace LanguageAppWpf
             };  
             return (wordsToNewList, true);
 
-        }
+        } // List of words to methods
         private void Checked(object sender, RoutedEventArgs e)
         {
             var items = ListOfWordsToMethods(sender);
@@ -74,7 +74,7 @@ namespace LanguageAppWpf
                 actualList = items.Item1;
 
             ItemsScrollView(actualList);
-        }
+        } // Checked
         private void Unchecked(object sender, RoutedEventArgs e)
         {
             var items = ListOfWordsToMethods(sender);
@@ -87,7 +87,7 @@ namespace LanguageAppWpf
                 actualList = items.Item1;
 
             ItemsScrollView(actualList);
-        }
+        } // Unchecked
         private void ExceptionsWithSort()
         {
             if (Alfabetical.IsChecked == true)
@@ -96,11 +96,11 @@ namespace LanguageAppWpf
                 actualList = actualList.OrderBy(y => y.Correct).ToList();
             else if (Uncorrect.IsChecked == true)
                 actualList = actualList.OrderBy(y => y.Mistake).ToList();
-        }
+        } // Exceptions with sort
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Exit button
         private void LoadScrollView(object sender, RoutedEventArgs e)
         {
             #region LoadCheckedBoxes
@@ -115,12 +115,12 @@ namespace LanguageAppWpf
             #endregion LoadCheckedBoxes
 
             ItemsScrollView(actualList);
-        }
+        } // Load scroll view
         private void Modify(object sender, RoutedEventArgs e)
         {
             buttonSender = sender as Button;
             myContextMenu.IsOpen = true;
-        }
+        } // Modify button
         private void ItemsScrollView(List<Word> list)
         {
             int count = 0, height = 30;
@@ -224,7 +224,7 @@ namespace LanguageAppWpf
                 }
                 ScrollList.Content = panel;
             }
-        }
+        } // Items scroll view
         private ContextMenu CreateContextMenu()
         {
             ContextMenu contextMenu = new ContextMenu();
@@ -239,7 +239,7 @@ namespace LanguageAppWpf
                 contextMenu.Items.Add(menuItem);
             }
             return contextMenu;
-        }
+        } // Create context menu
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             string header = (sender as MenuItem).Header.ToString();
@@ -269,6 +269,6 @@ namespace LanguageAppWpf
                     ItemsScrollView(MainWindow.words);
                     break;
             }
-        }
+        }  // Context menu items
     }
 }

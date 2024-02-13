@@ -44,7 +44,7 @@ namespace LanguageAppWpf
                 IsEnabled = true;
                 Focus();
             };
-        }
+        } // Add word button
         private void BtnReview(object sender, RoutedEventArgs e)
         {
             reviewWindow = new Review()
@@ -59,7 +59,7 @@ namespace LanguageAppWpf
                 IsEnabled = true;
                 Focus();
             };
-        }
+        } // Review button 
         private void BtnListOfWords(object sender, RoutedEventArgs e)
         {
             listOfWords = new ListOfWords()
@@ -74,14 +74,14 @@ namespace LanguageAppWpf
                 IsEnabled = true;
                 Focus();
             };
-        }
+        } // List of words button 
         private void BtnChangeLanguage(object sender, RoutedEventArgs e)
         {
             LanguageChoose languageChoose = new LanguageChoose();
             languageChoose.Show();
             languageChoose.Focus();
             this.Close();
-        }
+        } // Change language button 
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
         {
             string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
@@ -111,7 +111,7 @@ namespace LanguageAppWpf
                     }
                 } while (true);
             }
-        }
+        } // Down write to json file button 
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
             readJsonFile = new ReadJsonFile(words, unit)
@@ -126,11 +126,11 @@ namespace LanguageAppWpf
                 IsEnabled = true;
                 Focus();
             };
-        }
+        } // Read json file button 
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Exit button
         private void SwitchButton(object sender, RoutedEventArgs e)
         {
             if(WordsList.Text == "Most uncorrect words")
@@ -145,7 +145,7 @@ namespace LanguageAppWpf
             }
 
             MostCorrectAndUncorrect(words.Count);
-        }
+        } // Switch button to show most correct or uncorrect words
         private void LoadingData(object sender, RoutedEventArgs e)
         {
             Language.Text = lan;
@@ -174,7 +174,7 @@ namespace LanguageAppWpf
 
             NumberOfReview.Text = review.ToString();
             MostCorrectAndUncorrect(count);
-        }
+        } // Loading data 
         private void ActivData(object sender, EventArgs e)
         {
             MostCorrectAndUncorrect(words.Count);
@@ -182,7 +182,7 @@ namespace LanguageAppWpf
             NumberOfCorrect.Text = words.Sum(x => x.Correct).ToString();
             NumberOfUncorrect.Text = words.Sum(x => x.Mistake).ToString();
             NumberOfReview.Text = review.ToString();
-        }
+        } // Activ data 
         private void MostCorrectAndUncorrect(int count)
         {
             List<Word> sort = words.OrderByDescending(x => switcher ? x.Correct : x.Mistake).ToList();
@@ -207,7 +207,7 @@ namespace LanguageAppWpf
             SetDefaultTextIfEmpty(SecondOne,MistakeTwo);
             SetDefaultTextIfEmpty(ThirdOne,MistakeThree);
 
-        }
+        } // Most correct and uncorrect words 
         void SetTextAndMistakes(TextBlock textBlock1, TextBlock textBlock2, List<Word> sortedWords, int index)
         {
             textBlock1.Text = sortedWords[index].WordName;
@@ -220,12 +220,12 @@ namespace LanguageAppWpf
                 textBlock.Text = "Lack of word";
                 textBlock1.Text = "";
             }
-        }// Set default text if there is no word in list
+        }// Set default text if there is no word in list 
         public static void SaveData()
         {
             string json = JsonConvert.SerializeObject(words);
             File.WriteAllText(directPath,json);
-        }
+        } // Save data to json file     
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -233,6 +233,6 @@ namespace LanguageAppWpf
             {
                 e.Cancel = true;
             }
-        }
+        } // On closing window event 
     }    
 }
