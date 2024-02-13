@@ -206,26 +206,17 @@ namespace LanguageAppWpf
         {
             ContextMenu contextMenu = new ContextMenu();
            
-
-            MenuItem menuItem1 = new MenuItem();
-            menuItem1.Header = "Edit word";
-            menuItem1.Click += MenuItem_Click;
-
-            MenuItem menuItem2 = new MenuItem();
-            menuItem2.Header = "Delete word";
-            menuItem2.Click += MenuItem_Click;
-
-            MenuItem menuItem3 = new MenuItem();
-            menuItem3.Header = "Delete counting";
-            menuItem3.Click += MenuItem_Click;
-
-            contextMenu.Items.Add(menuItem1);
-            contextMenu.Items.Add(menuItem2);
-            contextMenu.Items.Add(menuItem3);
-
+            for (int i = 0; i < 3; i++)
+            {
+                MenuItem menuItem = new MenuItem()
+                {
+                    Header = i == 0 ? "Edit word" : i == 1 ? "Delete word" : "Delete counting"
+                };
+                menuItem.Click += MenuItem_Click;
+                contextMenu.Items.Add(menuItem);
+            }
             return contextMenu;
         }
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             string header = (sender as MenuItem).Header.ToString();
@@ -238,9 +229,12 @@ namespace LanguageAppWpf
                     modify = new Modify(index);
                     modify.Show();
                     this.IsEnabled = false;
-                    modify.Closing += (s, args) => ItemsScrollView(MainWindow.words);
+                    modify.Closing += (s, args) =>
+                    {
+                        ItemsScrollView(MainWindow.words);
+                        Focus();
+                    };
                     modify.Closed += (s,args) => this.IsEnabled = true;
-                    modify.Closing += (s, args) => this.Focus();
                     break;
                 case "Delete word":
                     MainWindow.words.RemoveAt(index);
