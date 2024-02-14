@@ -208,12 +208,12 @@ namespace LanguageAppWpf
             SetDefaultTextIfEmpty(ThirdOne,MistakeThree);
 
         } // Most correct and uncorrect words 
-        void SetTextAndMistakes(TextBlock textBlock1, TextBlock textBlock2, List<Word> sortedWords, int index)
+        private void SetTextAndMistakes(TextBlock textBlock1, TextBlock textBlock2, List<Word> sortedWords, int index)
         {
             textBlock1.Text = sortedWords[index].WordName;
             textBlock2.Text = switcher ? sortedWords[index].Correct.ToString() : sortedWords[index].Mistake.ToString();
         } // Set text and mistakes
-        void SetDefaultTextIfEmpty(TextBlock textBlock,TextBlock textBlock1)
+        private void SetDefaultTextIfEmpty(TextBlock textBlock,TextBlock textBlock1)
         {
             if(!words.Any(x => x.WordName == textBlock.Text))
             {

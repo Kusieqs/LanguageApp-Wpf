@@ -23,7 +23,7 @@ namespace LanguageAppWpf
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
             this.Close();
-        } // Exit button
+        } // Exit button    
         private void AddWordBtn(object sender, RoutedEventArgs e)
         {
             Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
