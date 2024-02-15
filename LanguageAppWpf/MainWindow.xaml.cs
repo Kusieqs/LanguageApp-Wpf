@@ -84,7 +84,7 @@ namespace LanguageAppWpf
         } // Change language button 
         private void BtnDownWriteToJson(object sender, RoutedEventArgs e)
         {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
             string pattern = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
             if(words.Count == 0)
@@ -94,18 +94,19 @@ namespace LanguageAppWpf
                 Random random = new Random();
                 do
                 {
-                    string word = "";
-                    for (int i = 0; i < 10; i++)
+                    string pat = "";
+                    for (int i = 0; i < 3; i++)
                     {
-                        word += pattern[random.Next(0, pattern.Length)];
+                        pat += pattern[random.Next(0, pattern.Length)];
                     }
 
-                    if (System.IO.File.Exists(System.IO.Path.Combine(path, word)))
+                    string pathName = $"{lan} {unit} {pat}";
+                    if (File.Exists(Path.Combine(path, pathName)))
                         continue;
                     else
                     {
                         string json = JsonConvert.SerializeObject(words);
-                        System.IO.File.WriteAllText(System.IO.Path.Combine(path, word), json);
+                        File.WriteAllText(Path.Combine(path, pathName), json);
                         MessageBox.Show("File was created", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     }
