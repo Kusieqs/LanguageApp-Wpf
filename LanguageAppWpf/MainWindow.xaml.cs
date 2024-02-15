@@ -230,9 +230,7 @@ namespace LanguageAppWpf
         {
             base.OnClosing(e);
             if ((reviewWindow!= null && reviewWindow.IsVisible) || (readJsonFile != null && readJsonFile.IsVisible) || (addWords != null&&addWords.IsVisible) || (listOfWords!= null && listOfWords.IsVisible))
-            {
                 e.Cancel = true;
-            }
         } // On closing window event 
     }    
 }

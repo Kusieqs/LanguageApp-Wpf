@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -270,5 +271,14 @@ namespace LanguageAppWpf
                     break;
             }
         }  // Context menu items
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if(modify != null && modify.IsVisible)
+            {
+                e.Cancel = true;
+                modify.Focus();
+            }
+        } // On closing
     }
 }

@@ -49,7 +49,7 @@ namespace LanguageAppWpf
         {
             if(TranslationTextBox.Text.Length > 0 && Regex.IsMatch(TranslationTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                TranslationTextBox.Text = (char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1)).Trim();
+                TranslationTextBox.Text = (char.ToUpper(TranslationTextBox.Text[0]) + TranslationTextBox.Text.Substring(1)).TrimStart();
                 TranslationTextBox.SelectionStart = TranslationTextBox.Text.Length;
                 TranslationBox = true;
             }
@@ -65,7 +65,7 @@ namespace LanguageAppWpf
 
             if(WordTextBox.Text.Length > 0 && Regex.IsMatch(WordTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                WordTextBox.Text = (char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1)).Trim();
+                WordTextBox.Text = (char.ToUpper(WordTextBox.Text[0]) + WordTextBox.Text.Substring(1)).TrimStart();
                 WordTextBox.SelectionStart = WordTextBox.Text.Length;
                 WordBox = true;
             }
