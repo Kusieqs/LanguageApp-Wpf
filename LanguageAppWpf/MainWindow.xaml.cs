@@ -115,7 +115,7 @@ namespace LanguageAppWpf
         } // Down write to json file button 
         private void BtnReadJson(object sender, RoutedEventArgs e)
         {
-            readJsonFile = new ReadJsonFile(words, unit)
+            readJsonFile = new ReadJsonFile()
             {
                 Owner = this
             };

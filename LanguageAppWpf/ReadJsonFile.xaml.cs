@@ -15,20 +15,12 @@ using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy ReadJsonFile.xaml
-    /// </summary>
     public partial class ReadJsonFile : Window
     {
-        public List<Word> words { get; set; }
-        public ReadJsonFile(List<Word> words, string unit)
+        public List<Word> words  = MainWindow.words.ToList();
+        public ReadJsonFile()
         {
             InitializeComponent();
-            this.words = words;
-        }
-        private void BtnExit(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         private void BtnRead(object sender, RoutedEventArgs e)
@@ -76,6 +68,10 @@ namespace LanguageAppWpf
                 MessageBox.Show("File can't be read.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void BtnExit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        } // Exit button
 
     }
 }
