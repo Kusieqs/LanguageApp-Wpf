@@ -45,9 +45,14 @@ namespace LanguageAppWpf
         {
             if(sender is TextBox textbox && textbox.Text.Length>0)
             {
-                textbox.Text = char.ToUpper(textbox.Text[0]) + textbox.Text.Substring(1);
+                textbox.Text = (char.ToUpper(textbox.Text[0]) + textbox.Text.Substring(1)).TrimStart();
                 textbox.SelectionStart = textbox.Text.Length;
             }
+
+            if (UnitName.Text.Length > 0)
+                AddUnitBtn.IsEnabled = true;
+            else
+                AddUnitBtn.IsEnabled = false;
         } // Capitalizing first letter
     }
 }
