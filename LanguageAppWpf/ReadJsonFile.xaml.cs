@@ -25,11 +25,6 @@ namespace LanguageAppWpf
 
         private void BtnRead(object sender, RoutedEventArgs e)
         {
-            if(txtFileName.Text == "")
-            {
-                MessageBox.Show("Text box is empty","Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                return;
-            }
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string pathFile = System.IO.Path.Combine(path, txtFileName.Text + ".json");
             if (!System.IO.File.Exists(pathFile))
@@ -68,6 +63,14 @@ namespace LanguageAppWpf
                 MessageBox.Show("File can't be read.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void ButtonAvtiveRead(object sender, TextChangedEventArgs e)
+        {
+            txtFileName.Text = txtFileName.Text.TrimStart();
+            if (txtFileName.Text.Length > 0)
+                ReadBtn.IsEnabled = true;
+            else
+                ReadBtn.IsEnabled = false;
+        } // Button active and text changed
         private void BtnExit(object sender, RoutedEventArgs e)
         {
             this.Close();
