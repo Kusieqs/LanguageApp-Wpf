@@ -153,7 +153,7 @@ namespace LanguageAppWpf
                     VerticalAlignment = VerticalAlignment.Center,
                     FontSize = 20,
                     FontWeight = FontWeights.Bold,
-                    Foreground = Brushes.White
+                    Foreground = Brushes.Yellow
                 };
                 stackTheme.Children.Add(textBlock);
             }
@@ -171,7 +171,7 @@ namespace LanguageAppWpf
                         if(i == 0 || i == 1)
                             width = 290;
                         else if(i == 2)
-                            width = 130;
+                            width = 120;
                         else
                             width = 100;
 
@@ -180,7 +180,7 @@ namespace LanguageAppWpf
                             Text = i == 0 ? word.WordName : i == 1 ? word.Translation.ToString() : i == 2 ? word.Category.ToString() : i == 3 ? word.Mistake.ToString() : word.Correct.ToString(),
                             Width = width,
                             Height = height,
-                            TextAlignment = TextAlignment.Left,
+                            TextAlignment = i == 3? TextAlignment.Center : i== 4 ? TextAlignment.Center : TextAlignment.Left,
                             VerticalAlignment = VerticalAlignment.Center,
                             FontSize = 20,
                             FontWeight = FontWeights.Bold,
@@ -222,8 +222,8 @@ namespace LanguageAppWpf
                     panel.Children.Add(stackPanel);
 
                 }
-                ScrollList.Content = panel;
             }
+            ScrollList.Content = panel;
         } // Items scroll view
         private ContextMenu CreateContextMenu()
         {
