@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="ReadJsonFile" Height="150" Width="300">
+        Title="ReadJsonFile" Height="170" Width="400" 
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="30"/>
@@ -31,6 +32,9 @@
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#FF565656"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -47,9 +51,9 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="File name: " Foreground="white" FontSize="24" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFileName" Foreground="white" FontSize="20" FontWeight="DemiBold" Margin="17,24,17,24" Background="#FF636363"/>
-        <Button x:Name="ReadBtn" Content="Read" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnRead"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <TextBlock Grid.Column="0" Text="File name: " Foreground="white" FontSize="24" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        <TextBox Grid.Row="0" x:Name="txtFileName" FontSize="20" FontWeight="DemiBold" Margin="155,24,17,24" Grid.ColumnSpan="2" TextChanged="ButtonAvtiveRead"/>
+        <Button x:Name="ReadBtn" Content="Read" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnRead"  Foreground="White" Style="{StaticResource ButtonStyle}" IsEnabled="False"/>
         <Button Content="Exit" Grid.Column="0" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
     </Grid>
 </Window>

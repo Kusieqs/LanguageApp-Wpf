@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
-    /// <summary>
-    /// Logika interakcji dla klasy ListOfWords.xaml
-    /// </summary>
     public partial class ListOfWords : Window
     {
         private Modify modify;
@@ -45,54 +37,45 @@ namespace LanguageAppWpf
                     if (x.ToLower() == "correct")
                     {
                         if(Uncorrect.IsChecked == true)
-                        {
                             Correct.IsChecked = false;
-                        }
+
                         return (actualList.OrderBy(y => y.Correct).ToList(),false);
                     }
                     else if(x.ToLower() == "uncorrect")
                     {
                         if(Correct.IsChecked == true)
-                        {
                             Uncorrect.IsChecked = false;
-                        }
+
                         return (actualList.OrderBy(y => y.Mistake).ToList(),false);
                     }
                     else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == true)
-                    {
                         return (actualList.OrderBy(y => y.WordName).ToList(),false);
-                    }
                     else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == false)
-                    {
                         return (actualList,false);
-                    }
                 }
             }
 
             foreach (Word word in words)
             {
                 if (word.Category.ToString().ToLower() == x.ToLower())
-                {
                     wordsToNewList.Add(word);
-                }
             };  
             return (wordsToNewList, true);
 
-        }
+        } // List of words to methods
         private void Checked(object sender, RoutedEventArgs e)
         {
             var items = ListOfWordsToMethods(sender);
-            if(items.Item2 == true)
+            if (items.Item2 == true)
             {
                 actualList = actualList.Union(items.Item1).ToList();
                 ExceptionsWithSort();
             }
             else
-            {
                 actualList = items.Item1;
-            }
+
             ItemsScrollView(actualList);
-        }
+        } // Checked
         private void Unchecked(object sender, RoutedEventArgs e)
         {
             var items = ListOfWordsToMethods(sender);
@@ -102,30 +85,23 @@ namespace LanguageAppWpf
                 ExceptionsWithSort();
             }
             else
-            {
                 actualList = items.Item1;
-            }
+
             ItemsScrollView(actualList);
-        }
+        } // Unchecked
         private void ExceptionsWithSort()
         {
             if (Alfabetical.IsChecked == true)
-            {
                 actualList = actualList.OrderBy(y => y.WordName).ToList();
-            }
             else if (Correct.IsChecked == true)
-            {
                 actualList = actualList.OrderBy(y => y.Correct).ToList();
-            }
             else if (Uncorrect.IsChecked == true)
-            {
                 actualList = actualList.OrderBy(y => y.Mistake).ToList();
-            }
-        }
+        } // Exceptions with sort
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        } // Exit button
         private void LoadScrollView(object sender, RoutedEventArgs e)
         {
             #region LoadCheckedBoxes
@@ -140,15 +116,15 @@ namespace LanguageAppWpf
             #endregion LoadCheckedBoxes
 
             ItemsScrollView(actualList);
-        }
+        } // Load scroll view
         private void Modify(object sender, RoutedEventArgs e)
         {
             buttonSender = sender as Button;
             myContextMenu.IsOpen = true;
-        }
+        } // Modify button
         private void ItemsScrollView(List<Word> list)
         {
-            int count = 0;
+            int count = 0, height = 30;
             buttonWordDictionary.Clear();
             if (ScrollList != null)
             {
@@ -156,71 +132,87 @@ namespace LanguageAppWpf
             }
 
             StackPanel panel = new StackPanel();
+            StackPanel stackTheme = new StackPanel();
+            stackTheme.Orientation = Orientation.Horizontal;
+            for (int i = 0; i < 5; i++)
+            {
+                int width = 0;
+
+                if (i == 0 || i == 1)     
+                    width = 290;
+                else if (i == 2)
+                    width = 130;
+                else
+                    width = 100;
+
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = i == 0 ? "Word" : i == 1 ? "Translation" : i == 2 ? "Category" : i == 3 ? "Mistake" : "Correct",
+                    Width = width,
+                    Height = height,
+                    TextAlignment = TextAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontSize = 20,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = Brushes.Yellow
+                };
+                stackTheme.Children.Add(textBlock);
+            }
+            panel.Children.Add(stackTheme);
             foreach (Word word in list)
             {
                 if (word != null)
                 {
                     StackPanel stackPanel = new StackPanel();
                     stackPanel.Orientation = Orientation.Horizontal;
-                    TextBlock textBlock = new TextBlock();
-                    textBlock.Text = " " + word.WordName;
-                    textBlock.Width = 280;
-                    textBlock.Height = 30;
-                    textBlock.TextAlignment = TextAlignment.Left;
-                    textBlock.VerticalAlignment = VerticalAlignment.Center;
-                    textBlock.FontSize = 20;
-                    textBlock.FontWeight = FontWeights.Bold;
-                    textBlock.Foreground = Brushes.White;
-                    stackPanel.Children.Add(textBlock);
-                    TextBlock textBlock1 = new TextBlock();
-                    textBlock1.Text = word.Translation;
-                    textBlock1.Width = 280;
-                    textBlock1.Height = 30;
-                    textBlock1.TextAlignment = TextAlignment.Left;
-                    textBlock1.VerticalAlignment = VerticalAlignment.Center;
-                    textBlock1.FontSize = 20;
-                    textBlock1.FontWeight = FontWeights.Bold;
-                    textBlock1.Foreground = Brushes.White;
-                    stackPanel.Children.Add(textBlock1);
-                    TextBlock textBlock2 = new TextBlock();
-                    textBlock2.Text = word.Mistake.ToString();
-                    textBlock2.Width = 70;
-                    textBlock2.Height = 30;
-                    textBlock2.TextAlignment = TextAlignment.Left;
-                    textBlock2.VerticalAlignment = VerticalAlignment.Center;
-                    textBlock2.FontSize = 20;
-                    textBlock2.FontWeight = FontWeights.Bold;
-                    textBlock2.Foreground = Brushes.White;
-                    stackPanel.Children.Add(textBlock2);
-                    TextBlock textBlock3 = new TextBlock();
-                    textBlock3.Text = word.Correct.ToString();
-                    textBlock3.Width = 70;
-                    textBlock3.Height = 30;
-                    textBlock3.TextAlignment = TextAlignment.Left;
-                    textBlock3.VerticalAlignment = VerticalAlignment.Center;
-                    textBlock3.FontSize = 20;
-                    textBlock3.FontWeight = FontWeights.Bold;
-                    textBlock3.Foreground = Brushes.White;
-                    stackPanel.Children.Add(textBlock3);
-                    Button button = new Button();
-                    Image image = new Image();
+                    for(int i = 0; i < 5; i++)
+                    {
+                        int width = 0;
+
+                        if(i == 0 || i == 1)
+                            width = 290;
+                        else if(i == 2)
+                            width = 120;
+                        else
+                            width = 100;
+
+                        TextBlock textBlock = new TextBlock()
+                        {
+                            Text = i == 0 ? word.WordName : i == 1 ? word.Translation.ToString() : i == 2 ? word.Category.ToString() : i == 3 ? word.Mistake.ToString() : word.Correct.ToString(),
+                            Width = width,
+                            Height = height,
+                            TextAlignment = i == 3? TextAlignment.Center : i== 4 ? TextAlignment.Center : TextAlignment.Left,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            FontSize = 20,
+                            FontWeight = FontWeights.Bold,
+                            Foreground = Brushes.White
+                        };
+                        stackPanel.Children.Add(textBlock);
+                    }
+
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/iconList.png");
                     bitmap.EndInit();
 
-                    image.Source = bitmap;
-                    image.Stretch = Stretch.Fill;
-                    button.Content = image;
-                    button.Width = 30;
-                    button.Height = 30;
-                    button.Margin = new Thickness(20, 10, 20, 10);
-                    button.Name = "iconList" + count;
-                    count++;
-                    button.Background = Brushes.Transparent;
-                    button.BorderBrush = Brushes.Transparent;
-                    button.Foreground = Brushes.Transparent;
-                    button.IsEnabled = true;
+                    Image image = new Image()
+                    {
+                        Source = bitmap,
+                        Stretch = Stretch.Fill
+                    };
+
+                    Button button = new Button()
+                    {
+                        Content = image,
+                        Width = 30,
+                        Height = 30,
+                        Margin = new Thickness(20, 10, 20, 10),
+                        Name = "iconList" + count,
+                        Background = Brushes.Transparent,
+                        BorderBrush = Brushes.Transparent,
+                        Foreground = Brushes.Transparent,
+                        IsEnabled = true
+                    };
 
                     buttonWordDictionary.Add(button, word);
                     button.Click += Modify;
@@ -231,33 +223,24 @@ namespace LanguageAppWpf
                     panel.Children.Add(stackPanel);
 
                 }
-                ScrollList.Content = panel;
             }
-        }
+            ScrollList.Content = panel;
+        } // Items scroll view
         private ContextMenu CreateContextMenu()
         {
             ContextMenu contextMenu = new ContextMenu();
            
-
-            MenuItem menuItem1 = new MenuItem();
-            menuItem1.Header = "Edit word";
-            menuItem1.Click += MenuItem_Click;
-
-            MenuItem menuItem2 = new MenuItem();
-            menuItem2.Header = "Delete word";
-            menuItem2.Click += MenuItem_Click;
-
-            MenuItem menuItem3 = new MenuItem();
-            menuItem3.Header = "Delete counting";
-            menuItem3.Click += MenuItem_Click;
-
-            contextMenu.Items.Add(menuItem1);
-            contextMenu.Items.Add(menuItem2);
-            contextMenu.Items.Add(menuItem3);
-
+            for (int i = 0; i < 3; i++)
+            {
+                MenuItem menuItem = new MenuItem()
+                {
+                    Header = i == 0 ? "Edit word" : i == 1 ? "Delete word" : "Delete counting"
+                };
+                menuItem.Click += MenuItem_Click;
+                contextMenu.Items.Add(menuItem);
+            }
             return contextMenu;
-        }
-
+        } // Create context menu
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             string header = (sender as MenuItem).Header.ToString();
@@ -270,9 +253,12 @@ namespace LanguageAppWpf
                     modify = new Modify(index);
                     modify.Show();
                     this.IsEnabled = false;
-                    modify.Closing += (s, args) => ItemsScrollView(MainWindow.words);
+                    modify.Closing += (s, args) =>
+                    {
+                        ItemsScrollView(MainWindow.words);
+                        Focus();
+                    };
                     modify.Closed += (s,args) => this.IsEnabled = true;
-                    modify.Closing += (s, args) => this.Focus();
                     break;
                 case "Delete word":
                     MainWindow.words.RemoveAt(index);
@@ -284,6 +270,15 @@ namespace LanguageAppWpf
                     ItemsScrollView(MainWindow.words);
                     break;
             }
-        }
+        }  // Context menu items
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if(modify != null && modify.IsVisible)
+            {
+                e.Cancel = true;
+                modify.Focus();
+            }
+        } // On closing
     }
 }

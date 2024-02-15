@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="NewUnit" Height="200" Width="300">
+        Title="NewUnit" Height="200" Width="350"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="30"/>
@@ -31,6 +32,9 @@
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#FF565656"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -44,19 +48,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Border Background="#FF565656" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
-            <TextBlock Text="New Unit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold" Foreground="Yellow"/>
+        <Border  Grid.Column="0" Grid.Row="0" >
+            <TextBlock Text="Unit Name:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10,0,0,0" Foreground="White"/>
         </Border>
-        <Border  Grid.Column="0" Grid.Row="1" >
-            <TextBlock Text="Unit Name" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10,0,0,0" Foreground="White"/>
-        </Border>
-        <TextBox Grid.Row="1" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="121,22,10,22" Grid.ColumnSpan="2" x:Name="UnitName" MaxLength="15" Background="#FF636363" Foreground="White"/>
-
-        <Button Content="Exit" Grid.Column="0" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
-        <Button Content="Add Unit" Grid.Column="1" Grid.Row="2" FontSize="20" FontWeight="Bold" Click="BtnAddUnit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <TextBox Grid.Row="0" FontSize="20" FontWeight="Bold" BorderThickness="2" Margin="143,40,10,40" Grid.ColumnSpan="2" x:Name="UnitName" MaxLength="15"  TextChanged="OnTextChanged" CharacterCasing="Lower"/>
+        <Button Content="Exit" Grid.Column="0" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="AddUnitBtn" Content="Add Unit" Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Click="BtnAddUnit"  Foreground="White" Style="{StaticResource ButtonStyle}" IsEnabled="False"/>
     </Grid>
 </Window>

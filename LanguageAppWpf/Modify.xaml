@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="Modify" Height="130" Width="800">
+        Title="Modify" Height="130" Width="800" 
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="23"/>
@@ -31,6 +32,9 @@
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#FF565656"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -44,9 +48,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Margin="10,33,10,33" Grid.Column="0" FontSize="15" x:Name="Word" FontWeight="DemiBold"/>
-        <TextBox Margin="10,33,10,33" Grid.Column="1" FontSize="15" x:Name="Translation" FontWeight="DemiBold"/>
+        <TextBox Margin="10,33,10,33" Grid.Column="0" FontSize="15" x:Name="Word" FontWeight="DemiBold" CharacterCasing="Lower" TextChanged="WordTextChanged" MaxLength="23"/>
+        <TextBox Margin="10,33,10,33" Grid.Column="1" FontSize="15" x:Name="Translation" FontWeight="DemiBold" CharacterCasing="Lower" TextChanged="TranslationTextChanged" MaxLength="23"/>
         <ComboBox Margin="10,33,10,33" Grid.Column="2" FontSize="15" x:Name="ComboBoxCat" FontWeight="DemiBold"/>
-        <Button Grid.Column="3" Style="{StaticResource ButtonStyle}" Margin="26" Content="Accept" Click="AcceptBtn"/>
+        <Button Grid.Column="3" x:Name="Accept" Style="{StaticResource ButtonStyle}" Margin="26" Content="Accept" Click="AcceptBtn"/>
     </Grid>
 </Window>

@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LanguageAppWpf
 {
@@ -44,17 +38,13 @@ namespace LanguageAppWpf
             string name = (sender as CheckBox).Name;
             wordList = wordList.Union(MainWindow.words.Where(x => x.Category.ToString() == name)).ToList();
         } // Checking and unchecking the theme of the review
-        private void UncheckedTheme(object sender, RoutedEventArgs e)
+        private void UncheckedTheme(object sender, RoutedEventArgs e)        
         {
-            int row = 0;
-            int column = 1;
-            int count = 0;
-            for(int i = 0; i < 8; i++)
+            int row = 0, column = 1, count = 0;
+            for(int i = 1; i < 9; i++)
             {
                 if ((Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) as CheckBox).IsChecked == false)
-                {
                     count++;
-                }
                 if (i == 3)
                 {
                     column = 3;
@@ -84,7 +74,7 @@ namespace LanguageAppWpf
             else
             {
                 int column = 1;
-                for(int i = 0; i < 4; i++)
+                for(int i = 1; i < 5; i++)
                 {
                     if (Level.Children.Cast<UIElement>().First(x => Grid.GetColumn(x) == column && Grid.GetRow(x) == i) is CheckBox && senderRow != i)
                     {
@@ -112,7 +102,7 @@ namespace LanguageAppWpf
             }
             else
             {
-                for(int i = 0; i < 3; i++)
+                for(int i = 1; i < 4; i++)
                 {
                     if(Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == i && Grid.GetColumn(x) == 1) is CheckBox checkBox1 && i != senderRow)
                     {
@@ -121,9 +111,7 @@ namespace LanguageAppWpf
                     }
                 }
             }
-
             modeName = (Mode.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == senderRow && Grid.GetColumn(x) == 0) as TextBlock).Text;
-
         }  // Checking the mode of the review
         private void StartBtnActive()
         {
@@ -136,6 +124,7 @@ namespace LanguageAppWpf
         } // Checking if the start button should be active
         private void StartBtn(object sender, RoutedEventArgs e)
         {
+            #region Freezing the buttons
             Restart.IsEnabled = true;
             Stop.IsEnabled = true;
             Start.IsEnabled = false;
@@ -143,7 +132,7 @@ namespace LanguageAppWpf
             Theme.IsEnabled = false;
             Level.IsEnabled = false;
             Mode.IsEnabled = false;
-
+            #endregion Freezing the buttons
 
             Random random = new Random();
             List<Word> copyWordList = wordList.ToList();
@@ -157,23 +146,21 @@ namespace LanguageAppWpf
             listToReview = listToReview.Distinct().ToList();
 
             if (wordCount == 20)
-            {
                 listToReview = listToReview.OrderBy(x => x.Mistake).ToList();
-            }
             else
             {
                 if(listToReview.Count < wordCount)
-                {
                     listToReview = listToReview.GetRange(0, listToReview.Count);
-                }
                 else
-                {
                     listToReview = listToReview.GetRange(0, wordCount);
-                }
             }
             ModeChoosed();
 
         } // Starting the review
+        private bool CompareWords(string input, string target)
+        {
+            return input.ToLower() == target.ToLower();
+        }// Comparing the words
         private void ReviewWord(object sender, KeyEventArgs e)
         {
             bool mistake = false;
@@ -183,65 +170,33 @@ namespace LanguageAppWpf
                 switch (modeName)
                 {
                     case "Word":
-                        if (TranslationBox.Text == word.Translation)
-                        {
-                            listToReview[loop].Correct++;
-                        }
-                        else
-                        {
-                            mistake = true;
-                            listToReview[loop].Mistake++;
-                        }
+                        mistake = !CompareWords(TranslationBox.Text, word.Translation);
                         break;
                     case "Translation":
-                        if (TranslationBox.Text == word.WordName)
-                        {
-                            listToReview[loop].Correct++;
-                        }
-                        else
-                        {
-                            mistake = true;
-                            listToReview[loop].Mistake++;
-                        }
+                        mistake = !CompareWords(TranslationBox.Text, word.WordName);
                         break;
                     case "Mix":
-                        if(WordName.Text == word.WordName)
-                        {
-                            if (TranslationBox.Text == word.Translation)
-                            {
-                                listToReview[loop].Correct++;
-                            }
-                            else
-                            {
-                                mistake = true;
-                                listToReview[loop].Mistake++;
-                            }
-                        }
+                        if(WordName.Text.ToLower() == word.WordName.ToLower())
+                            mistake = !CompareWords(TranslationBox.Text, word.Translation);
                         else
-                        {
-                            if (TranslationBox.Text == word.WordName)
-                            {
-                                listToReview[loop].Correct++;
-                            }
-                            else
-                            {
-                                mistake = true;
-                                listToReview[loop].Mistake++;
-                            }
-                        }
+                            mistake = !CompareWords(TranslationBox.Text, word.WordName);
+
                         break;
                 }
 
                 if(mistake)
                 {
+                    listToReview[loop].Mistake++;
                     LastResult.Text = "Uncorrect";
                     LastResult.Foreground = Brushes.Red;
                 }
                 else
                 {
+                    listToReview[loop].Correct++;
                     LastResult.Text = "Correct";
                     LastResult.Foreground = Brushes.Green;
                 }
+
                 WordList.Text = listToReview[loop].WordName;
                 TranslationList.Text = listToReview[loop].Translation;
                 loop++;
@@ -274,13 +229,9 @@ namespace LanguageAppWpf
                     Random random = new Random();
                     int index = random.Next(0, 2);
                     if(index == 0)
-                    {
                         WordName.Text = listToReview[loop].WordName;
-                    }
                     else
-                    {
                         WordName.Text = listToReview[loop].Translation;
-                    }
                     break;
             }
         } // Choosing the mode of the review
