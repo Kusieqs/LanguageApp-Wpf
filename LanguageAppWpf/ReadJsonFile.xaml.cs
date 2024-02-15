@@ -2,16 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace LanguageAppWpf
 {
@@ -26,43 +20,38 @@ namespace LanguageAppWpf
         private void BtnRead(object sender, RoutedEventArgs e)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string pathFile = System.IO.Path.Combine(path, txtFileName.Text + ".json");
-            if (!System.IO.File.Exists(pathFile))
-            {
-                MessageBox.Show("File doesn't exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            string pathFile = System.IO.Path.Combine(path, txtFileName.Text); 
 
             try
             {
-                int repeat = 0;
-                string json = System.IO.File.ReadAllText(pathFile);
-                List<Word> wordsFromFile = JsonConvert.DeserializeObject<List<Word>>(json);
-                if(wordsFromFile.Count == 0)
-                {
-                    MessageBox.Show("File is empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
 
+                if (!File.Exists(pathFile))
+                    throw new FormatException($"File not found {pathFile}");
+
+                int repeat = 0;
+                string json = File.ReadAllText(pathFile);
+                List<Word> wordsFromFile = JsonConvert.DeserializeObject<List<Word>>(json);
+
+                if(wordsFromFile.Count == 0)
+                    throw new FormatException("File is empty");
+           
                 foreach (var word in wordsFromFile)
                 {
-                    if (!words.Any(x => x.WordName.ToLower() == word.WordName.ToLower() && x.Translation.ToLower() == word.Translation.ToLower()))
-                    {
+                    if (!words.Any(x => x.WordName.ToLower() == word.WordName.ToLower() && x.Translation.ToLower() == word.Translation.ToLower() && x.Category == word.Category))
                         words.Add(word);
-                    }
                     else
                         repeat++;
                 }
                 MessageBox.Show($"File has been read\nCount of words repeat: {repeat}", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow.words = words;
+                MainWindow.words = words.ToList();
                 MainWindow.SaveData();
 
             }
             catch(Exception ex)
             {
-                MessageBox.Show("File can't be read.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        } // Read button and read file from desktop and add to list
         private void ButtonAvtiveRead(object sender, TextChangedEventArgs e)
         {
             txtFileName.Text = txtFileName.Text.TrimStart();
