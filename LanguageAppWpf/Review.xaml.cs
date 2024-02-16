@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.IO;
 
 namespace LanguageAppWpf
 {
@@ -25,10 +26,12 @@ namespace LanguageAppWpf
             {"Hard", MainWindow.words.Count },
             {"Mistake", 20}
         }; // Dictionary with the number of words for each level
-        public Review()
+        private string path;
+        public Review(string path)
         {
             InitializeComponent();
             TranslationBox.PreviewKeyDown += ReviewWord;
+            this.path = path;
         }
 
         private void CheckedTheme(object sender, RoutedEventArgs e)
@@ -124,6 +127,9 @@ namespace LanguageAppWpf
         } // Checking if the start button should be active
         private void StartBtn(object sender, RoutedEventArgs e)
         {
+            MainWindow.review++;
+            File.WriteAllText(path, MainWindow.review.ToString());
+
             #region Freezing the buttons
             Restart.IsEnabled = true;
             Stop.IsEnabled = true;

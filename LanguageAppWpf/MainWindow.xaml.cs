@@ -11,10 +11,11 @@ namespace LanguageAppWpf
 {
     public partial class MainWindow : Window
     {
-        public int review { get; set;}
+        public static int review { get; set;}
         public string lan { get; set; }
         public string unit { get; set; }
         public static string directPath { get; set; }
+        public string pathReview { get; set; }
         public static List<Word> words = new List<Word>();
         private bool switcher = false;
         private AddWords addWords;
@@ -27,6 +28,7 @@ namespace LanguageAppWpf
             this.lan = lan;
             this.unit = unit;
             directPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit,"Data.json");
+            pathReview = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", lan, unit, "Review");
             this.Loaded += LoadingData;
             this.Activated += ActivData;
         }
@@ -47,7 +49,7 @@ namespace LanguageAppWpf
         } // Add word button
         private void BtnReview(object sender, RoutedEventArgs e)
         {
-            reviewWindow = new Review()
+            reviewWindow = new Review(pathReview)
             {
                 Owner = this
             };
@@ -165,17 +167,29 @@ namespace LanguageAppWpf
             NumberOfCorrect.Text = words.Sum(x => x.Correct).ToString();
             NumberOfUncorrect.Text = words.Sum(x => x.Mistake).ToString();
 
-            if(File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf","Review.txt")))
+            ReviewNumber();
+            MostCorrectAndUncorrect(count);
+        } // Loading data 
+        private void ReviewNumber()
+        {
+            if (File.Exists(pathReview))
             {
-                string readFile = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", "Review.txt"));
-                review = int.Parse(readFile);
+                string readFile = File.ReadAllText(pathReview);
+                try
+                {
+                    int number = int.Parse(readFile);
+                    review = number;
+                }
+                catch (Exception)
+                {
+                    review = 0;
+                }
             }
             else
                 review = 0;
 
             NumberOfReview.Text = review.ToString();
-            MostCorrectAndUncorrect(count);
-        } // Loading data 
+        }
         private void ActivData(object sender, EventArgs e)
         {
             MostCorrectAndUncorrect(words.Count);
