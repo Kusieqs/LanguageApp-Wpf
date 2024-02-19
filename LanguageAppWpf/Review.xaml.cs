@@ -43,15 +43,15 @@ namespace LanguageAppWpf
         } // Checking and unchecking the theme of the review
         private void UncheckedTheme(object sender, RoutedEventArgs e)        
         {
-            int row = 0, column = 1, count = 0;
-            for(int i = 1; i < 9; i++)
+            int row = 1, column = 1, count = 0;
+            for(int i = 0; i < 8; i++)
             {
                 if ((Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) as CheckBox).IsChecked == false)
                     count++;
                 if (i == 3)
                 {
                     column = 3;
-                    row = 0;
+                    row = 1;
                     continue;
                 }
                 row++;
@@ -201,6 +201,13 @@ namespace LanguageAppWpf
                     listToReview[loop].Correct++;
                     LastResult.Text = "Correct";
                     LastResult.Foreground = Brushes.Green;
+                }
+               
+                int index = MainWindow.words.FindIndex(x => x.WordName == word.WordName && x.Translation == word.Translation);
+                if(index != -1)
+                {
+                    MainWindow.words[index] = listToReview[loop];
+                    MainWindow.SaveData();
                 }
 
                 WordList.Text = listToReview[loop].WordName;
