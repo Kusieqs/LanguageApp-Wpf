@@ -8,6 +8,36 @@
         Title="ListOfWords" Height="450" Width="1200"
         ResizeMode="NoResize">
     <Window.Resources>
+        <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Content" Value="Exit"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="1.3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFFFF83F"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="Yellow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
             <Setter Property="Foreground" Value="Yellow"/>
             <Setter Property="FontSize" Value="25"/>
@@ -93,32 +123,13 @@
                 <Border>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="List of words" FontSize="30" FontWeight="DemiBold" Foreground="Yellow" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <Button Content="Exit" Grid.Column="1" FontSize="25" FontWeight="DemiBold" Click="ExitBtn"  Foreground="Black">
-                            <Button.Effect>
-                                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" Opacity="0.5"/>
-                            </Button.Effect>
-                            <Button.Margin>170,5,10,5</Button.Margin>
-                            <Button.Cursor>Hand</Button.Cursor>
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border x:Name="border" CornerRadius="10" BorderBrush="Black" BorderThickness="1.3">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="#FFFFF83F"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="False">
-                                            <Setter TargetName="border" Property="Background" Value="Yellow"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <Button Content="Exit" Grid.Column="2" FontSize="25" FontWeight="DemiBold" Click="ExitBtn" Style="{StaticResource BtnStyle}" Margin="10,0,28,0" />
+                        <Button Content="Clear All" Grid.Column="1" FontSize="25" FontWeight="DemiBold" Click="ClearAllBtn" Style="{StaticResource BtnStyle}" Margin="28,0,28,0" />
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" BorderBrush="Yellow" BorderThickness="1.5" Background="#FF565656">

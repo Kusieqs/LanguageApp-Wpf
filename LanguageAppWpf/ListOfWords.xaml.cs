@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -271,6 +272,12 @@ namespace LanguageAppWpf
                     break;
             }
         }  // Context menu items
+        private void ClearAllBtn(object sender, RoutedEventArgs e)
+        {
+            MainWindow.words.Clear();
+            ItemsScrollView(MainWindow.words);
+            MainWindow.SaveData();
+        } // Clear all button
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
