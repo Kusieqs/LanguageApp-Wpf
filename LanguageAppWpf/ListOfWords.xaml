@@ -128,8 +128,8 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="List of words" FontSize="30" FontWeight="DemiBold" Foreground="Yellow" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <Button Content="Exit" Grid.Column="2" FontSize="25" FontWeight="DemiBold" Click="ExitBtn" Style="{StaticResource BtnStyle}" Margin="10,0,28,0" />
-                        <Button Content="Clear All" Grid.Column="1" FontSize="25" FontWeight="DemiBold" Click="ClearAllBtn" Style="{StaticResource BtnStyle}" Margin="28,0,28,0" />
+                        <Button Content="Exit" Grid.Column="2" FontSize="25" FontWeight="DemiBold" Click="ExitBtn" Style="{StaticResource BtnStyle}" Margin="10,3,28,3" />
+                        <Button Content="Clear All" Grid.Column="1" FontSize="25" FontWeight="DemiBold" Click="ClearAllBtn" Style="{StaticResource BtnStyle}" Margin="28,3,28,3" />
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" BorderBrush="Yellow" BorderThickness="1.5" Background="#FF565656">
