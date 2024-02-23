@@ -148,7 +148,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Mode" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" />
+                        <TextBlock Text="Mode" FontSize="30" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Margin="60,-2,0,0" />
                         <TextBlock Text="Word" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlock}"/>
                         <CheckBox x:Name="Word" Checked="CheckedMode" Grid.Column="1" Grid.Row="1" Style="{StaticResource CheckBoxStyle}"/>
                         <TextBlock Text="Translation" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlock}"/>

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.IO;
 
 namespace LanguageAppWpf
 {
@@ -25,10 +26,12 @@ namespace LanguageAppWpf
             {"Hard", MainWindow.words.Count },
             {"Mistake", 20}
         }; // Dictionary with the number of words for each level
-        public Review()
+        private string path;
+        public Review(string path)
         {
             InitializeComponent();
             TranslationBox.PreviewKeyDown += ReviewWord;
+            this.path = path;
         }
 
         private void CheckedTheme(object sender, RoutedEventArgs e)
@@ -40,15 +43,15 @@ namespace LanguageAppWpf
         } // Checking and unchecking the theme of the review
         private void UncheckedTheme(object sender, RoutedEventArgs e)        
         {
-            int row = 0, column = 1, count = 0;
-            for(int i = 1; i < 9; i++)
+            int row = 1, column = 1, count = 0;
+            for(int i = 0; i < 8; i++)
             {
                 if ((Theme.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == row && Grid.GetColumn(x) == column) as CheckBox).IsChecked == false)
                     count++;
                 if (i == 3)
                 {
                     column = 3;
-                    row = 0;
+                    row = 1;
                     continue;
                 }
                 row++;
@@ -124,6 +127,9 @@ namespace LanguageAppWpf
         } // Checking if the start button should be active
         private void StartBtn(object sender, RoutedEventArgs e)
         {
+            MainWindow.review++;
+            File.WriteAllText(path, MainWindow.review.ToString());
+
             #region Freezing the buttons
             Restart.IsEnabled = true;
             Stop.IsEnabled = true;
@@ -195,6 +201,13 @@ namespace LanguageAppWpf
                     listToReview[loop].Correct++;
                     LastResult.Text = "Correct";
                     LastResult.Foreground = Brushes.Green;
+                }
+               
+                int index = MainWindow.words.FindIndex(x => x.WordName == word.WordName && x.Translation == word.Translation);
+                if(index != -1)
+                {
+                    MainWindow.words[index] = listToReview[loop];
+                    MainWindow.SaveData();
                 }
 
                 WordList.Text = listToReview[loop].WordName;

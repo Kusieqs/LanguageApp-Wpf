@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,34 +28,35 @@ namespace LanguageAppWpf
             int row = 0;
             List<Word> words = MainWindow.words;
             List<Word> wordsToNewList = new List<Word>();
-            if (sender is CheckBox checkBox)
+            CheckBox checkBox = sender as CheckBox;
+
+            row = Grid.GetRow(checkBox);
+            if (SortBy.Children.Cast<UIElement>().FirstOrDefault(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 0) is TextBlock textBlock)
             {
-                row = Grid.GetRow(checkBox);
-                if (SortBy.Children.Cast<UIElement>().FirstOrDefault(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 0) is TextBlock textBlock)
+                 x = textBlock.Text;
+                switch(x.ToLower())
                 {
-                    x = textBlock.Text;
-
-                    if (x.ToLower() == "correct")
-                    {
-                        if(Uncorrect.IsChecked == true)
-                            Correct.IsChecked = false;
-
-                        return (actualList.OrderBy(y => y.Correct).ToList(),false);
-                    }
-                    else if(x.ToLower() == "uncorrect")
-                    {
-                        if(Correct.IsChecked == true)
+                    case "correct":
+                        if (Uncorrect.IsChecked == true)
+                        {
                             Uncorrect.IsChecked = false;
+                        }
+                        return (actualList.OrderBy(y => y.Mistake).ToList(), false);
+                    case "uncorrect":
+                        if (Correct.IsChecked == true)
+                        {
+                            Correct.IsChecked = false;
+                        }
 
-                        return (actualList.OrderBy(y => y.Mistake).ToList(),false);
-                    }
-                    else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == true)
-                        return (actualList.OrderBy(y => y.WordName).ToList(),false);
-                    else if (x.ToLower() == "alfabetical" && Alfabetical.IsChecked == false)
-                        return (actualList,false);
+                        return (actualList.OrderBy(y => y.Correct).ToList(), false);
+                    case "alfabetical":
+                        if (Alfabetical.IsChecked == true)
+                            return (actualList.OrderBy(y => y.WordName).ToList(), false);
+                        else
+                            return (actualList, false);
                 }
             }
-
+            
             foreach (Word word in words)
             {
                 if (word.Category.ToString().ToLower() == x.ToLower())
@@ -65,38 +67,40 @@ namespace LanguageAppWpf
         } // List of words to methods
         private void Checked(object sender, RoutedEventArgs e)
         {
+            Sorting(true, sender);
+            CheckBox checkBox = sender as CheckBox;
+            checkBox.IsChecked = true;
+        } // Checked
+        private void Unchecked(object sender, RoutedEventArgs e)
+        {
+            Sorting(false, sender);
+        } // Unchecked
+        private void Sorting(bool isItChecked, object sender)
+        {
             var items = ListOfWordsToMethods(sender);
-            if (items.Item2 == true)
+            if(items.Item2 == true && isItChecked)
             {
                 actualList = actualList.Union(items.Item1).ToList();
                 ExceptionsWithSort();
             }
-            else
-                actualList = items.Item1;
-
-            ItemsScrollView(actualList);
-        } // Checked
-        private void Unchecked(object sender, RoutedEventArgs e)
-        {
-            var items = ListOfWordsToMethods(sender);
-            if (items.Item2 == true)
+            else if(items.Item2 == true && !isItChecked)
             {
                 actualList = actualList.Except(items.Item1).ToList();
                 ExceptionsWithSort();
             }
-            else
+            else 
                 actualList = items.Item1;
 
             ItemsScrollView(actualList);
-        } // Unchecked
+        } // Sorting list of words 
         private void ExceptionsWithSort()
         {
             if (Alfabetical.IsChecked == true)
                 actualList = actualList.OrderBy(y => y.WordName).ToList();
             else if (Correct.IsChecked == true)
-                actualList = actualList.OrderBy(y => y.Correct).ToList();
-            else if (Uncorrect.IsChecked == true)
                 actualList = actualList.OrderBy(y => y.Mistake).ToList();
+            else if (Uncorrect.IsChecked == true)
+                actualList = actualList.OrderBy(y => y.Correct).ToList();
         } // Exceptions with sort
         private void ExitBtn(object sender, RoutedEventArgs e)
         {
@@ -271,6 +275,12 @@ namespace LanguageAppWpf
                     break;
             }
         }  // Context menu items
+        private void ClearAllBtn(object sender, RoutedEventArgs e)
+        {
+            MainWindow.words.Clear();
+            ItemsScrollView(MainWindow.words);
+            MainWindow.SaveData();
+        } // Clear all button
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
