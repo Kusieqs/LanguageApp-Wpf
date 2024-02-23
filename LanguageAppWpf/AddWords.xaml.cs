@@ -28,8 +28,12 @@ namespace LanguageAppWpf
         {
             Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
             Word word = new Word(_language,WordTextBox.Text.Trim(),TranslationTextBox.Text.Trim(),category,_unit);
-            MainWindow.words.Add(word); 
-            MainWindow.SaveData();
+            // not add the same word to the list of words in the main window 
+            if (!MainWindow.words.Contains(word))
+            {
+                MainWindow.words.Add(word);
+                MainWindow.SaveData();
+            }
             WordTextBox.Text = "";
             TranslationTextBox.Text = "";
             AddWord.IsEnabled = false;

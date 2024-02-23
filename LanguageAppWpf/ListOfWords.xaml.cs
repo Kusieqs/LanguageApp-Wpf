@@ -67,30 +67,32 @@ namespace LanguageAppWpf
         } // List of words to methods
         private void Checked(object sender, RoutedEventArgs e)
         {
+            Sorting(true, sender);
+            CheckBox checkBox = sender as CheckBox;
+            checkBox.IsChecked = true;
+        } // Checked
+        private void Unchecked(object sender, RoutedEventArgs e)
+        {
+            Sorting(false, sender);
+        } // Unchecked
+        private void Sorting(bool isItChecked, object sender)
+        {
             var items = ListOfWordsToMethods(sender);
-            if (items.Item2 == true)
+            if(items.Item2 == true && isItChecked)
             {
                 actualList = actualList.Union(items.Item1).ToList();
                 ExceptionsWithSort();
             }
-            else
-                actualList = items.Item1;
-
-            ItemsScrollView(actualList);
-        } // Checked
-        private void Unchecked(object sender, RoutedEventArgs e)
-        {
-            var items = ListOfWordsToMethods(sender);
-            if (items.Item2 == true)
+            else if(items.Item2 == true && !isItChecked)
             {
                 actualList = actualList.Except(items.Item1).ToList();
                 ExceptionsWithSort();
             }
-            else
+            else 
                 actualList = items.Item1;
 
             ItemsScrollView(actualList);
-        } // Unchecked
+        } // Sorting list of words 
         private void ExceptionsWithSort()
         {
             if (Alfabetical.IsChecked == true)
