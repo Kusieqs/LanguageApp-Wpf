@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="Review" Height="450" Width="800"
+        Title="Review" Height="550" Width="900"
         ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="TextBlock" TargetType="TextBlock">
@@ -165,10 +165,12 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="Stop" Grid.Row="2" Content="Stop" Style="{StaticResource ButtonStyle}" Margin="15" Click="StopBtn" IsEnabled="False"/>
                 <Button x:Name="Start" Grid.Row="0" Content="Start" Style="{StaticResource ButtonStyle}" Margin="15" Click="StartBtn" IsEnabled="False"/>
                 <Button x:Name="Restart" Grid.Row="1" Content="Restart" Style="{StaticResource ButtonStyle}" Margin="15" Click="RestartBtn" IsEnabled="False"/>
+                <Button x:Name="Exit"  Grid.Row="3" Content="Exit" Style="{StaticResource ButtonStyle}" Margin="15" Click="ExitBtn"/>
             </Grid>
         </Border>
         <Border Grid.Column="1" Grid.Row="4">
@@ -187,22 +189,14 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Grid.RowSpan="5" Background="Yellow"/>
                 <Border Grid.Row="2" Grid.ColumnSpan="4" Background="Yellow"/>
-                <TextBlock Text="Word:" FontSize="30" Grid.Row="0" Grid.Column="1" Foreground="White" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,66,0" Height="40"/>
-                <TextBlock x:Name="TranslationName" Text="Translation:" FontSize="30" Grid.Column="1" Foreground="White" FontWeight="DemiBold" VerticalAlignment="Center" Margin="8,0,238,0" Height="40" Grid.ColumnSpan="2" Grid.Row="1"/>
-                <TextBlock x:Name="WordName" Text="" Foreground="White" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold"/>
-                <TextBox x:Name="TranslationBox" Grid.Column="1" FontSize="22" IsEnabled="False" FontWeight="DemiBold" VerticalAlignment="Center" Margin="178,0,10,0" Height="40" Grid.Row="1" MaxLength="23" Grid.ColumnSpan="2" />
-                <TextBlock Text="Last result: " FontSize="30" Grid.Column="1" Grid.Row="3" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,8,0,0"/>
-                <TextBlock x:Name="LastResult" Text="" FontSize="30" Grid.Column="2" Grid.Row="3" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,8,0,0"/>
-                <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="WordList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <TextBlock x:Name="TranslationList" FontSize="20" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
-                    </Grid>
-                </Border>
+                <TextBlock Text="Word:" FontSize="35" Grid.Row="0" Grid.Column="1" Foreground="White" FontWeight="DemiBold" VerticalAlignment="Center" Margin="10,0,66,0" Height="40"/>
+                <TextBlock x:Name="TranslationName" Text="Translation:" FontSize="35" Grid.Column="1" Foreground="White" FontWeight="DemiBold" VerticalAlignment="Center" Margin="8,0,238,0" Height="40" Grid.ColumnSpan="2" Grid.Row="1"/>
+                <TextBlock x:Name="WordName" Text="" Foreground="White" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="25" FontWeight="DemiBold" Margin="50,0,0,0"/>
+                <TextBox x:Name="TranslationBox" Grid.Column="2" FontSize="22" IsEnabled="False" FontWeight="DemiBold" VerticalAlignment="Center" Margin="50,0,10,0" Height="40" Grid.Row="1" MaxLength="23" />
+                <TextBlock Text="Last result: " FontSize="35" Grid.Column="1" Grid.Row="3" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <TextBlock x:Name="LastResult" Text="" FontSize="30" Grid.Column="2" Grid.Row="3" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,8,0,0"/>
+                <TextBlock x:Name="WordList" FontSize="20" Grid.Row="4" Grid.Column="1" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <TextBlock x:Name="TranslationList" FontSize="20" Grid.Row="4" Grid.Column="2" FontWeight="DemiBold" Foreground="White" Text="" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="50,0,0,0"/>
 
             </Grid>
         </Border>

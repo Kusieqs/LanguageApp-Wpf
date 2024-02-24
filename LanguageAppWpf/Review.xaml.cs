@@ -153,13 +153,11 @@ namespace LanguageAppWpf
 
             if (wordCount == 20)
                 listToReview = listToReview.OrderBy(x => x.Mistake).ToList();
+            else if(listToReview.Count < wordCount)
+                listToReview = listToReview.GetRange(0, listToReview.Count);
             else
-            {
-                if(listToReview.Count < wordCount)
-                    listToReview = listToReview.GetRange(0, listToReview.Count);
-                else
-                    listToReview = listToReview.GetRange(0, wordCount);
-            }
+                listToReview = listToReview.GetRange(0, wordCount);
+
             ModeChoosed();
 
         } // Starting the review
@@ -227,7 +225,7 @@ namespace LanguageAppWpf
             if(listToReview.Count == 0)
             {
                 EnabledButtons();
-                MessageBox.Show("No words in review", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No words to review", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             switch (modeName)
@@ -270,5 +268,9 @@ namespace LanguageAppWpf
         {
             EnabledButtons();
         } // Stopping the review, Changing the buttons to the default state
+        private void ExitBtn(object sender, RoutedEventArgs e)
+        {
+            Close();
+        } // Closing the window
     }
 }
