@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageAppWpf"
         mc:Ignorable="d"
-        Title="Language" Height="650" Width="700"
+        Title="Language" Height="650" Width="900"
         ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -51,7 +51,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Background="#FF565656" CornerRadius="50" Margin="20" BorderBrush="Yellow" BorderThickness="2" >
@@ -73,11 +73,28 @@
                 <TextBlock Text="Choose Language" FontWeight="DemiBold" Foreground="Yellow" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
-        <ComboBox Name="comboUnit" SelectedIndex="0" Grid.Column="1" Grid.Row="1" Margin="125,30,25,30" FontSize="20" FontWeight="DemiBold" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBlock Text="Unit:" Foreground="Yellow" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0"/>
-        <Button x:Name="newLanguageBtn" Content="New Language" Grid.Column="1" Grid.Row="4" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
-        <Button Content="Exit" Grid.Column="1" Grid.Row="5" FontSize="30" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="newUnitBtn"  Content="New Unit" Grid.Column="1" Grid.Row="3" FontSize="30" FontWeight="Bold" Click="BtnNewUnit" IsEnabled="False"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="continueBtn" Content="Continue" Grid.Column="1" Grid.Row="2" FontSize="30" FontWeight="Bold" Click="BtnContinue" IsEnabled="False"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+        <Border Grid.Column="1" Grid.RowSpan="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ComboBox Name="comboUnit" SelectedIndex="0" Grid.Row="1" Margin="138,30,25,30" FontSize="25" FontWeight="DemiBold" IsEnabled="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Unit:" Foreground="Yellow" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold" Grid.Row="1" Grid.Column="0" Margin="20,0,0,0"/>
+                <Button x:Name="newLanguageBtn" Content="New Language" Grid.Column="1" Grid.Row="2" FontSize="30" FontWeight="Bold" Click="BtnAddLanguage"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Exit" Grid.Column="1" Grid.Row="5" FontSize="30" FontWeight="Bold" Click="BtnExit"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="newUnitBtn" Content="New Unit" Grid.Column="0" Grid.Row="2" FontSize="30" FontWeight="Bold" Click="BtnNewUnit" IsEnabled="False"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="continueBtn" Content="Continue" Grid.Column="0" Grid.Row="4" FontSize="30" FontWeight="Bold" Click="BtnContinue" IsEnabled="False"  Foreground="White" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="deleteUnitBtn" Content="Delete Unit" Grid.Column="0" Grid.Row="3" FontSize="30" FontWeight="DemiBold" Click="BtnDeleteUnit" IsEnabled="False" Foreground="White" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="deleteLanguageBtn" Content="Delete Language" Grid.Column="1" Grid.Row="3" FontSize="29" FontWeight="DemiBold" Click="BtnDeleteUnit" IsEnabled="False" Foreground="White" Style="{StaticResource ButtonStyle}"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

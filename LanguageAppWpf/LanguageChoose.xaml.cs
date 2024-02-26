@@ -177,5 +177,9 @@ namespace LanguageAppWpf
                 e.Cancel = true;
         } // Preventing from closing main window when new language window is open
 
+        private void BtnDeleteUnit(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
