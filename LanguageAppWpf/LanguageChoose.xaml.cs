@@ -31,16 +31,17 @@ namespace LanguageAppWpf
             Image image = new Image();
             image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png"));
             image.Margin = new Thickness(20, 10, 20, 10);
-            Grid.SetColumn(image, 1);
+            Grid.SetColumn(image, 0);
             Grid.SetRow(image, 0);
-            UIElement elementRemoveBtn = MainGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
+            Grid.SetColumnSpan(image, 2);
+            UIElement elementRemoveBtn = OptionGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 0 && Grid.GetRow(x) == 0);
             
             if (elementRemoveBtn != null)
             {
-                MainGrid.Children.Remove(elementRemoveBtn);
+                OptionGrid.Children.Remove(elementRemoveBtn);
             }
 
-            MainGrid.Children.Add(image);
+            OptionGrid.Children.Add(image);
             ReadComboBox(sender, e);
             
         }// Choosing language and adding flag to the grid
@@ -155,14 +156,17 @@ namespace LanguageAppWpf
             newUnitBtn.IsEnabled = true;
             comboUnit.IsEnabled = true;
             comboUnit.Items.Clear();
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage);
-            List<string> units = new List<string>(Directory.GetDirectories(path).Select(System.IO.Path.GetFileName).ToList());
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage);
+            List<string> units = new List<string>(Directory.GetDirectories(path).Select(Path.GetFileName).ToList());
 
             if (units.Count == 0)
             {
                 continueBtn.IsEnabled = false;
                 comboUnit.IsEnabled = false;
+                deleteUnitBtn.IsEnabled = false;
             }
+            else
+                deleteUnitBtn.IsEnabled = true;
 
             foreach (var unit in units)
             {
@@ -176,8 +180,22 @@ namespace LanguageAppWpf
             if ((newLanguage != null && newLanguage.IsVisible) || (newUnit != null && newUnit.IsVisible))
                 e.Cancel = true;
         } // Preventing from closing main window when new language window is open
-
         private void BtnDeleteUnit(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult ask = MessageBox.Show("Are you sure you want to delete this unit?", "Delete unit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (ask == MessageBoxResult.No)
+                return;
+
+            string unit = comboUnit.SelectedItem.ToString();
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage, unit);
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+                ReadComboBox(sender, e);
+            }
+        } // Deleting unit from folder and combobox items list 
+
+        private void BtnDeleteLanguage(object sender, RoutedEventArgs e)
         {
 
         }
