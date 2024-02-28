@@ -27,6 +27,7 @@ namespace LanguageAppWpf
         }
         private void BtnFlag(object sender, RoutedEventArgs e)
         {
+            deleteLanguageBtn.IsEnabled = true;
             actualLanguage = (sender as Button).Name;
             Image image = new Image();
             image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png"));
@@ -62,11 +63,12 @@ namespace LanguageAppWpf
         } // Creating new window for adding new language
         private void AddingFlagsAsButtons()
         {
+            BorderLan.Children.Clear();
             int gridRows = 1, gridColumns = 0;
             string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             List<string> languages = new List<string>();
 
-            ExistingFolder(System.IO.Path.Combine(appDataFolder, "LanguageAppWpf"), ref languages);
+            ExistingFolder(Path.Combine(appDataFolder, "LanguageAppWpf"), ref languages);
 
             foreach (string lan in languages)
             {
@@ -113,6 +115,8 @@ namespace LanguageAppWpf
             }
             if(languages.Count == 12)
                 newLanguageBtn.IsEnabled = false;
+
+            deleteLanguageBtn.IsEnabled = languages.Count > 0;
         } // Adding flags as buttons
         private void ExistingFolder(string path, ref List<string> languages)
         {
@@ -193,11 +197,32 @@ namespace LanguageAppWpf
                 Directory.Delete(path, true);
                 ReadComboBox(sender, e);
             }
-        } // Deleting unit from folder and combobox items list 
-
+        } // Deleting unit from folder 
         private void BtnDeleteLanguage(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult ask = MessageBox.Show("Are you sure you want to delete this language?", "Delete language", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (ask == MessageBoxResult.No)
+                return;
 
-        }
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LanguageAppWpf", actualLanguage);
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+                AddingFlagsAsButtons();
+            }
+            comboUnit.Items.Clear();
+            continueBtn.IsEnabled = false;
+            newUnitBtn.IsEnabled = false;
+            deleteUnitBtn.IsEnabled = false;
+            deleteLanguageBtn.IsEnabled = false;
+            UIElement elementRemoveBtn = OptionGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 0 && Grid.GetRow(x) == 0);
+
+            if (elementRemoveBtn != null)
+            {
+                OptionGrid.Children.Remove(elementRemoveBtn);
+            }
+            actualLanguage = "";
+
+        } // Deleting language from folder
     }
 }
