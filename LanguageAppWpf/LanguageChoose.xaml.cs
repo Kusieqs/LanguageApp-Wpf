@@ -29,20 +29,22 @@ namespace LanguageAppWpf
         {
             deleteLanguageBtn.IsEnabled = true;
             actualLanguage = (sender as Button).Name;
-            Image image = new Image();
-            image.Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png"));
-            image.Margin = new Thickness(20, 10, 20, 10);
-            Grid.SetColumn(image, 0);
+            Image image = new Image()
+            {
+                Source = new BitmapImage(new Uri("pack://application:,,,/LanguageAppWpf;component/Resources/" + actualLanguage.Substring(0, 3) + ".png")),
+                Margin = new Thickness(20, 10, 20, 10),
+                Stretch = Stretch.Fill  
+            };
+            Grid.SetColumn(image, 1);
             Grid.SetRow(image, 0);
-            Grid.SetColumnSpan(image, 2);
-            UIElement elementRemoveBtn = OptionGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 0 && Grid.GetRow(x) == 0);
+            UIElement elementRemoveBtn = FlagGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
             
             if (elementRemoveBtn != null)
             {
-                OptionGrid.Children.Remove(elementRemoveBtn);
+                FlagGrid.Children.Remove(elementRemoveBtn);
             }
 
-            OptionGrid.Children.Add(image);
+            FlagGrid.Children.Add(image);
             ReadComboBox(sender, e);
             
         }// Choosing language and adding flag to the grid
@@ -64,7 +66,7 @@ namespace LanguageAppWpf
         private void AddingFlagsAsButtons()
         {
             BorderLan.Children.Clear();
-            int gridRows = 1, gridColumns = 0;
+            int gridRows = 0, gridColumns = 0;
             string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             List<string> languages = new List<string>();
 
@@ -215,11 +217,11 @@ namespace LanguageAppWpf
             newUnitBtn.IsEnabled = false;
             deleteUnitBtn.IsEnabled = false;
             deleteLanguageBtn.IsEnabled = false;
-            UIElement elementRemoveBtn = OptionGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 0 && Grid.GetRow(x) == 0);
+            UIElement elementRemoveBtn = FlagGrid.Children.Cast<UIElement>().FirstOrDefault(x => Grid.GetColumn(x) == 1 && Grid.GetRow(x) == 0);
 
             if (elementRemoveBtn != null)
             {
-                OptionGrid.Children.Remove(elementRemoveBtn);
+                FlagGrid.Children.Remove(elementRemoveBtn);
             }
             actualLanguage = "";
 
