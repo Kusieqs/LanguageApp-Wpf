@@ -26,7 +26,7 @@ The application allows users to effortlessly load their language learning data f
 ## Instructions
 1. Running the Application: Launch the main application file.
 2. Adding a New Language: Choose the option to add a new language or use deafult (English) and follow the prompts.
-3. Adding a New Unit: Choose the option to add a new unit or use default when English was selected (Unit1). 
+3. Adding a New Unit: Choose the option to add a new unit. 
 4. Learning: Utilize the word review function with various study modes, ensuring regular practice and retention of material.
 
 ## System Requirements
@@ -48,5 +48,6 @@ This project signifies my initial foray into more extensive WPF development. Und
 ![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/4cc89422-4eb1-4653-acd9-4a570fa901df)
 ![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/3ccafc70-9acd-40c4-b3b8-6c1cc90cbe12)
 ![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/9eafc688-240d-4872-b63f-11fa5cc0c3a5)
-![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/42277cfa-504f-48b7-bc27-2dc97c01fa16)
+![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/eb6b4213-3e40-4c9b-b4f0-e9f8c80c1061)
+
 
