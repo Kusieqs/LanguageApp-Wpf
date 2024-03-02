@@ -277,9 +277,13 @@ namespace LanguageAppWpf
         }  // Context menu items
         private void ClearAllBtn(object sender, RoutedEventArgs e)
         {
-            MainWindow.words.Clear();
-            ItemsScrollView(MainWindow.words);
-            MainWindow.SaveData();
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete all words?", "Delete all words", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow.words.Clear();
+                ItemsScrollView(MainWindow.words);
+                MainWindow.SaveData();
+            }
         } // Clear all button
         protected override void OnClosing(CancelEventArgs e)
         {

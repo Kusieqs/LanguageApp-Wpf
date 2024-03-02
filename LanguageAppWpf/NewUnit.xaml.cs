@@ -23,7 +23,7 @@ namespace LanguageAppWpf
         {
             try
             {
-                if (UnitName.Text != "" && !ComboBox.Items.Contains(UnitName.Text) && Regex.IsMatch(UnitName.Text,@"^[A-Za-z\s]+$"))
+                if (UnitName.Text != "" && !ComboBox.Items.Contains(UnitName.Text) && Regex.IsMatch(UnitName.Text,@"^[A-Za-z0-9\s]+$"))
                 {
                     string path = System.IO.Path.Combine(directPath, UnitName.Text);
                     System.IO.Directory.CreateDirectory(path);
@@ -33,7 +33,7 @@ namespace LanguageAppWpf
                     throw new FormatException("You have to enter the name of unit");
                 else if (ComboBox.Items.Contains(UnitName.Text))
                     throw new FormatException("This unit already exists");
-                else if (!Regex.IsMatch(UnitName.Text, @"^[a-zA-Z\s]+$"))
+                else if (!Regex.IsMatch(UnitName.Text, @"^[a-zA-Z0-9\s]+$"))
                     throw new FormatException("You have to enter only letters");
             }
             catch (Exception ex)
