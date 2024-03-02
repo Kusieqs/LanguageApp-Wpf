@@ -136,14 +136,14 @@ namespace LanguageAppWpf
         } // Exit button
         private void SwitchButton(object sender, RoutedEventArgs e)
         {
-            if(WordsList.Text == "Most uncorrect words")
+            if(WordsList.Text == "Best words")
             {
-                WordsList.Text = "Most correct words";
+                WordsList.Text = "Worst words";
                 switcher = true;
             }
             else
             {
-                WordsList.Text = "Most uncorrect words";
+                WordsList.Text = "Best words";
                 switcher = false;
             }
 
@@ -218,9 +218,7 @@ namespace LanguageAppWpf
                     SetTextAndMistakes(ThirdOne,MistakeThree, sort,2);
                     break;
             }
-            SetDefaultTextIfEmpty(FirstOne,MistakeOne);
-            SetDefaultTextIfEmpty(SecondOne,MistakeTwo);
-            SetDefaultTextIfEmpty(ThirdOne,MistakeThree);
+            SetDefaultTextIfEmpty();
 
         } // Most correct and uncorrect words 
         private void SetTextAndMistakes(TextBlock textBlock1, TextBlock textBlock2, List<Word> sortedWords, int index)
@@ -228,12 +226,23 @@ namespace LanguageAppWpf
             textBlock1.Text = sortedWords[index].WordName;
             textBlock2.Text = switcher ? sortedWords[index].Correct.ToString() : sortedWords[index].Mistake.ToString();
         } // Set text and mistakes
-        private void SetDefaultTextIfEmpty(TextBlock textBlock,TextBlock textBlock1)
+        private void SetDefaultTextIfEmpty()
         {
-            if(!words.Any(x => x.WordName == textBlock.Text))
+            string lack = "Lack of word";
+            if(!words.Any(x => x.WordName == FirstOne.Text))
             {
-                textBlock.Text = "Lack of word";
-                textBlock1.Text = "";
+                FirstOne.Text = lack;
+                MistakeOne.Text = "";
+            }
+            if (!words.Any(x => x.WordName == SecondOne.Text))
+            {
+                SecondOne.Text = lack;
+                MistakeTwo.Text = "";
+            }
+            if (!words.Any(x => x.WordName == ThirdOne.Text))
+            {
+                ThirdOne.Text = lack;
+                MistakeThree.Text = "";
             }
         }// Set default text if there is no word in list 
         public static void SaveData()
