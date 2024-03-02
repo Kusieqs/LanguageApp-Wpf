@@ -43,7 +43,7 @@ This project is available under the MIT License.
 ### About this project
 This project signifies my initial foray into more extensive WPF development. Undertaking this endeavor, I aim to elevate my skills and explore the intricacies of WPF-based application development. Though it may not be flawless, it stands as a noteworthy milestone in my learning journey.
 
-###Images
+### Images
 
 ![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/4cc89422-4eb1-4653-acd9-4a570fa901df)
 ![image](https://github.com/Kusieqs/LanguageApp-Wpf/assets/130232383/3ccafc70-9acd-40c4-b3b8-6c1cc90cbe12)
