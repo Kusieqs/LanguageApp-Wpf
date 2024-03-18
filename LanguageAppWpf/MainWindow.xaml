@@ -75,19 +75,19 @@
         <TextBlock Text="Contact:" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold"/>
         <TextBlock Text="Konrad.kus@edu.uekat.pl" Grid.Column="0" Grid.Row="0" Foreground="Yellow" FontSize="12" FontWeight="DemiBold" Margin="0,20,0,0"/>
         <Button Click="BtnAddWord" Grid.Column="0" Grid.Row="1" Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Add words" Foreground="White" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Add words" Foreground="White" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="BtnReview" Grid.Column="0" Grid.Row="2" Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Review" Foreground="White" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Review" Foreground="White" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="BtnListOfWords" Grid.Column="0" Grid.Row="3" Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="List of words" Foreground="White" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="List of words" Foreground="White" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="BtnChangeLanguage" Grid.Column="0" Grid.Row="4" Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Change language" Foreground="White" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Change language" Foreground="White" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="BtnDownWriteToJson" Grid.Column="0" Grid.Row="5" Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Down write to json" Foreground="White" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Down write to json" Foreground="White" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="BtnReadJson" Grid.Column="0" Grid.Row="6"  Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Read json file" Foreground="White" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Read json file" Foreground="White" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Button Click="Exit" Grid.Column="0" Grid.Row="7"  Style="{StaticResource CustomButtonStyle}"/>
-        <TextBlock Text="Exit" Foreground="White" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0"/>
+        <TextBlock Text="Exit" Foreground="White" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontSize="15" Margin="57,0,0,0" IsHitTestVisible="False"/>
         <Image Source="/LanguageAppWpf;component/Resources/uncorrect.png" Width="20" Height="20"/>
 
         <Border CornerRadius="34" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="#FF565656" Margin="15" BorderBrush="Yellow" BorderThickness="2.5">
