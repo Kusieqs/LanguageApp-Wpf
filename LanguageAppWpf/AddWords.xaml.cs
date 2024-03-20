@@ -29,8 +29,12 @@ namespace LanguageAppWpf
         private void AddWordBtn(object sender, RoutedEventArgs e)
         {
             Category category = (Category)Enum.Parse(typeof(Category), TypeComboBox.Text);
-            Word word = new Word(_language,WordTextBox.Text.Trim().ToLower(),TranslationTextBox.Text.Trim().ToLower(),category,_unit);
-            // not add the same word to the list of words in the main window 
+            string wordName = WordTextBox.Text.Trim().ToLower();
+            wordName = char.ToUpper(wordName[0]) + wordName.Substring(1);
+            string translation = TranslationTextBox.Text.Trim().ToLower();
+            translation = char.ToUpper(translation[0]) + translation.Substring(1);
+
+            Word word = new Word(_language,wordName,translation,category,_unit);
             if (!MainWindow.words.Contains(word))
             {
                 MainWindow.words.Add(word);

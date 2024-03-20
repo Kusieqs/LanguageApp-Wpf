@@ -136,7 +136,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Best words" Name="WordsList" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="31" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Worst words" Name="WordsList" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" FontSize="31" FontWeight="DemiBold" VerticalAlignment ="Center" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="FirstOne" Text="" Grid.Column="0" Grid.Row="1" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 <TextBlock x:Name="SecondOne" Text="" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 <TextBlock x:Name="ThirdOne" Text="" Grid.Column="0" Grid.Row="3" Foreground="White" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>

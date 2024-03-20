@@ -20,8 +20,13 @@ namespace LanguageAppWpf
         }
         private void AcceptBtn(object sender, RoutedEventArgs e)
         {
-            MainWindow.words[index].WordName = Word.Text;
-            MainWindow.words[index].Translation = Translation.Text;
+            string wordName = Word.Text.Trim().ToLower();
+            wordName = char.ToUpper(wordName[0]) + wordName.Substring(1);
+            string translation = Translation.Text.Trim().ToLower();
+            translation = char.ToUpper(translation[0]) + translation.Substring(1);
+
+            MainWindow.words[index].WordName = wordName;
+            MainWindow.words[index].Translation = translation;
             MainWindow.words[index].Category = (Category)Enum.Parse(typeof(Category), ComboBoxCat.Text);
             Close();
         }

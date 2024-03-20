@@ -139,12 +139,12 @@ namespace LanguageAppWpf
             if(WordsList.Text == "Best words")
             {
                 WordsList.Text = "Worst words";
-                switcher = true;
+                switcher = false;
             }
             else
             {
                 WordsList.Text = "Best words";
-                switcher = false;
+                switcher = true;
             }
 
             MostCorrectAndUncorrect(words.Count);
