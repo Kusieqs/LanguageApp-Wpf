@@ -10,6 +10,8 @@ namespace LanguageAppWpf
         private int index;
         private bool translationBox = false;
         private bool wordBox = false;
+        private string translationData;
+        private string wordData;
         public Modify(int index)
         {
             InitializeComponent();
@@ -18,8 +20,13 @@ namespace LanguageAppWpf
         }
         private void AcceptBtn(object sender, RoutedEventArgs e)
         {
-            MainWindow.words[index].WordName = Word.Text;
-            MainWindow.words[index].Translation = Translation.Text;
+            string wordName = Word.Text.Trim().ToLower();
+            wordName = char.ToUpper(wordName[0]) + wordName.Substring(1);
+            string translation = Translation.Text.Trim().ToLower();
+            translation = char.ToUpper(translation[0]) + translation.Substring(1);
+
+            MainWindow.words[index].WordName = wordName;
+            MainWindow.words[index].Translation = translation;
             MainWindow.words[index].Category = (Category)Enum.Parse(typeof(Category), ComboBoxCat.Text);
             Close();
         }
@@ -38,30 +45,47 @@ namespace LanguageAppWpf
 
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Translation.Text.Length > 0 && Regex.IsMatch(Translation.Text, @"^[a-zA-Z\s]+$"))
-            {
-                Translation.Text = (char.ToUpper(Translation.Text[0]) + Translation.Text.Substring(1)).TrimStart();
-                Translation.SelectionStart = Translation.Text.Length;
-                translationBox = true;
-            }
-            else if (Translation.Text.Length == 0)
-                translationBox = false;
-            else if (Translation.Text.Length > 0 && !Regex.IsMatch(Translation.Text, @"^[a-zA-Z\s]+$"))
-                Translation.Text = Translation.Text.Remove(Translation.Text.Length - 1);
-            ButtonActive();
+            Changed(Translation, true);
         }
         private void WordTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Word.Text.Length > 0 && Regex.IsMatch(Word.Text, @"^[a-zA-Z\s]+$"))
+            Changed(Word, false);
+        }
+        private void Changed(TextBox textBox, bool whichProperty)
+        {
+            if(textBox.Text.Length > 0 && Regex.IsMatch(textBox.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
             {
-                Word.Text = (char.ToUpper(Word.Text[0]) + Word.Text.Substring(1)).TrimStart();
-                Word.SelectionStart = Word.Text.Length;
-                wordBox = true;
+                if(whichProperty)
+                    translationBox = true;
+                else
+                    wordBox = true;
             }
-            else if (Word.Text.Length == 0)
-                wordBox = false;
-            else if (Word.Text.Length > 0 && !Regex.IsMatch(Word.Text, @"^[a-zA-Z\s]+$"))
-                Word.Text = Word.Text.Remove(Word.Text.Length - 1);
+            else if (textBox.Text.Length == 0)
+            {
+                if(whichProperty)
+                    translationBox = false;
+                else
+                    wordBox = false;
+            }
+            else if(textBox.Text.Length > 0 && !Regex.IsMatch(textBox.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
+            {
+                if(whichProperty)
+                {
+                    Translation.Text = translationData;
+                    Translation.SelectionStart = Translation.Text.Length;
+                }
+                else
+                {
+                    Word.Text = wordData;
+                    Word.SelectionStart = Word.Text.Length;
+                }
+            }
+
+            if(whichProperty)
+                translationData = Translation.Text;
+            else
+                wordData = Word.Text;
+
             ButtonActive();
         }
         private void ButtonActive()
