@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace LanguageAppWpf
 {
@@ -63,7 +64,7 @@ namespace LanguageAppWpf
                 StartBtnActive();
             }
             string name = (sender as CheckBox).Name;
-            wordList = wordList.Where(x => x.Category.ToString() != name).ToList();
+            wordList = wordList.Where(x => x.Category.ToString().ToLower() != name.ToLower()).ToList();
         } // Checking and unchecking the theme of the review
         private void CheckedLvl(object sender, RoutedEventArgs e)
         {
@@ -127,6 +128,7 @@ namespace LanguageAppWpf
         } // Checking if the start button should be active
         private void StartBtn(object sender, RoutedEventArgs e)
         {
+            listToReview.Clear();
             MainWindow.review++;
             File.WriteAllText(path, MainWindow.review.ToString());
 
@@ -142,7 +144,6 @@ namespace LanguageAppWpf
 
             Random random = new Random();
             List<Word> copyWordList = wordList.ToList();
-
             foreach (var item in wordList)
             {
                 int index = random.Next(0, copyWordList.Count);
@@ -157,7 +158,7 @@ namespace LanguageAppWpf
                 listToReview = listToReview.GetRange(0, listToReview.Count);
             else
                 listToReview = listToReview.GetRange(0, wordCount);
-
+            Numbers.Text = $"0/{listToReview.Count}";
             ModeChoosed();
 
         } // Starting the review
@@ -187,15 +188,18 @@ namespace LanguageAppWpf
 
                         break;
                 }
-
                 if(mistake)
                 {
+
                     listToReview[loop].Mistake++;
                     LastResult.Text = "Uncorrect";
                     LastResult.Foreground = Brushes.Red;
                 }
                 else
                 {
+                    string[] numebrs = Numbers.Text.Split('/');
+                    int x = int.Parse(numebrs[0]) + 1;
+                    Numbers.Text = $"{x}/{numebrs[1]}";
                     listToReview[loop].Correct++;
                     LastResult.Text = "Correct";
                     LastResult.Foreground = Brushes.Green;

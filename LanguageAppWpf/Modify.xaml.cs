@@ -45,33 +45,47 @@ namespace LanguageAppWpf
 
         private void TranslationTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Translation.Text.Length > 0 && Regex.IsMatch(Translation.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
-                translationBox = true;
-            else if (Translation.Text.Length == 0)
-                translationBox = false;
-            else if (Translation.Text.Length > 0 && !Regex.IsMatch(Translation.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
-            {
-                Translation.Text = translationData;
-                Translation.SelectionStart = Translation.Text.Length;
-            }    
-
-            translationData = Translation.Text;
-
-            ButtonActive();
+            Changed(Translation, true);
         }
         private void WordTextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Word.Text.Length > 0 && Regex.IsMatch(Word.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
-                wordBox = true;
-            else if (Word.Text.Length == 0)
-                wordBox = false;
-            else if (Word.Text.Length > 0 && !Regex.IsMatch(Word.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
+            Changed(Word, false);
+        }
+        private void Changed(TextBox textBox, bool whichProperty)
+        {
+            if(textBox.Text.Length > 0 && Regex.IsMatch(textBox.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
             {
-                Word.Text = wordData;
-                Word.SelectionStart = Word.Text.Length;
+                if(whichProperty)
+                    translationBox = true;
+                else
+                    wordBox = true;
+            }
+            else if (textBox.Text.Length == 0)
+            {
+                if(whichProperty)
+                    translationBox = false;
+                else
+                    wordBox = false;
+            }
+            else if(textBox.Text.Length > 0 && !Regex.IsMatch(textBox.Text, @"^[a-zA-Z,'\s-ąćęłńóśźżĄĆĘŁŃÓŚŹŻáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙèéîóòçàãçêíõôÀÃÇÊÍÕÔåäöÅÄÖæøåÆØÅ]+$"))
+            {
+                if(whichProperty)
+                {
+                    Translation.Text = translationData;
+                    Translation.SelectionStart = Translation.Text.Length;
+                }
+                else
+                {
+                    Word.Text = wordData;
+                    Word.SelectionStart = Word.Text.Length;
+                }
             }
 
-            wordData = Word.Text;
+            if(whichProperty)
+                translationData = Translation.Text;
+            else
+                wordData = Word.Text;
+
             ButtonActive();
         }
         private void ButtonActive()
